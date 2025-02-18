@@ -1,0 +1,106 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj",
+        "projectName": "DSA_Group1_Final_Project",
+        "projectPath": "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj",
+        "packagesPath": "C:\\Users\\barla\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\barla\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows",
+            "projectReferences": {
+              "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj": {
+                "projectPath": "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "Guna.UI2.WinForms": {
+              "target": "Package",
+              "version": "[2.0.4.6, )"
+            },
+            "Supabase": {
+              "target": "Package",
+              "version": "[1.1.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WindowsForms": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj",
+        "projectName": "StackDataStructure",
+        "projectPath": "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj",
+        "UsingMicrosoftNETSdk": false,
+        "frameworks": {
+          "native": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "native": {}
+      }
+    }
+  }
+}
