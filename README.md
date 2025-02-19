@@ -17,6 +17,7 @@
 ## Branching and Pushing
 
 When branching and pushing, ensure that you do the following:
+
 -**Branches should be named on the feature**
 ex. git branch <GUI_Forms>
 
