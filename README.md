@@ -1,6 +1,7 @@
 ﻿# DSA_Group1_Final_Project
 
 ## What to do First?
+
 1. Clone the repository
 2. In Visual Studio 2022 Powershell, make sure that the following is done
     - git init
@@ -11,8 +12,10 @@
      - git add "DSA_Froup1_FinalProject"
      - git commit -m "Add Your Message"
      - git push
+
   
-##Branching and Pushing
+## Branching and Pushing
+
 When branching and pushing, ensure that you do the following:
 -**Branches should be named on the feature**
 ex. git branch <GUI_Forms>
