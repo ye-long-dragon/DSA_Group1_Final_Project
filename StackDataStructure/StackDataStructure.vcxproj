@@ -39,7 +39,7 @@
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{c5b952c8-bd8f-4269-ab1c-0441f36a07ea}</ProjectGuid>
-    <RootNamespace>StackDataStructure</RootNamespace>
+    <RootNamespace>DataStructures</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>DataStructures</ProjectName>
   </PropertyGroup>
@@ -264,15 +264,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DataStructures.h" />
     <ClInclude Include="dequeue.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="hashMap.h" />
+    <ClInclude Include="hashtable.h" />
     <ClInclude Include="heap.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="stack.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="dequeue.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="hashtable.cpp" />
+    <ClCompile Include="heap.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

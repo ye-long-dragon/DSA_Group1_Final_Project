@@ -16,8 +16,9 @@ public:
 	void enqueueRear(int x);
 	int dequeueFront();
 	int dequeueRear();
-	bool isEmpty();
-	bool isFull();
+	bool dequeueIsEmpty();
+	bool dequeueIsFull();
+	std::string returnDequeue();
 
 };
 
@@ -33,12 +34,12 @@ dequeue::~dequeue() {
 	delete[]arr;
 }
 
-bool dequeue::isEmpty() {
+bool dequeue::dequeueIsEmpty() {
 	if (front == rear) return true;
 	return false;
 }
 
-bool dequeue::isFull() {
+bool dequeue::dequeueIsFull() {
 	if (rear == size - 1) return true;
 	return false;
 }
@@ -52,7 +53,7 @@ void dequeue::enqueueFront(int x) {
 }
 
 void dequeue::enqueueRear(int x) {
-	if (isFull())std::cout << "Dequeue Overflow" << std::endl;
+	if (dequeueIsFull())std::cout << "Dequeue Overflow" << std::endl;
 	else {
 		rear++;
 		arr[rear] = x;
@@ -61,7 +62,7 @@ void dequeue::enqueueRear(int x) {
 
 int dequeue::dequeueFront() {
 	int x = -1;
-	if (isEmpty())std::cout << "Dequeue Underflow" << std::endl;
+	if (dequeueIsEmpty())std::cout << "Dequeue Underflow" << std::endl;
 	else {
 		x = arr[front];
 		front++;
@@ -78,4 +79,13 @@ int dequeue::dequeueRear() {
 	}
 	return x;
 }
+
+std::string dequeue::returnDequeue() {
+	std::string temp;
+	for (int i = front; i <= rear; i++) {
+		temp += std::to_string(arr[i]) + " ";
+	}
+	return temp;
+}
+
 
