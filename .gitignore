@@ -17,5 +17,6 @@ packages/
 
 # Ignore temporary files
 *.tmp
+/DSA_Group1_Final_Project/obj/x86/Debug/net8.0-windows/DSA_Group1_Final_Project.AssemblyInfo.cs
+/DSA_Group1_Final_Project/obj/x86/Debug/net8.0-windows/DSA_Group1_Final_Project.AssemblyInfoInputs.cache
 /DSA_Group1_Final_Project/obj/x86/Debug/net8.0-windows/DSA_Group1_Final_Project.csproj.AssemblyReference.cache
-/.gitignore
