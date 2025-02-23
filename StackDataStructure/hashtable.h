@@ -101,26 +101,3 @@ void hashTable::deleteItem(int key) {
     }
 }
 
-extern "C" __declspec(dllexport) void* createHashTable(int size) {
-    return (void*) new hashTable(size);
-}
-
-extern "C" __declspec(dllexport)void* deleteHashTable(hashTable* h) {
-    delete h;
-}
-
-extern "C" __declspec(dllexport)void insertItem(hashTable* h,int key,std::string item) {
-    return h->insertItem(key,item);
-}
-
-extern "C" __declspec(dllexport) void deleteItem(hashTable* h, int key) {
-    return h->deleteItem(key);
-}
-
-extern "C" __declspec(dllexport)int searchItem(hashTable* h, int key) {
-    return h->searchItem(key);
-}
-
-extern "C" __declspec(dllexport) std::string returnItem(hashTable* h, int key) {
-    return h->returnItem(key);
-}
