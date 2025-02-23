@@ -9,28 +9,28 @@ namespace DSA_Group1_Final_Project.Classes.DLLs
 {
     public class Stack
     {
-        [DllImport("StackDataStructure.dll")]
+        [DllImport("StackDataStructure.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr createStack(int size);
 
-        [DllImport("StackDataStructure.dll")]
+        [DllImport("StackDataStructure.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr deleteStack(IntPtr stack);
 
-        [DllImport("StackDataStructure.dll")]
+        [DllImport("StackDataStructure.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void push(IntPtr stack, int x);
 
-        [DllImport("StackDataStructure.dll")]
+        [DllImport("StackDataStructure.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int pop(IntPtr stack);
 
-        [DllImport("StackDataStructure.dll")]
+        [DllImport("StackDataStructure.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int peek(IntPtr stack);
 
-        [DllImport("StackDataStructure.dll")]
+        [DllImport("StackDataStructure.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern bool isEmpty(IntPtr stack);
 
-        [DllImport("StackDataStructure.dll")]
+        [DllImport("StackDataStructure.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern bool isFull(IntPtr stack);
 
-        [DllImport("StackDataStructure.dll")]
+        [DllImport("StackDataStructure.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int getCount(IntPtr stack);
     }
 }

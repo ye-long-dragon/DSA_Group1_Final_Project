@@ -1,1 +1,4 @@
 C:\Users\barla\source\repos\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\StackDataStructure.vcxproj.AssemblyReference.cache
+C:\Users\barla\source\repos\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\StackDataStructure.vcxproj.MdMergeInputs.cache
+C:\Users\barla\source\repos\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\StackDataStructure.vcxproj.cppwinrt_plat.cache
+C:\Users\barla\source\repos\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\StackDataStructure.vcxproj.cppwinrt_comp.cache

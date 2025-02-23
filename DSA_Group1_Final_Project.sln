@@ -5,7 +5,12 @@ VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSA_Group1_Final_Project", "DSA_Group1_Final_Project\DSA_Group1_Final_Project.csproj", "{AA4603FD-4B1D-4135-8364-C936AE136889}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StackDataStructure", "StackDataStructure\StackDataStructure.vcxproj", "{C5B952C8-BD8F-4269-AB1C-0441F36A07EA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataStructures", "StackDataStructure\StackDataStructure.vcxproj", "{C5B952C8-BD8F-4269-AB1C-0441F36A07EA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{121EF50C-7909-4EAC-90D4-EAD29B8B9E54}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

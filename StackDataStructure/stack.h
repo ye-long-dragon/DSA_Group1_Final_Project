@@ -8,8 +8,8 @@ public:
 	void push(int x);
 	int pop();
 	int peek();
-	bool isEmpty();
-	bool isFull();
+	bool stackIsEmpty();
+	bool stackIsFull();
 	int getCount();
 
 private:
@@ -59,50 +59,18 @@ int Stack::peek() {
 	}
 }
 
-bool Stack::isEmpty() {
+bool Stack::stackIsEmpty() {
 	if (pointer == -1) return true;
 	return false;
 }
 
-bool Stack::isFull() {
+bool Stack::stackIsFull() {
 	if (pointer == count) return true;
 	return false;
 }
 
 int Stack::getCount() {
 	return count;
-}
-
-extern "C" __declspec(dllexport) void* createStack(int size) {
-	return (void*) new Stack(size);
-}
-
-extern "C" __declspec(dllexport) void* deleteStack(Stack* s) {
-	delete s;
-}
-
-extern "C" __declspec(dllexport) void push(Stack* s, int x) {
-	return s->push(x);
-}
-
-extern "C" __declspec(dllexport) int pop(Stack* s) {
-	return s->pop();
-}
-
-extern "C" __declspec(dllexport) int peek(Stack* s) {
-	return s->peek();
-}
-
-extern "C" __declspec(dllexport) bool isEmpty(Stack* s) {
-	return s->isEmpty();
-}
-
-extern "C" __declspec(dllexport) bool isFull(Stack* s) {
-	return s->isFull();
-}
-
-extern "C" __declspec(dllexport) int getCount(Stack* s) {
-	return s->getCount();
 }
 
 

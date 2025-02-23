@@ -24,6 +24,18 @@
     <ClInclude Include="stack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="heap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dequeue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hashtable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructures.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -35,5 +47,17 @@
     <ClCompile Include="stack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="heap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hashtable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dequeue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
