@@ -23,6 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="DataStructures">
+      <HintPath>..\x64\Debug\DataStructures.dll</HintPath>
+    </Reference>
     <Reference Include="StackDataStructure">
       <HintPath>..\x64\Debug\StackDataStructure.dll</HintPath>
     </Reference>
