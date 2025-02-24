@@ -9,7 +9,6 @@ C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\bi
 C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\bin\x86\Debug\net8.0-windows\DataStructures.dll
 C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\bin\x86\Debug\net8.0-windows\DataStructures.pdb
 C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x86\Debug\net8.0-windows\DSA_Group1_Final_Project.csproj.AssemblyReference.cache
-C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x86\Debug\net8.0-windows\DSA_Group1_Final_Project.Form1.resources
 C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x86\Debug\net8.0-windows\DSA_Group1_Final_Project.csproj.GenerateResource.cache
 C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x86\Debug\net8.0-windows\DSA_Group1_Final_Project.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x86\Debug\net8.0-windows\DSA_Group1_Final_Project.AssemblyInfoInputs.cache
@@ -22,3 +21,4 @@ C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\ob
 C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x86\Debug\net8.0-windows\DSA_Group1_Final_Project.pdb
 C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x86\Debug\net8.0-windows\DSA_Group1_Final_Project.genruntimeconfig.cache
 C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x86\Debug\net8.0-windows\ref\DSA_Group1_Final_Project.dll
+C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x86\Debug\net8.0-windows\DSA_Group1_Final_Project.Login.resources

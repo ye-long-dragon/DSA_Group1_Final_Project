@@ -9,23 +9,45 @@ namespace DSA_Group1_Final_Project.Classes.DLLs
 {
     public class HashTable
     {
-        [DllImport("StackDataStructure.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void createHashtable(int size);
+        IntPtr Hash;
 
-        [DllImport("StackDataStructure.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void deleteHashTable(IntPtr ptr);
+        public HashTable(int size) { 
+            Hash = new IntPtr(size);
+            Hash = createHashtable(size);
+        }
 
-        [DllImport("StackDataStructure.dll", CallingConvention = CallingConvention.Cdecl)]
+        public void insertElement(int key, string value) {
+            insertItem(Hash, key, value);
+        }
+
+        public void deleteElement(int key) {
+            deleteItem(Hash,key);
+        }
+
+        public string returnElement(int key)
+        {
+            return returnItem(Hash, key);
+        }
+
+
+
+        [DllImport("DataStructures.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr createHashtable(int size);
+
+        [DllImport("DataStructures.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr deleteHashTable(IntPtr ptr);
+
+        [DllImport("DataStructures.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void insertItem(IntPtr ptr, int key, string item);
 
-        [DllImport("StackDataStructure.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("DataStructures.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void deleteItem(IntPtr ptr, int key);
 
-        [DllImport("StackDataStructure.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("DataStructures.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int searchItem(IntPtr ptr, int key);
         //std::string searchItem()
 
-        [DllImport("StackDataStructure.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("DataStructures.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern string returnItem(IntPtr ptr, int key);
 
 

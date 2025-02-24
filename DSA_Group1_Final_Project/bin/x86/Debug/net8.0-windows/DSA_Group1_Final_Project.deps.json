@@ -47,14 +47,6 @@
           }
         }
       },
-      "DataStructures/1.0.0": {
-        "runtime": {
-          "DataStructures.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": ""
-          }
-        }
-      },
       "DataStructures.Reference/0.0.0.0": {
         "runtime": {
           "DataStructures.dll": {
@@ -91,11 +83,6 @@
       "sha512": "sha512-A4jed4QUviDOm7fJNKAJObEAEkEUXmkGL/w0iyCYTzrl1rezTj8LGFHfsVst4Vb9JwFcTpboiDrvdST48avBpw==",
       "path": "system.management/7.0.0",
       "hashPath": "system.management.7.0.0.nupkg.sha512"
-    },
-    "DataStructures/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     },
     "DataStructures.Reference/0.0.0.0": {
       "type": "reference",
