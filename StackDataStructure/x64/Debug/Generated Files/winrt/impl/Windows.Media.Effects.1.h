@@ -7,13 +7,6 @@
 #include "winrt/impl/Windows.Media.Effects.0.h"
 WINRT_EXPORT namespace winrt::Windows::Media::Effects
 {
-    struct __declspec(empty_bases) IAcousticEchoCancellationConfiguration :
-        winrt::Windows::Foundation::IInspectable,
-        impl::consume_t<IAcousticEchoCancellationConfiguration>
-    {
-        IAcousticEchoCancellationConfiguration(std::nullptr_t = nullptr) noexcept {}
-        IAcousticEchoCancellationConfiguration(void* ptr, take_ownership_from_abi_t) noexcept : winrt::Windows::Foundation::IInspectable(ptr, take_ownership_from_abi) {}
-    };
     struct __declspec(empty_bases) IAudioCaptureEffectsManager :
         winrt::Windows::Foundation::IInspectable,
         impl::consume_t<IAudioCaptureEffectsManager>
@@ -27,13 +20,6 @@ WINRT_EXPORT namespace winrt::Windows::Media::Effects
     {
         IAudioEffect(std::nullptr_t = nullptr) noexcept {}
         IAudioEffect(void* ptr, take_ownership_from_abi_t) noexcept : winrt::Windows::Foundation::IInspectable(ptr, take_ownership_from_abi) {}
-    };
-    struct __declspec(empty_bases) IAudioEffect2 :
-        winrt::Windows::Foundation::IInspectable,
-        impl::consume_t<IAudioEffect2>
-    {
-        IAudioEffect2(std::nullptr_t = nullptr) noexcept {}
-        IAudioEffect2(void* ptr, take_ownership_from_abi_t) noexcept : winrt::Windows::Foundation::IInspectable(ptr, take_ownership_from_abi) {}
     };
     struct __declspec(empty_bases) IAudioEffectDefinition :
         winrt::Windows::Foundation::IInspectable,

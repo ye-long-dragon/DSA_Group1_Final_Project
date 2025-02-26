@@ -141,11 +141,6 @@ WINRT_EXPORT namespace winrt::Windows::Devices::Sensors
         CompassReadingChangedEventArgs(std::nullptr_t) noexcept {}
         CompassReadingChangedEventArgs(void* ptr, take_ownership_from_abi_t) noexcept : winrt::Windows::Devices::Sensors::ICompassReadingChangedEventArgs(ptr, take_ownership_from_abi) {}
     };
-    struct __declspec(empty_bases) DetectedPerson : winrt::Windows::Devices::Sensors::IDetectedPerson
-    {
-        DetectedPerson(std::nullptr_t) noexcept {}
-        DetectedPerson(void* ptr, take_ownership_from_abi_t) noexcept : winrt::Windows::Devices::Sensors::IDetectedPerson(ptr, take_ownership_from_abi) {}
-    };
     struct __declspec(empty_bases) Gyrometer : winrt::Windows::Devices::Sensors::IGyrometer,
         impl::require<Gyrometer, winrt::Windows::Devices::Sensors::IGyrometerDeviceId, winrt::Windows::Devices::Sensors::IGyrometer2, winrt::Windows::Devices::Sensors::IGyrometer3, winrt::Windows::Devices::Sensors::IGyrometer4>
     {
@@ -170,16 +165,6 @@ WINRT_EXPORT namespace winrt::Windows::Devices::Sensors
     {
         GyrometerReadingChangedEventArgs(std::nullptr_t) noexcept {}
         GyrometerReadingChangedEventArgs(void* ptr, take_ownership_from_abi_t) noexcept : winrt::Windows::Devices::Sensors::IGyrometerReadingChangedEventArgs(ptr, take_ownership_from_abi) {}
-    };
-    struct __declspec(empty_bases) HeadOrientation : winrt::Windows::Devices::Sensors::IHeadOrientation
-    {
-        HeadOrientation(std::nullptr_t) noexcept {}
-        HeadOrientation(void* ptr, take_ownership_from_abi_t) noexcept : winrt::Windows::Devices::Sensors::IHeadOrientation(ptr, take_ownership_from_abi) {}
-    };
-    struct __declspec(empty_bases) HeadPosition : winrt::Windows::Devices::Sensors::IHeadPosition
-    {
-        HeadPosition(std::nullptr_t) noexcept {}
-        HeadPosition(void* ptr, take_ownership_from_abi_t) noexcept : winrt::Windows::Devices::Sensors::IHeadPosition(ptr, take_ownership_from_abi) {}
     };
     struct __declspec(empty_bases) HingeAngleReading : winrt::Windows::Devices::Sensors::IHingeAngleReading
     {
@@ -207,7 +192,7 @@ WINRT_EXPORT namespace winrt::Windows::Devices::Sensors
         HumanPresenceFeatures(void* ptr, take_ownership_from_abi_t) noexcept : winrt::Windows::Devices::Sensors::IHumanPresenceFeatures(ptr, take_ownership_from_abi) {}
     };
     struct __declspec(empty_bases) HumanPresenceSensor : winrt::Windows::Devices::Sensors::IHumanPresenceSensor,
-        impl::require<HumanPresenceSensor, winrt::Windows::Devices::Sensors::IHumanPresenceSensor2, winrt::Windows::Devices::Sensors::IHumanPresenceSensor3>
+        impl::require<HumanPresenceSensor, winrt::Windows::Devices::Sensors::IHumanPresenceSensor2>
     {
         HumanPresenceSensor(std::nullptr_t) noexcept {}
         HumanPresenceSensor(void* ptr, take_ownership_from_abi_t) noexcept : winrt::Windows::Devices::Sensors::IHumanPresenceSensor(ptr, take_ownership_from_abi) {}
@@ -218,7 +203,7 @@ WINRT_EXPORT namespace winrt::Windows::Devices::Sensors
         static auto GetDefault();
     };
     struct __declspec(empty_bases) HumanPresenceSensorReading : winrt::Windows::Devices::Sensors::IHumanPresenceSensorReading,
-        impl::require<HumanPresenceSensorReading, winrt::Windows::Devices::Sensors::IHumanPresenceSensorReading2, winrt::Windows::Devices::Sensors::IHumanPresenceSensorReading3>
+        impl::require<HumanPresenceSensorReading, winrt::Windows::Devices::Sensors::IHumanPresenceSensorReading2>
     {
         HumanPresenceSensorReading(std::nullptr_t) noexcept {}
         HumanPresenceSensorReading(void* ptr, take_ownership_from_abi_t) noexcept : winrt::Windows::Devices::Sensors::IHumanPresenceSensorReading(ptr, take_ownership_from_abi) {}
