@@ -166,11 +166,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj",
+      "projectUniqueName": "C:\\Users\\barla\\Source\\Repos\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj",
       "projectName": "DSA_Group1_Final_Project",
-      "projectPath": "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj",
+      "projectPath": "C:\\Users\\barla\\Source\\Repos\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj",
       "packagesPath": "C:\\Users\\barla\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\obj\\",
+      "outputPath": "C:\\Users\\barla\\Source\\Repos\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -191,8 +191,8 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj": {
-              "projectPath": "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj"
+            "C:\\Users\\barla\\Source\\Repos\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj": {
+              "projectPath": "C:\\Users\\barla\\Source\\Repos\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj"
             }
           }
         }
@@ -240,5 +240,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\barla\\Source\\Repos\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
