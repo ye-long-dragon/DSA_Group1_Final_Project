@@ -1,6 +1,15 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (StackDataStructure.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  StackDataStructure.vcxproj -> C:\Users\barla\source\repos\DSA_Group1_Final_Project\x64\Debug\DataStructures.dll
-  C:\Users\barla\source\repos\DSA_Group1_Final_Project\x64\Debug\DataStructures.dll
-  C:\Users\barla\source\repos\DSA_Group1_Final_Project\x64\Debug\DataStructures.dll.metagen
-  C:\Users\barla\source\repos\DSA_Group1_Final_Project\x64\Debug\DataStructures.pdb
+  pch.cpp
+  dequeue.cpp
+  dllmain.cpp
+  hashtable.cpp
+  heap.cpp
+  stack.cpp
+  Generating Code...
+  .NETFramework,Version=v4.7.2.AssemblyAttributes.cpp
+  dequeue.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  StackDataStructure.vcxproj -> C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\x64\Debug\DataStructures.dll
+  C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\x64\Debug\DataStructures.dll
+  C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\x64\Debug\DataStructures.dll.metagen
+  C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\x64\Debug\DataStructures.pdb
   3 File(s) copied
