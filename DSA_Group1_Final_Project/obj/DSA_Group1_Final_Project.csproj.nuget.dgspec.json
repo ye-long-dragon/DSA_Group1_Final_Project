@@ -1,7 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
     "C:\\Users\\barla\\Source\\Repos\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj": {}
   },
   "projects": {
@@ -13,29 +12,12 @@
         "projectPath": "C:\\Users\\barla\\Source\\Repos\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj",
         "packagesPath": "C:\\Users\\barla\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\barla\\Source\\Repos\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\obj\\",
-=======
-    "C:\\Users\\duff bastasa\\Documents\\MMCM CPE\\Data Structure and Algorithms\\MMCMCurriculumTracker\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj": {}
-  },
-  "projects": {
-    "C:\\Users\\duff bastasa\\Documents\\MMCM CPE\\Data Structure and Algorithms\\MMCMCurriculumTracker\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\duff bastasa\\Documents\\MMCM CPE\\Data Structure and Algorithms\\MMCMCurriculumTracker\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj",
-        "projectName": "DSA_Group1_Final_Project",
-        "projectPath": "C:\\Users\\duff bastasa\\Documents\\MMCM CPE\\Data Structure and Algorithms\\MMCMCurriculumTracker\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj",
-        "packagesPath": "C:\\Users\\duff bastasa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\duff bastasa\\Documents\\MMCM CPE\\Data Structure and Algorithms\\MMCMCurriculumTracker\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\obj\\",
->>>>>>> 854a02eee53d21dcbc005ef7a8b6550dc2e42a81
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-<<<<<<< HEAD
           "C:\\Users\\barla\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-          "C:\\Users\\duff bastasa\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> 854a02eee53d21dcbc005ef7a8b6550dc2e42a81
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -50,13 +32,8 @@
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-<<<<<<< HEAD
               "C:\\Users\\barla\\Source\\Repos\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj": {
                 "projectPath": "C:\\Users\\barla\\Source\\Repos\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj"
-=======
-              "C:\\Users\\duff bastasa\\Documents\\MMCM CPE\\Data Structure and Algorithms\\MMCMCurriculumTracker\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj": {
-                "projectPath": "C:\\Users\\duff bastasa\\Documents\\MMCM CPE\\Data Structure and Algorithms\\MMCMCurriculumTracker\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj"
->>>>>>> 854a02eee53d21dcbc005ef7a8b6550dc2e42a81
               }
             }
           }
@@ -71,31 +48,15 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
-            "FirebaseAdmin": {
-              "target": "Package",
-              "version": "[3.1.0, )"
-            },
-            "Google.Apis.Auth": {
-              "target": "Package",
-              "version": "[1.69.0, )"
-            },
-            "Google.Cloud.Firestore": {
-              "target": "Package",
-              "version": "[3.9.0, )"
-            },
             "Guna.UI2.WinForms": {
               "target": "Package",
               "version": "[2.0.4.6, )"
-            },
-            "System.Text.Json": {
-              "target": "Package",
-              "version": "[9.0.2, )"
             }
           },
           "imports": [
@@ -117,23 +78,15 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-<<<<<<< HEAD
     "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj": {
       "restore": {
         "projectUniqueName": "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj",
         "projectName": "DataStructures",
         "projectPath": "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj",
-=======
-    "C:\\Users\\duff bastasa\\Documents\\MMCM CPE\\Data Structure and Algorithms\\MMCMCurriculumTracker\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj": {
-      "restore": {
-        "projectUniqueName": "C:\\Users\\duff bastasa\\Documents\\MMCM CPE\\Data Structure and Algorithms\\MMCMCurriculumTracker\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj",
-        "projectName": "DataStructures",
-        "projectPath": "C:\\Users\\duff bastasa\\Documents\\MMCM CPE\\Data Structure and Algorithms\\MMCMCurriculumTracker\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj",
->>>>>>> 854a02eee53d21dcbc005ef7a8b6550dc2e42a81
         "UsingMicrosoftNETSdk": false,
         "frameworks": {
           "native": {

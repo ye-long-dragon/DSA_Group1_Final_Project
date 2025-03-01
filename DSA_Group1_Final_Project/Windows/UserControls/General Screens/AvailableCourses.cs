@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DSA_Group1_Final_Project
+namespace DSA_Group1_Final_Project.Windows.UserControls.General_Screens
 {
-    public partial class setupAdmin : Form
+    public partial class AvailableCourses : UserControl
     {
-        public setupAdmin()
+        public AvailableCourses()
         {
             InitializeComponent();
         }
