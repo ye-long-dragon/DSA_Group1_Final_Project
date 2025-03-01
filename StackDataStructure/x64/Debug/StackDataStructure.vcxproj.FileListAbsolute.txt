@@ -2,6 +2,7 @@ C:\Users\barla\source\repos\DSA_Group1_Final_Project\StackDataStructure\x64\Debu
 C:\Users\barla\source\repos\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\StackDataStructure.vcxproj.MdMergeInputs.cache
 C:\Users\barla\source\repos\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\StackDataStructure.vcxproj.cppwinrt_plat.cache
 C:\Users\barla\source\repos\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\StackDataStructure.vcxproj.cppwinrt_comp.cache
+<<<<<<< HEAD
 C:\Users\Jameel Mamogkat\Documents\AY24-25, 2nd Term\DSA\PROJECT\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\StackDataStructure.vcxproj.AssemblyReference.cache
 C:\Users\Jameel Mamogkat\Documents\AY24-25, 2nd Term\DSA\PROJECT\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\StackDataStructure.vcxproj.MdMergeInputs.cache
 C:\Users\Jameel Mamogkat\Documents\AY24-25, 2nd Term\DSA\PROJECT\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\StackDataStructure.vcxproj.cppwinrt_plat.cache
@@ -10,3 +11,9 @@ C:\Users\duff bastasa\Documents\MMCM CPE\Data Structure and Algorithms\MMCMCurri
 C:\Users\duff bastasa\Documents\MMCM CPE\Data Structure and Algorithms\MMCMCurriculumTracker\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\StackDataStructure.vcxproj.MdMergeInputs.cache
 C:\Users\duff bastasa\Documents\MMCM CPE\Data Structure and Algorithms\MMCMCurriculumTracker\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\StackDataStructure.vcxproj.cppwinrt_plat.cache
 C:\Users\duff bastasa\Documents\MMCM CPE\Data Structure and Algorithms\MMCMCurriculumTracker\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\StackDataStructure.vcxproj.cppwinrt_comp.cache
+=======
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\StackDataStructure.vcxproj.AssemblyReference.cache
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\StackDataStructure.vcxproj.MdMergeInputs.cache
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\StackDataStructure.vcxproj.cppwinrt_plat.cache
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\StackDataStructure.vcxproj.cppwinrt_comp.cache
+>>>>>>> dsaGui

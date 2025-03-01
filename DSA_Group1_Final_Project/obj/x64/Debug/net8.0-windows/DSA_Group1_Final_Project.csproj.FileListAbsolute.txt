@@ -22,6 +22,7 @@ C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\bi
 C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\bin\x64\Debug\net8.0-windows\DataStructures.pdb
 C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.Login.resources
 C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.sourcelink.json
+<<<<<<< HEAD
 C:\Users\Jameel Mamogkat\Documents\AY24-25, 2nd Term\DSA\PROJECT\DSA_Group1_Final_Project\DSA_Group1_Final_Project\bin\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.exe
 C:\Users\Jameel Mamogkat\Documents\AY24-25, 2nd Term\DSA\PROJECT\DSA_Group1_Final_Project\DSA_Group1_Final_Project\bin\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.deps.json
 C:\Users\Jameel Mamogkat\Documents\AY24-25, 2nd Term\DSA\PROJECT\DSA_Group1_Final_Project\DSA_Group1_Final_Project\bin\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.runtimeconfig.json
@@ -98,3 +99,34 @@ C:\Users\duff bastasa\Documents\MMCM CPE\Data Structure and Algorithms\MMCMCurri
 C:\Users\duff bastasa\Documents\MMCM CPE\Data Structure and Algorithms\MMCMCurriculumTracker\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.pdb
 C:\Users\duff bastasa\Documents\MMCM CPE\Data Structure and Algorithms\MMCMCurriculumTracker\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.genruntimeconfig.cache
 C:\Users\duff bastasa\Documents\MMCM CPE\Data Structure and Algorithms\MMCMCurriculumTracker\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\ref\DSA_Group1_Final_Project.dll
+=======
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\bin\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.exe
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\bin\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.deps.json
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\bin\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.runtimeconfig.json
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\bin\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.dll
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\bin\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.pdb
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\bin\x64\Debug\net8.0-windows\Guna.UI2.dll
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\bin\x64\Debug\net8.0-windows\System.Management.dll
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\bin\x64\Debug\net8.0-windows\runtimes\win\lib\net7.0\System.Management.dll
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\bin\x64\Debug\net8.0-windows\DataStructures.dll
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\bin\x64\Debug\net8.0-windows\DataStructures.pdb
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.csproj.AssemblyReference.cache
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.Login.resources
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.Properties.Resources.resources
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.csproj.GenerateResource.cache
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.AssemblyInfoInputs.cache
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.AssemblyInfo.cs
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.csproj.CoreCompileInputs.cache
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.sourcelink.json
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Grou.E20B7F76.Up2Date
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.dll
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\refint\DSA_Group1_Final_Project.dll
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.pdb
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.genruntimeconfig.cache
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\ref\DSA_Group1_Final_Project.dll
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.Admin.resources
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.Setup.resources
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.setupAdmin.resources
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.userPage.resources
+>>>>>>> dsaGui

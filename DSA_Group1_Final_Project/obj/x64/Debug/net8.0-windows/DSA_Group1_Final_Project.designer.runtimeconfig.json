@@ -12,13 +12,22 @@
       }
     ],
     "additionalProbingPaths": [
+<<<<<<< HEAD
       "C:\\Users\\duff bastasa\\.dotnet\\store\\|arch|\\|tfm|",
       "C:\\Users\\duff bastasa\\.nuget\\packages",
+=======
+<<<<<<< Updated upstream
+      "C:\\Users\\NeeCHAN\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\NeeCHAN\\.nuget\\packages"
+=======
+      "C:\\Users\\barla\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\barla\\.nuget\\packages",
+>>>>>>> dsaGui
       "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+>>>>>>> Stashed changes
     ],
     "configProperties": {
       "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": true,
-      "CSWINRT_USE_WINDOWS_UI_XAML_PROJECTIONS": false,
       "Microsoft.NETCore.DotNetHostPolicy.SetAppPaths": true
     }
   }
