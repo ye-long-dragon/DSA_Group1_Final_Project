@@ -11,11 +11,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FirebaseAdmin" Version="3.1.0" />
+    <PackageReference Include="Google.Apis.Auth" Version="1.69.0" />
+    <PackageReference Include="Google.Cloud.Firestore" Version="3.9.0" />
     <PackageReference Include="Guna.UI2.WinForms" Version="2.0.4.6" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Windows\" />
+    <PackageReference Include="System.Text.Json" Version="9.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +29,10 @@
     <Reference Include="StackDataStructure">
       <HintPath>..\x64\Debug\StackDataStructure.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Windows\UserControls\Auth\" />
   </ItemGroup>
 
 </Project>
