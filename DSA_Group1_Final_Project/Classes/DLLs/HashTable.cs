@@ -11,10 +11,10 @@ namespace DSA_Group1_Final_Project.Classes.DLLs
     {
         IntPtr Hash;
 
-        public HashTable(int size) { 
-            Hash = new IntPtr(size);
-            Hash = createHashtable(size);
-        }
+        //public HashTable(int size) { 
+        //    Hash = new IntPtr(size);
+        //    Hash = createHashtable(size);
+        //}
 
         public void insertElement(int key, string value) {
             insertItem(Hash, key, value);

@@ -20,16 +20,16 @@ namespace DSA_Group1_Final_Project
 
         private void button1_Click(object sender, EventArgs e)
         {
-            HashTable hash = new HashTable(10);
-            hash.insertElement(9, "CS100L");
-            hash.insertElement(1, "CPE001L");
-            hash.insertElement(5, "CPE141L");
+            //HashTable hash = new HashTable(10);
+            //hash.insertElement(9, "CS100L");
+            //hash.insertElement(1, "CPE001L");
+            //hash.insertElement(5, "CPE141L");
 
-            MessageBox.Show(hash.returnElement(9));
+            //MessageBox.Show(hash.returnElement(9));
 
-            hash.deleteElement(9);
+            //hash.deleteElement(9);
 
-            MessageBox.Show(hash.returnElement(9));
+            //MessageBox.Show(hash.returnElement(9));
         }
     }
 }
