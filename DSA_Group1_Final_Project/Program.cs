@@ -1,4 +1,4 @@
-namespace DSA_Group1_Final_Project
+namespace DSA_Group1_Final_Project.Windows.AuthScreens
 {
     internal static class Program
     {
