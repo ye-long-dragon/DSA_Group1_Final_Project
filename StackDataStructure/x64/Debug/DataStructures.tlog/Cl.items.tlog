@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\duff bastasa\Documents\MMCM CPE\Data Structure and Algorithms\MMCMCurriculumTracker\DSA_Group1_Final_Project\StackDataStructure\dequeue.cpp;C:\Users\duff bastasa\Documents\MMCM CPE\Data Structure and Algorithms\MMCMCurriculumTracker\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\dequeue.obj
 C:\Users\duff bastasa\Documents\MMCM CPE\Data Structure and Algorithms\MMCMCurriculumTracker\DSA_Group1_Final_Project\StackDataStructure\dllmain.cpp;C:\Users\duff bastasa\Documents\MMCM CPE\Data Structure and Algorithms\MMCMCurriculumTracker\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\dllmain.obj
 C:\Users\duff bastasa\Documents\MMCM CPE\Data Structure and Algorithms\MMCMCurriculumTracker\DSA_Group1_Final_Project\StackDataStructure\hashtable.cpp;C:\Users\duff bastasa\Documents\MMCM CPE\Data Structure and Algorithms\MMCMCurriculumTracker\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\hashtable.obj
@@ -5,3 +6,12 @@ C:\Users\duff bastasa\Documents\MMCM CPE\Data Structure and Algorithms\MMCMCurri
 C:\Users\duff bastasa\Documents\MMCM CPE\Data Structure and Algorithms\MMCMCurriculumTracker\DSA_Group1_Final_Project\StackDataStructure\pch.cpp;C:\Users\duff bastasa\Documents\MMCM CPE\Data Structure and Algorithms\MMCMCurriculumTracker\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\pch.obj
 C:\Users\duff bastasa\Documents\MMCM CPE\Data Structure and Algorithms\MMCMCurriculumTracker\DSA_Group1_Final_Project\StackDataStructure\stack.cpp;C:\Users\duff bastasa\Documents\MMCM CPE\Data Structure and Algorithms\MMCMCurriculumTracker\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\stack.obj
 C:\Users\duff bastasa\Documents\MMCM CPE\Data Structure and Algorithms\MMCMCurriculumTracker\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cpp;C:\Users\duff bastasa\Documents\MMCM CPE\Data Structure and Algorithms\MMCMCurriculumTracker\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.obj
+=======
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\StackDataStructure\dequeue.cpp;C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\dequeue.obj
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\StackDataStructure\dllmain.cpp;C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\dllmain.obj
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\StackDataStructure\hashtable.cpp;C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\hashtable.obj
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\StackDataStructure\heap.cpp;C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\heap.obj
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\StackDataStructure\pch.cpp;C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\pch.obj
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\StackDataStructure\stack.cpp;C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\stack.obj
+C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cpp;C:\Users\NeeCHAN\Source\Repos\DSA_Group1_Final_Project\StackDataStructure\x64\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.obj
+>>>>>>> dsaGui
