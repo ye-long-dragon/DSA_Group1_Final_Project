@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Windows\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\StackDataStructure\StackDataStructure.vcxproj" />
   </ItemGroup>
 

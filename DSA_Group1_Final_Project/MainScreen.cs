@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace DSA_Group1_Final_Project
 {
-    public partial class userPage : Form
+    public partial class MainScreen : Form
     {
-        public userPage()
+        public MainScreen()
         {
             InitializeComponent();
         }

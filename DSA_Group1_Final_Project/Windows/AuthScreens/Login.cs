@@ -19,6 +19,11 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             InitializeComponent();
         }
 
+
+        /* Register registerForm = new Register();
+            registerForm.Show();
+            this.Hide(); // Hide login form
+        */
         private void button1_Click(object sender, EventArgs e)
         {
             //HashTable hash = new HashTable(10);
@@ -33,6 +38,11 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             //MessageBox.Show(hash.returnElement(9));
         }
         private void btnRegister_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void label4_Click(object sender, EventArgs e)
         {
             Register registerForm = new Register();
             registerForm.Show();
