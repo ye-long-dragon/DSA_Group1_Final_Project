@@ -1,4 +1,5 @@
 ﻿using DSA_Group1_Final_Project.Classes.DLLs;
+using DSA_Group1_Final_Project.Windows.AuthScreens;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DSA_Group1_Final_Project
+namespace DSA_Group1_Final_Project.Windows.AuthScreens
 {
     public partial class Login : Form
     {
@@ -30,6 +31,12 @@ namespace DSA_Group1_Final_Project
             //hash.deleteElement(9);
 
             //MessageBox.Show(hash.returnElement(9));
+        }
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            Register registerForm = new Register();
+            registerForm.Show();
+            this.Hide(); // Hide login form
         }
     }
 }
