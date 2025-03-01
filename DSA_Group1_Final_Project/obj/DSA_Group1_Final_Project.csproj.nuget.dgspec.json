@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jameel Mamogkat\\Documents\\AY24-25, 2nd Term\\DSA\\PROJECT\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj": {}
+    "C:\\Users\\duff bastasa\\Documents\\MMCM CPE\\Data Structure and Algorithms\\MMCMCurriculumTracker\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jameel Mamogkat\\Documents\\AY24-25, 2nd Term\\DSA\\PROJECT\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj": {
+    "C:\\Users\\duff bastasa\\Documents\\MMCM CPE\\Data Structure and Algorithms\\MMCMCurriculumTracker\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jameel Mamogkat\\Documents\\AY24-25, 2nd Term\\DSA\\PROJECT\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj",
+        "projectUniqueName": "C:\\Users\\duff bastasa\\Documents\\MMCM CPE\\Data Structure and Algorithms\\MMCMCurriculumTracker\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj",
         "projectName": "DSA_Group1_Final_Project",
-        "projectPath": "C:\\Users\\Jameel Mamogkat\\Documents\\AY24-25, 2nd Term\\DSA\\PROJECT\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj",
-        "packagesPath": "C:\\Users\\Jameel Mamogkat\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jameel Mamogkat\\Documents\\AY24-25, 2nd Term\\DSA\\PROJECT\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\obj\\",
+        "projectPath": "C:\\Users\\duff bastasa\\Documents\\MMCM CPE\\Data Structure and Algorithms\\MMCMCurriculumTracker\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj",
+        "packagesPath": "C:\\Users\\duff bastasa\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\duff bastasa\\Documents\\MMCM CPE\\Data Structure and Algorithms\\MMCMCurriculumTracker\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Jameel Mamogkat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\duff bastasa\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -32,8 +32,8 @@
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "C:\\Users\\Jameel Mamogkat\\Documents\\AY24-25, 2nd Term\\DSA\\PROJECT\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj": {
-                "projectPath": "C:\\Users\\Jameel Mamogkat\\Documents\\AY24-25, 2nd Term\\DSA\\PROJECT\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj"
+              "C:\\Users\\duff bastasa\\Documents\\MMCM CPE\\Data Structure and Algorithms\\MMCMCurriculumTracker\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj": {
+                "projectPath": "C:\\Users\\duff bastasa\\Documents\\MMCM CPE\\Data Structure and Algorithms\\MMCMCurriculumTracker\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj"
               }
             }
           }
@@ -48,15 +48,31 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
+            "FirebaseAdmin": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "Google.Apis.Auth": {
+              "target": "Package",
+              "version": "[1.69.0, )"
+            },
+            "Google.Cloud.Firestore": {
+              "target": "Package",
+              "version": "[3.9.0, )"
+            },
             "Guna.UI2.WinForms": {
               "target": "Package",
               "version": "[2.0.4.6, )"
+            },
+            "System.Text.Json": {
+              "target": "Package",
+              "version": "[9.0.2, )"
             }
           },
           "imports": [
@@ -78,15 +94,15 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Jameel Mamogkat\\Documents\\AY24-25, 2nd Term\\DSA\\PROJECT\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj": {
+    "C:\\Users\\duff bastasa\\Documents\\MMCM CPE\\Data Structure and Algorithms\\MMCMCurriculumTracker\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj": {
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jameel Mamogkat\\Documents\\AY24-25, 2nd Term\\DSA\\PROJECT\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj",
+        "projectUniqueName": "C:\\Users\\duff bastasa\\Documents\\MMCM CPE\\Data Structure and Algorithms\\MMCMCurriculumTracker\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj",
         "projectName": "DataStructures",
-        "projectPath": "C:\\Users\\Jameel Mamogkat\\Documents\\AY24-25, 2nd Term\\DSA\\PROJECT\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj",
+        "projectPath": "C:\\Users\\duff bastasa\\Documents\\MMCM CPE\\Data Structure and Algorithms\\MMCMCurriculumTracker\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj",
         "UsingMicrosoftNETSdk": false,
         "frameworks": {
           "native": {
