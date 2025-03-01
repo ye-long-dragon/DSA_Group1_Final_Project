@@ -160,23 +160,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\barla\\.nuget\\packages\\": {},
+    "C:\\Users\\Jameel Mamogkat\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj",
+      "projectUniqueName": "C:\\Users\\Jameel Mamogkat\\Documents\\AY24-25, 2nd Term\\DSA\\PROJECT\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj",
       "projectName": "DSA_Group1_Final_Project",
-      "projectPath": "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj",
-      "packagesPath": "C:\\Users\\barla\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\obj\\",
+      "projectPath": "C:\\Users\\Jameel Mamogkat\\Documents\\AY24-25, 2nd Term\\DSA\\PROJECT\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project.csproj",
+      "packagesPath": "C:\\Users\\Jameel Mamogkat\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Jameel Mamogkat\\Documents\\AY24-25, 2nd Term\\DSA\\PROJECT\\DSA_Group1_Final_Project\\DSA_Group1_Final_Project\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\barla\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Jameel Mamogkat\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -191,8 +191,8 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj": {
-              "projectPath": "C:\\Users\\barla\\source\\repos\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj"
+            "C:\\Users\\Jameel Mamogkat\\Documents\\AY24-25, 2nd Term\\DSA\\PROJECT\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj": {
+              "projectPath": "C:\\Users\\Jameel Mamogkat\\Documents\\AY24-25, 2nd Term\\DSA\\PROJECT\\DSA_Group1_Final_Project\\StackDataStructure\\StackDataStructure.vcxproj"
             }
           }
         }
