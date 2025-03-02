@@ -1,6 +1,6 @@
-﻿namespace DSA_Group1_Final_Project.Windows.UserControls.General_Screens
+﻿namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
 {
-    partial class ProgramCourses
+    partial class ManageCurriculums
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,8 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            SuspendLayout();
+            // 
+            // ManageCurriculums
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Name = "ManageCurriculums";
+            Size = new Size(1136, 896);
+            ResumeLayout(false);
         }
 
         #endregion

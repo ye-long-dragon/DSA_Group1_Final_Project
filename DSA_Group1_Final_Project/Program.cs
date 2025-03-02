@@ -11,7 +11,7 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Login());
+            Application.Run(new MainScreen("Student"));
         }
     }
 }
