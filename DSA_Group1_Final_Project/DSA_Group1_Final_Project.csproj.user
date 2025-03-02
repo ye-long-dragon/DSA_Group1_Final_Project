@@ -1,8 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Compile Update="Windows\Login.cs">
+    <Compile Update="Windows\AuthScreens\RegisterStudent.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MainScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Windows\AuthScreens\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Windows\AuthScreens\Register.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Windows\AuthScreens\VerifyOTPForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Windows\UserControls\General Screens\AvailableCourses.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Windows\UserControls\General Screens\ProgramCourses.cs">
+      <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
 </Project>
