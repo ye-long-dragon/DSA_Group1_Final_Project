@@ -16,10 +16,28 @@
     <Compile Update="Windows\AuthScreens\VerifyOTPForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Windows\UserControls\General Screens\AvailableCourses.cs">
+    <Compile Update="Windows\UserControls\Admin\itemMasterList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Windows\UserControls\General Screens\ProgramCourses.cs">
+    <Compile Update="Windows\UserControls\Admin\ManageCurriculums.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Windows\UserControls\Admin\StudentMasterList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Windows\UserControls\General Screens\Developers.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Windows\UserControls\General Screens\StudentProfile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Windows\UserControls\Student\AvailableCourses.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Windows\UserControls\Student\CourseList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Windows\UserControls\Student\itemCourses.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>

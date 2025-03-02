@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DSA_Group1_Final_Project.Windows.UserControls.General_Screens
+namespace DSA_Group1_Final_Project.Windows.UserControls.Student
 {
-    public partial class ProgramCourses : UserControl
+    public partial class itemCourses : UserControl
     {
-        public ProgramCourses()
+        public itemCourses()
         {
             InitializeComponent();
         }
