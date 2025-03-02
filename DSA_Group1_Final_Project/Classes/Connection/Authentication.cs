@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Collections;
+using DSA_Group1_Final_Project.Classes.User_Class;
 
 namespace DSA_Group1_Final_Project.Classes.Connection
 {
@@ -258,5 +259,48 @@ namespace DSA_Group1_Final_Project.Classes.Connection
                 return "Error during registration: " + ex.Message;
             }
         }
+
+
+        public async Task<List<Course>> ReturnCourses()
+        {
+            try
+            {
+                List<Course> courses = new List<Course>();
+
+                // Await the asynchronous call to get the snapshot
+                QuerySnapshot snapshot = await db.Collection("courses").GetSnapshotAsync();
+
+                foreach (DocumentSnapshot document in snapshot.Documents)
+                {
+                    if (document.Exists) // Check if the document exists
+                    {
+                        Course course = new Course
+                        {
+                            name = document.GetValue<string>("name"),
+                            code = document.GetValue<string>("code"),
+                            preReq = document.GetValue<string[]>("preReq"),
+                            term = document.GetValue<int>("term"),
+                            regularTerm = document.GetValue<int[]>("regularTerm"),
+                            units = document.GetValue<int>("units"),
+                            yearLevel = document.GetValue<int>("yearLevel")
+                        };
+
+                        courses.Add(course);
+                    }
+                }
+
+                return courses;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error fetching courses: " + ex.Message);
+                return null;
+            }
+        }
+
+
+
+
+
     }
 }

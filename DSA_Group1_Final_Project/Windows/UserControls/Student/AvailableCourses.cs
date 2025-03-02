@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DSA_Group1_Final_Project.Classes.Connection;
+using DSA_Group1_Final_Project.Classes.User_Class;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,15 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Student
 {
     public partial class AvailableCourses : UserControl
     {
-        public AvailableCourses()
+        public AvailableCourses(Authentication authentication)
         {
             InitializeComponent();
+            Authentication authentication = await authentication.CreateAsync();
+
+            List<Course> courses = await authentication.GetCoursesAsync();
+
+
+
         }
     }
 }
