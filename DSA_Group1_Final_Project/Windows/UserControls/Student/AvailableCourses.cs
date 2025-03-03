@@ -16,10 +16,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Student
     {
         public AvailableCourses(Authentication authentication)
         {
-            InitializeComponent();
-            Authentication authentication = await authentication.CreateAsync();
-
-            List<Course> courses = await authentication.GetCoursesAsync();
+            
 
 
 
