@@ -22,9 +22,6 @@
     <Compile Update="Windows\UserControls\Auth\AuthControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Windows\UserControls\General Screens\AvailableCourses.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="Windows\UserControls\Student\itemCourses.cs">
       <SubType>UserControl</SubType>
     </Compile>
