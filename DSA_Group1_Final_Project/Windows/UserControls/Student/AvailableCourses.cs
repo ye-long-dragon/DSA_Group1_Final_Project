@@ -14,12 +14,10 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Student
 {
     public partial class AvailableCourses : UserControl
     {
-        public AvailableCourses(Authentication authentication)
+        public AvailableCourses()
         {
             InitializeComponent();
-            Authentication authentication = await authentication.CreateAsync();
-
-            List<Course> courses = await authentication.GetCoursesAsync();
+            
 
 
 
