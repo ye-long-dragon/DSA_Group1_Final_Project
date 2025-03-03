@@ -31,20 +31,26 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
                 return;
             }
 
-            Authentication auth = await Authentication.CreateAsync(); // Create an instance
+            Authentication auth = await Authentication.CreateAsync();
             string result = await auth.VerifyOtp(email, enteredOtp, password, role, program);
 
             if (result == "Registration successful.")
             {
                 MessageBox.Show("Registration successful! You can now log in.");
-                this.Hide();
-                Login loginForm = new Login();
-                loginForm.Show();
+                this.Close(); // Close OTP form
+
+                // Return to MainForm and show login
+                AuthForm mainForm = Application.OpenForms.OfType<AuthForm>().FirstOrDefault();
+                if (mainForm != null)
+                {
+                    mainForm.ShowLogin(); // Switch back to Login screen
+                }
             }
             else
             {
                 MessageBox.Show(result);
             }
         }
+
     }
 }
