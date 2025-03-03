@@ -28,41 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lblStudentMasterList = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            flowLayoutPanel1 = new FlowLayoutPanel();
+            flpStudentList = new FlowLayoutPanel();
             SuspendLayout();
             // 
-            // lblStudentMasterList
+            // flpStudentList
             // 
-            lblStudentMasterList.BackColor = Color.Transparent;
-            lblStudentMasterList.Location = new Point(56, 55);
-            lblStudentMasterList.Name = "lblStudentMasterList";
-            lblStudentMasterList.Size = new Size(129, 22);
-            lblStudentMasterList.TabIndex = 0;
-            lblStudentMasterList.Text = "Student Master List";
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.Location = new Point(33, 94);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(1065, 760);
-            flowLayoutPanel1.TabIndex = 1;
+            flpStudentList.AutoScroll = true;
+            flpStudentList.BackColor = SystemColors.ActiveCaption;
+            flpStudentList.Dock = DockStyle.Fill;
+            flpStudentList.Location = new Point(0, 0);
+            flpStudentList.Name = "flpStudentList";
+            flpStudentList.Size = new Size(836, 690);
+            flpStudentList.TabIndex = 0;
             // 
             // StudentMasterList
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(flowLayoutPanel1);
-            Controls.Add(lblStudentMasterList);
+            Controls.Add(flpStudentList);
             Name = "StudentMasterList";
-            Size = new Size(1136, 896);
+            Size = new Size(836, 690);
+            Load += StudentMasterList_Load;
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblStudentMasterList;
-        private FlowLayoutPanel flowLayoutPanel1;
+        private FlowLayoutPanel flpStudentList;
     }
 }

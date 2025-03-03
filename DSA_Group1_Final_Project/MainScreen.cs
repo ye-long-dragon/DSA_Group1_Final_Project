@@ -76,10 +76,10 @@ namespace DSA_Group1_Final_Project
 
         private void btnStudentMasterList_Click(object sender, EventArgs e)
         {
-            StudentMasterList studentMasterList = new StudentMasterList();
-            studentMasterList.Dock = DockStyle.Fill;
-            pnlMain.Controls.Clear();
-            pnlMain.Controls.Add(studentMasterList);
+            //StudentMasterList studentMasterList = new StudentMasterList();
+            //studentMasterList.Dock = DockStyle.Fill;
+            //pnlMain.Controls.Clear();
+            //pnlMain.Controls.Add(studentMasterList);
         }
 
         private void btnCourseList_Click_1(object sender, EventArgs e)
