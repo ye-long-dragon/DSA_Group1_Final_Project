@@ -92,7 +92,7 @@ namespace DSA_Group1_Final_Project
 
         private void btnAvailableCourses_Click(object sender, EventArgs e)
         {
-            AvailableCourses availableCourses = new AvailableCourses(Authentication);
+            AvailableCourses availableCourses = new AvailableCourses();
             availableCourses.Dock = DockStyle.Fill;
             pnlMain.Controls.Clear();
             pnlMain.Controls.Add(availableCourses);
