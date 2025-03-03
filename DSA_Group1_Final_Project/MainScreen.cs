@@ -76,10 +76,10 @@ namespace DSA_Group1_Final_Project
 
         private void btnStudentMasterList_Click(object sender, EventArgs e)
         {
-            StudentMasterList studentMasterList = new StudentMasterList();
-            studentMasterList.Dock = DockStyle.Fill;
-            pnlMain.Controls.Clear();
-            pnlMain.Controls.Add(studentMasterList);
+            //StudentMasterList studentMasterList = new StudentMasterList();
+            //studentMasterList.Dock = DockStyle.Fill;
+            //pnlMain.Controls.Clear();
+            //pnlMain.Controls.Add(studentMasterList);
         }
 
         private void btnCourseList_Click_1(object sender, EventArgs e)
@@ -92,16 +92,16 @@ namespace DSA_Group1_Final_Project
 
         private void btnAvailableCourses_Click(object sender, EventArgs e)
         {
-            AvailableCourses availableCourses = new AvailableCourses();
-            availableCourses.Dock = DockStyle.Fill;
+            //AvailableCourses availableCourses = new AvailableCourses();
+            //availableCourses.Dock = DockStyle.Fill;
             pnlMain.Controls.Clear();
-            pnlMain.Controls.Add(availableCourses);
+            //pnlMain.Controls.Add(availableCourses);
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            Login login = new Login();
-            login.Show();
+            //Login login = new Login();
+            //login.Show();
             this.Close();
         }
     }
