@@ -14,9 +14,8 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Student
 {
     public partial class AvailableCourses : UserControl
     {
-        public AvailableCourses()
+        public AvailableCourses(Authentication authentication)
         {
-            InitializeComponent();
             
 
 
