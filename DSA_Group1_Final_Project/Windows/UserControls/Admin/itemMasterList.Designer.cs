@@ -113,6 +113,7 @@
             btnProgram.Size = new Size(129, 56);
             btnProgram.TabIndex = 5;
             btnProgram.Text = "Update Program";
+            btnProgram.Click += btnProgram_Click;
             // 
             // btnStatus
             // 
@@ -129,6 +130,7 @@
             btnStatus.Size = new Size(142, 56);
             btnStatus.TabIndex = 6;
             btnStatus.Text = "Update Approval Status";
+            btnStatus.Click += btnStatus_Click;
             // 
             // btnCuriculum
             // 
@@ -145,6 +147,7 @@
             btnCuriculum.Size = new Size(142, 56);
             btnCuriculum.TabIndex = 7;
             btnCuriculum.Text = "Update Curriculum";
+            btnCuriculum.Click += btnCuriculum_Click;
             // 
             // btnDetails
             // 
@@ -161,6 +164,7 @@
             btnDetails.Size = new Size(142, 56);
             btnDetails.TabIndex = 8;
             btnDetails.Text = "View Curriculum Details";
+            btnDetails.Click += btnDetails_Click;
             // 
             // btnAvailableCourses
             // 
@@ -177,6 +181,7 @@
             btnAvailableCourses.Size = new Size(142, 56);
             btnAvailableCourses.TabIndex = 9;
             btnAvailableCourses.Text = "Next Available Courses";
+            btnAvailableCourses.Click += btnAvailableCourses_Click;
             // 
             // btnRemove
             // 
@@ -194,6 +199,7 @@
             btnRemove.Size = new Size(142, 56);
             btnRemove.TabIndex = 10;
             btnRemove.Text = "Remove Student";
+            btnRemove.Click += btnRemove_Click;
             // 
             // itemMasterList
             // 

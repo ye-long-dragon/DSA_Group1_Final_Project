@@ -16,7 +16,7 @@ namespace DSA_Group1_Final_Project.Classes.Connection
 
         public FirestoreServices()
         {
-            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"C:\Users\Jameel Mamogkat\Documents\AY24-25, 2nd Term\DSA\PROJECT\DSA_Group1_Final_Project\mmcm-curriculum-tracker-app-firebase-adminsdk-fbsvc-04fba75862.json"); //Replace with your json file path
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"C:\Users\barla\Downloads\mmcm-curriculum-tracker-app-firebase-adminsdk-fbsvc-96d137e620.json"); //Replace with your json file path
             db = FirestoreDb.Create("mmcm-curriculum-tracker-app"); // Replace with your Firebase project ID
             Debug.WriteLine("Connected to Firestore.");
         }

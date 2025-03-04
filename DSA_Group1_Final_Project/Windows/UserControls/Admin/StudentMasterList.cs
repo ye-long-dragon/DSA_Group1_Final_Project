@@ -16,11 +16,10 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
     {
         private FirestoreServices firestoreService;
         private TestForm mainForm; // Store reference to TestForm
-        public StudentMasterList(TestForm parentForm)
+        public StudentMasterList()
         {
             InitializeComponent();
-            firestoreService = new FirestoreServices();
-            this.mainForm = parentForm; // 🔥 Store reference to TestForm
+            firestoreService = new FirestoreServices();// 🔥 Store reference to TestForm
         }
 
         private async void StudentMasterList_Load(object sender, EventArgs e)
@@ -36,6 +35,18 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
 
             foreach (var student in students)
             {
+
+                itemMasterList itemMasterList = new itemMasterList(student);
+                itemMasterList.btnProgramClick += ItemMasterList_btnProgramClick;// 🔥 Add event handler
+                itemMasterList.btnStatusClick += ItemMasterList_btnStatusClick;// 🔥 Add event handler
+                itemMasterList.btncurriculumClick += ItemMasterList_btncurriculumClick;// 🔥 Add event handler
+                itemMasterList.btnRemoveClick += ItemMasterList_btnRemoveClick;// 🔥 Add event handler
+                itemMasterList.btnAvailableCoursesClick += (s, e) => ItemMasterList_btnDetailsClick(s, e, student);
+                itemMasterList.btnAvailableCoursesClick += (s, e) => ItemMasterList_btnAvailableCoursesClick(s, e, student); 
+                flpStudentList.Controls.Add(itemMasterList);
+
+
+                /*
 
                 // Create a main panel for each student
                 Panel studentPanel = new Panel
@@ -123,9 +134,30 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
                 studentPanel.Controls.Add(layout);
 
                 // Add panel to FlowLayoutPanel
-                flpStudentList.Controls.Add(studentPanel);
+                flpStudentList.Controls.Add(studentPanel);*/
             }
         }
+
+        private async void ItemMasterList_btnProgramClick(object? sender, EventArgs e)
+        {
+            await LoadStudents();
+        }
+
+        private async void ItemMasterList_btnStatusClick(object? sender, EventArgs e)
+        {
+            await LoadStudents();
+        }
+
+        private async void ItemMasterList_btncurriculumClick(object? sender, EventArgs e)
+        {
+            await LoadStudents();
+        }
+
+        private async void ItemMasterList_btnRemoveClick(object? sender, EventArgs e)
+        {
+            await LoadStudents();
+        }
+
         // Button Click Event Handlers
         private void UpdateProgram(object sender, EventArgs e, StudentDocument student)
         {
@@ -272,13 +304,24 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
 
         }
 
+        private void ItemMasterList_btnDetailsClick(object? sender, EventArgs e, StudentDocument student)
+        {
+            ViewCurriculumDetails(sender, e, student);
+        }
+
+        private void ItemMasterList_btnAvailableCoursesClick(object? sender, EventArgs e, StudentDocument student)
+        {
+            NextAvailableCourses(sender, e, student);
+        }
+
         private void ViewCurriculumDetails(object sender, EventArgs e, StudentDocument student)
         {
             // 🔥 Create new ViewCurriculumDetails UserControl
             ViewCurriculumDetails curriculumDetailsControl = new ViewCurriculumDetails(student);
 
             // 🔥 Call LoadUserControl() from TestForm to switch screens
-            mainForm.LoadUserControl(curriculumDetailsControl);
+            //mainForm.LoadUserControl(curriculumDetailsControl);
+            
         }
 
         private void NextAvailableCourses(object sender, EventArgs e, StudentDocument student)
@@ -287,7 +330,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
             AdminNextAvailableCourses nextAvailableCoursesControl = new AdminNextAvailableCourses(student);
 
             // 🔥 Call LoadUserControl() from TestForm to switch screens
-            mainForm.LoadUserControl(nextAvailableCoursesControl);
+            //mainForm.LoadUserControl(nextAvailableCoursesControl);
         }
     }
     

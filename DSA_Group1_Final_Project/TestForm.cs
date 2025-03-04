@@ -27,7 +27,7 @@ namespace DSA_Group1_Final_Project
             this.Controls.Add(mainPanel); // Add mainPanel to form
 
             // 🔥 Initialize and add StudentMasterList to mainPanel
-            StudentMasterList studentMasterList = new StudentMasterList(this); // Pass TestForm reference
+            StudentMasterList studentMasterList = new StudentMasterList(); // Pass TestForm reference
             studentMasterList.Dock = DockStyle.Fill;
             mainPanel.Controls.Add(studentMasterList); // Add to mainPanel
         }
