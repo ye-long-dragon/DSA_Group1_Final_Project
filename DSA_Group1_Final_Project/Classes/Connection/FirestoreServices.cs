@@ -127,9 +127,9 @@ namespace DSA_Group1_Final_Project.Classes.Connection
             }
         }
 
-        public async Task<Dictionary<int, Dictionary<int, List<CourseNode>>>> GetCurriculumCourses(string curriculumId)
+        public async Task<CourseGraph> GetCurriculumCourses(string curriculumId)
         {
-            var courseGraph = new Dictionary<int, Dictionary<int, List<CourseNode>>>();
+            var groupedCourses = new Dictionary<int, Dictionary<int, List<CourseNode>>>();
             var electiveCourses = new List<CourseNode>();
             var studentCurriculum = GetCurriculumString(curriculumId);
 
@@ -140,10 +140,10 @@ namespace DSA_Group1_Final_Project.Classes.Connection
             // 🔹 Map of elective categories based on curriculumId
             Dictionary<string, List<string>> electiveCategories = new Dictionary<string, List<string>>
             {
-                { "bscpe_2022_2023", new List<string> { "AWS171P", "EMSY171P", "GEN_ED", "MACH171P", "MICR172P", "NETA172P", "SDEV173P", "SNAD174P" } },
-                { "bsee_2024_2025", new List<string> { "ADVANCED_ELECTRICAL_SYSTEMS_DESIGN", "ADVANCED_POWER_SYSTEMS", "ADVANCED_SYSTEM_DESIGN", "AGRICULTURAL_ENGINEERING", "GEN_ED", "MECHATRONICS", "OPEN_ELECTIVE" } },
-                { "bscpe_2021_2022", new List<string> { "AWS171P", "EMSY171P", "GEN_ED", "MACH171P", "MICR172P", "NETA172P", "SDEV173P", "SNAD174P" } },
-                { "bsece_2022_2023", new List<string> { "ECE137P", "ECE110P", "ECE154P", "ECE152P", "SNAD175P", "NETA172P", "AWS171P", "ECE194", "NETA173P", "ECE166P", "ECE153", "ECE118P", "ECE127", "AENG", "GEN_ED" } }
+                { "1", new List<string> { "AWS171P", "EMSY171P", "GEN_ED", "MACH171P", "MICR172P", "NETA172P", "SDEV173P", "SNAD174P" } },
+                { "2", new List<string> { "ADVANCED_ELECTRICAL_SYSTEMS_DESIGN", "ADVANCED_POWER_SYSTEMS", "ADVANCED_SYSTEM_DESIGN", "AGRICULTURAL_ENGINEERING", "GEN_ED", "MECHATRONICS", "OPEN_ELECTIVE" } },
+                { "3", new List<string> { "AWS171P", "EMSY171P", "GEN_ED", "MACH171P", "MICR172P", "NETA172P", "SDEV173P", "SNAD174P" } },
+                { "4", new List<string> { "ECE137P", "ECE110P", "ECE154P", "ECE152P", "SNAD175P", "NETA172P", "AWS171P", "ECE194", "NETA173P", "ECE166P", "ECE153", "ECE118P", "ECE127", "AENG", "GEN_ED" } }
             };
 
             try
@@ -192,30 +192,60 @@ namespace DSA_Group1_Final_Project.Classes.Connection
 
                         if (courses.Any())
                         {
-                            if (!courseGraph.ContainsKey(year))
-                                courseGraph[year] = new Dictionary<int, List<CourseNode>>();
+                            if (!groupedCourses.ContainsKey(year))
+                                groupedCourses[year] = new Dictionary<int, List<CourseNode>>();
 
-                            if (!courseGraph[year].ContainsKey(term))
-                                courseGraph[year][term] = new List<CourseNode>();
+                            if (!groupedCourses[year].ContainsKey(term))
+                                groupedCourses[year][term] = new List<CourseNode>();
 
-                            courseGraph[year][term].AddRange(courses);
+                            groupedCourses[year][term].AddRange(courses);
                         }
                     }
                 }
 
-                // 🔹 Fetch electives if the curriculum has them
-                if (electiveCategories.ContainsKey(curriculumId))
+                if (!electiveCategories.ContainsKey(curriculumId))
                 {
-                    foreach (string category in electiveCategories[curriculumId])
-                    {
-                        CollectionReference electiveRef = db.Collection("curriculums").Document(curriculumId).Collection("electives").Document(category).Collection("courses");
-                        QuerySnapshot snapshot = await electiveRef.GetSnapshotAsync();
-
-                        electiveCourses.AddRange(snapshot.Documents.Select(doc => doc.ConvertTo<CourseNode>()));
-                    }
+                    Debug.WriteLine($"No electives found for curriculumId: {curriculumId}");
+                    return null;
                 }
+
+                var electiveCategory = electiveCategories[curriculumId].Distinct().ToList(); // Remove duplicates
+                var fetchTasks = electiveCategory.Select(async category =>
+                {
+                    CollectionReference electiveRef = db.Collection("curriculums").Document(studentCurriculum).Collection("electives").Document(category).Collection("courses");
+                    QuerySnapshot snapshot = await electiveRef.GetSnapshotAsync();
+
+                    if (snapshot.Documents.Count == 0)
+                    {
+                        Debug.WriteLine($"No elective courses found for category: {category}");
+                        return;
+                    }
+
+                    var courses = snapshot.Documents.Select(doc =>
+                    {
+                        var data = doc.ToDictionary();
+                        return new CourseNode
+                        {
+                            Code = data.ContainsKey("code") ? data["code"].ToString() : "",
+                            Name = data.ContainsKey("name") ? data["name"].ToString() : "",
+                            Units = data.ContainsKey("units") ? Convert.ToInt32(data["units"]) : 0,
+                            YearLevel = data.ContainsKey("yearLevel") ? Convert.ToInt32(data["yearLevel"]) : 0,
+                            Term = data.ContainsKey("term") ? Convert.ToInt32(data["term"]) : 0,
+                            Prerequisites = data.TryGetValue("prerequisites", out object prereqObj) && prereqObj is List<object> prereqList ? prereqList.Select(p => p.ToString()).ToList() : new List<string>(),
+                            CoRequisites = data.TryGetValue("coRequisites", out object coreqObj) && coreqObj is List<object> coreqList ? coreqList.Select(c => c.ToString()).ToList() : new List<string>(),
+                            RegularTerms = data.TryGetValue("regularTerms", out object termObj) && termObj is List<object> termList ? termList.Select(t => Convert.ToInt32(t)).ToList() : new List<int>(),
+                            Taken = false
+                        };
+                    }).ToList();
+
+                    electiveCourses.AddRange(courses);
+                });
+
+                await Task.WhenAll(fetchTasks); // Fetch all electives in parallel
+
+
                 // 🔹 Return the structured course graph
-                return courseGraph;
+                return new CourseGraph(groupedCourses, electiveCourses);
                 
             }
             catch (Exception ex)

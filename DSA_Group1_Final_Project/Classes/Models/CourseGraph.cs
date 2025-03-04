@@ -11,10 +11,16 @@ namespace DSA_Group1_Final_Project.Classes.Models
         private Dictionary<string, List<string>> adjacencyList = new Dictionary<string, List<string>>();
         private Dictionary<string, CourseNode> courses = new Dictionary<string, CourseNode>();
         private Dictionary<string, int> inDegree = new Dictionary<string, int>();
-        private List<CourseNode> electives = new List<CourseNode>();
+        // ✅ Declare groupedCourses and electives as class attributes
+        public Dictionary<int, Dictionary<int, List<CourseNode>>> groupedCourses;
+        public List<CourseNode> electives;
 
         public CourseGraph(Dictionary<int, Dictionary<int, List<CourseNode>>> groupedCourses, List<CourseNode> electivesList)
         {
+            // ✅ Initialize the attributes with the provided arguments
+            this.groupedCourses = groupedCourses;
+            this.electives = electivesList;
+
             // Populate Graph with Courses
             foreach (var year in groupedCourses)
             {

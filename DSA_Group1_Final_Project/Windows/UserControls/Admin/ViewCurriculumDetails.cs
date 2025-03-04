@@ -71,100 +71,140 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
         {
             var courseData = await firestoreService.GetCurriculumCourses(student.Curriculum);
 
-            //print courseData in debug console
+            if (courseData == null)
+            {
+                Debug.WriteLine("Failed to fetch curriculum data.");
+                return;
+            }
+
             Debug.WriteLine("Course Data:");
-            foreach (var (year, terms) in courseData)
+            foreach (var (year, terms) in courseData.groupedCourses)
             {
                 Debug.WriteLine($"Year {year}");
                 foreach (var (term, courses) in terms)
                 {
-                    Debug.WriteLine($"Term {term}");
+                    Debug.WriteLine($"  Term {term}");
                     foreach (var course in courses)
                     {
-                        Debug.WriteLine($"{course.Code} - {course.Name}");
+                        Debug.WriteLine($"    {course.Code} - {course.Name}");
                     }
                 }
             }
 
-            if (courseData != null)
+            // 🔹 Print Electives
+            if (courseData.electives.Any())
             {
-                var completedCourses = new HashSet<string>(student.CompletedCourses); // Convert to HashSet for fast lookup
-
-
-                // Reset table layout to avoid old data stacking
-                tableCourses.Controls.Clear();
-                tableCourses.RowStyles.Clear();
-                tableCourses.ColumnCount = 2; // One for course name, one for checkbox
-                tableCourses.AutoSize = true;
-                tableCourses.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-                tableCourses.GrowStyle = TableLayoutPanelGrowStyle.AddRows;
-
-                int row = 0;
-                foreach (var (year, terms) in courseData) // 🔥 Loop through Years
+                Debug.WriteLine("Elective Courses:");
+                foreach (var elective in courseData.electives)
                 {
-                    Label lblYear = new Label
+                    Debug.WriteLine($"  {elective.Code} - {elective.Name}");
+                }
+            }
+            else { 
+                Debug.WriteLine("No Elective Courses"); 
+            }
+
+            var completedCourses = new HashSet<string>(student.CompletedCourses); // Convert to HashSet for fast lookup
+
+            // Reset table layout to avoid old data stacking
+            tableCourses.Controls.Clear();
+            tableCourses.RowStyles.Clear();
+            tableCourses.ColumnCount = 2; // One for course name, one for checkbox
+            tableCourses.AutoSize = true;
+            tableCourses.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            tableCourses.GrowStyle = TableLayoutPanelGrowStyle.AddRows;
+
+            int row = 0;
+
+            // 🔹 Loop through Years
+            foreach (var (year, terms) in courseData.groupedCourses)
+            {
+                Label lblYear = new Label
+                {
+                    Text = $"Year {year}",
+                    Font = new Font("Arial", 12, FontStyle.Bold),
+                    ForeColor = Color.Blue,
+                    Dock = DockStyle.Top,
+                    AutoSize = true,
+                    Padding = new Padding(10)
+                };
+                tableCourses.Controls.Add(lblYear, 0, row++);
+
+                // 🔹 Loop through Terms
+                foreach (var (term, courses) in terms)
+                {
+                    Label lblTerm = new Label
                     {
-                        Text = $"Year {year}",
-                        Font = new Font("Arial", 12, FontStyle.Bold),
-                        ForeColor = Color.Blue,
+                        Text = $"Term {term}",
+                        Font = new Font("Arial", 10, FontStyle.Bold),
+                        ForeColor = Color.Red,
                         Dock = DockStyle.Top,
                         AutoSize = true,
-                        Padding = new Padding(10)
+                        Padding = new Padding(5)
                     };
-                    tableCourses.Controls.Add(lblYear, 0, row++);
+                    tableCourses.Controls.Add(lblTerm, 0, row++);
+                    tableCourses.SetColumnSpan(lblTerm, 2);
 
-                    foreach (var (term, courses) in terms) // 🔥 Loop through Terms
+                    // 🔹 Loop through Courses
+                    foreach (var course in courses)
                     {
-                        Label lblTerm = new Label
-                        {
-                            Text = $"Term {term}",
-                            Font = new Font("Arial", 10, FontStyle.Bold),
-                            ForeColor = Color.Red,
-                            Dock = DockStyle.Top,
-                            AutoSize = true,
-                            Padding = new Padding(5)   
-                        };
-                        tableCourses.Controls.Add(lblTerm, 0, row++);
-                        tableCourses.SetColumnSpan(lblTerm, 2);
-
-                        foreach (var course in courses) // 🔥 Loop through Courses
-                        {
-                            // Create Course Label
-                            Label lblCourse = new Label
-                            {
-                                Text = course.Name,
-                                AutoSize = true,
-                                MaximumSize = new Size(400, 0), // Restrict width, allow multiline
-                                Padding = new Padding(5),
-                                TextAlign = ContentAlignment.MiddleLeft // Align text properly
-                            };
-
-                            // Create Checkbox
-                            CheckBox chkCourse = new CheckBox
-                            {
-                                AutoSize = true,
-                                Padding = new Padding(5),
-                                Checked = completedCourses.Contains(course.Code), // ✅ Check if course is completed
-                                Dock = DockStyle.Left // Align checkbox properly
-                            };
-
-                            // Attach event to Checkbox
-                            chkCourse.CheckedChanged += async (s, e) =>
-                            {
-                                await firestoreService.UpdateCompletedCourses(student.StudentID, course.Code, chkCourse.Checked);
-                            };
-
-                            // Add controls in correct order
-                            tableCourses.Controls.Add(lblCourse, 0, row); // Add Label to first column
-                            tableCourses.Controls.Add(chkCourse, 1, row); // Add Checkbox to second column
-
-                            row++; // Move to next row
-
-                        }
+                        AddCourseRow(course, completedCourses, ref row);
                     }
+                }
+            }
+
+            // 🔹 Display Electives
+            if (courseData.electives.Any())
+            {
+                Label lblElectives = new Label
+                {
+                    Text = "Elective Courses",
+                    Font = new Font("Arial", 12, FontStyle.Bold),
+                    ForeColor = Color.DarkGreen,
+                    Dock = DockStyle.Top,
+                    AutoSize = true,
+                    Padding = new Padding(10)
+                };
+                tableCourses.Controls.Add(lblElectives, 0, row++);
+                tableCourses.SetColumnSpan(lblElectives, 2);
+
+                foreach (var elective in courseData.electives)
+                {
+                    AddCourseRow(elective, completedCourses, ref row);
                 }
             }
         }
+
+        // 🔥 Helper Method to Add a Course Row (Handles Regular & Elective Courses)
+        private void AddCourseRow(CourseNode course, HashSet<string> completedCourses, ref int row)
+        {
+            Label lblCourse = new Label
+            {
+                Text = course.Name,
+                AutoSize = true,
+                MaximumSize = new Size(400, 0), // Restrict width, allow multiline
+                Padding = new Padding(5),
+                TextAlign = ContentAlignment.MiddleLeft
+            };
+
+            CheckBox chkCourse = new CheckBox
+            {
+                AutoSize = true,
+                Padding = new Padding(5),
+                Checked = completedCourses.Contains(course.Code), // ✅ Check if course is completed
+                Dock = DockStyle.Left
+            };
+
+            chkCourse.CheckedChanged += async (s, e) =>
+            {
+                await firestoreService.UpdateCompletedCourses(student.StudentID, course.Code, chkCourse.Checked);
+            };
+
+            tableCourses.Controls.Add(lblCourse, 0, row); // Add Label to first column
+            tableCourses.Controls.Add(chkCourse, 1, row); // Add Checkbox to second column
+            row++; // Move to next row
+        }
+
 
         // 🔹 Go back to previous screen
         private void GoBack()
