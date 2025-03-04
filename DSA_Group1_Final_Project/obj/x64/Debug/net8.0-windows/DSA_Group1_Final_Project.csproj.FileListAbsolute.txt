@@ -32,8 +32,6 @@ C:\Users\barla\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\bi
 C:\Users\barla\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.csproj.AssemblyReference.cache
 C:\Users\barla\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.MainScreen.resources
 C:\Users\barla\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.Properties.Resources.resources
-C:\Users\barla\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.Windows.AuthScreens.Login.resources
-C:\Users\barla\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.Windows.AuthScreens.Register.resources
 C:\Users\barla\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.RegisterStudent.resources
 C:\Users\barla\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.Windows.AuthScreens.VerifyOTPForm.resources
 C:\Users\barla\Source\Repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.csproj.GenerateResource.cache
@@ -56,3 +54,10 @@ C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\ob
 C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.Windows.UserControls.Student.AvailableCourses.resources
 C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.Windows.UserControls.Student.CourseList.resources
 C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.Windows.UserControls.Student.itemCourses.resources
+C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.Windows.AuthScreens.AuthForm.resources
+C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.Windows.AuthScreens.LoginControl.resources
+C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.Windows.AuthScreens.RegisterControl.resources
+C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.Windows.UserControls.Auth.AuthControl.resources
+C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.TestForm.resources
+C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.Windows.UserControls.Admin.AdminNextAvailableCourses.resources
+C:\Users\barla\source\repos\DSA_Group1_Final_Project\DSA_Group1_Final_Project\obj\x64\Debug\net8.0-windows\DSA_Group1_Final_Project.Windows.UserControls.Admin.ViewCurriculumDetails.resources
