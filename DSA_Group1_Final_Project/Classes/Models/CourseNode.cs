@@ -4,21 +4,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DSA_Group1_Final_Project.Graph_Processing
+namespace DSA_Group1_Final_Project.Classes.Models
 {
-    public class CourseNode // Change from internal to public
+    using System.Collections.Generic;
+    using Google.Cloud.Firestore;
+
+    [FirestoreData] // 🔥 Required to map the class to Firestore
+    public class CourseNode
     {
+        [FirestoreProperty]
         public string Code { get; set; } = "";
+
+        [FirestoreProperty]
         public string Name { get; set; } = "";
+
+        [FirestoreProperty]
         public int Units { get; set; } = 0;
+
+        [FirestoreProperty]
         public int YearLevel { get; set; } = 0;
+
+        [FirestoreProperty]
         public int Term { get; set; } = 0;
+
+        [FirestoreProperty]
         public List<string> Prerequisites { get; set; } = new List<string>();
+
+        [FirestoreProperty]
         public List<string> CoRequisites { get; set; } = new List<string>();
+
+        [FirestoreProperty]
         public List<int> RegularTerms { get; set; } = new List<int>();
+
+        [FirestoreProperty]
         public bool Taken { get; set; } = false;
 
-        // Default constructor (needed for serialization)
+        // Default constructor (needed for Firestore deserialization)
         public CourseNode() { }
 
         // Constructor with parameters
