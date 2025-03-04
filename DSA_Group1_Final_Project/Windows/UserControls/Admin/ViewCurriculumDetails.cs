@@ -17,7 +17,6 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
     {
         private StudentDocument student;
         private FirestoreServices firestoreService;
-        private Dictionary<string, bool> completedCourses = new Dictionary<string, bool>();
         private TableLayoutPanel tableCourses = new TableLayoutPanel(); // 🔹 Initialize here
 
         public ViewCurriculumDetails(StudentDocument student)
@@ -25,6 +24,8 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
             InitializeComponent();
             this.student = student;
             this.firestoreService = new FirestoreServices();
+
+            // Use student.CompletedCourses directly instead of calling Firestore
 
             // 🔥 Setup UI dynamically
             InitializeUI();
@@ -87,6 +88,9 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
 
             if (courseData != null)
             {
+                var completedCourses = new HashSet<string>(student.CompletedCourses); // Convert to HashSet for fast lookup
+
+
                 // Reset table layout to avoid old data stacking
                 tableCourses.Controls.Clear();
                 tableCourses.RowStyles.Clear();
@@ -140,7 +144,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
                             {
                                 AutoSize = true,
                                 Padding = new Padding(5),
-                                Checked = completedCourses.ContainsKey(course.Code) && completedCourses[course.Code],
+                                Checked = completedCourses.Contains(course.Code), // ✅ Check if course is completed
                                 Dock = DockStyle.Left // Align checkbox properly
                             };
 
