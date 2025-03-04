@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DSA_Group1_Final_Project.Graph_Processing
+namespace DSA_Group1_Final_Project.Classes.Models
 {
     public class CourseGraph
     {

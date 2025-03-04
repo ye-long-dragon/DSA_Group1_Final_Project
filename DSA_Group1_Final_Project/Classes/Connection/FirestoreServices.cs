@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DSA_Group1_Final_Project.Classes;
 using DSA_Group1_Final_Project.Classes.Models;
 using System.Diagnostics;
 
@@ -102,6 +101,15 @@ namespace DSA_Group1_Final_Project.Classes.Connection
             { "4", "bsece_2022_2023" }  // BS Electronics Engineering 2022-2023
         };
 
+        public static string GetCurriculumString(string curriculumId)
+        {
+            if (CurriculumMap.TryGetValue(curriculumId, out string curriculumName))
+            {
+                return curriculumName;
+            }
+            return "Unknown Curriculum"; // Default value if ID is not found
+        }
+
         public async Task<bool> DeleteStudent(string studentId)
         {
             try
@@ -118,6 +126,141 @@ namespace DSA_Group1_Final_Project.Classes.Connection
                 return false; // Failure
             }
         }
+
+        public async Task<Dictionary<int, Dictionary<int, List<CourseNode>>>> GetCurriculumCourses(string curriculumId)
+        {
+            var courseGraph = new Dictionary<int, Dictionary<int, List<CourseNode>>>();
+            var electiveCourses = new List<CourseNode>();
+            var studentCurriculum = GetCurriculumString(curriculumId);
+
+            // 🔹 Years & Terms as stored in Firestore
+            List<int> years = new List<int> { 1, 2, 3, 4 };
+            List<int> terms = new List<int> { 1, 2, 3 };
+
+            // 🔹 Map of elective categories based on curriculumId
+            Dictionary<string, List<string>> electiveCategories = new Dictionary<string, List<string>>
+            {
+                { "bscpe_2022_2023", new List<string> { "AWS171P", "EMSY171P", "GEN_ED", "MACH171P", "MICR172P", "NETA172P", "SDEV173P", "SNAD174P" } },
+                { "bsee_2024_2025", new List<string> { "ADVANCED_ELECTRICAL_SYSTEMS_DESIGN", "ADVANCED_POWER_SYSTEMS", "ADVANCED_SYSTEM_DESIGN", "AGRICULTURAL_ENGINEERING", "GEN_ED", "MECHATRONICS", "OPEN_ELECTIVE" } },
+                { "bscpe_2021_2022", new List<string> { "AWS171P", "EMSY171P", "GEN_ED", "MACH171P", "MICR172P", "NETA172P", "SDEV173P", "SNAD174P" } },
+                { "bsece_2022_2023", new List<string> { "ECE137P", "ECE110P", "ECE154P", "ECE152P", "SNAD175P", "NETA172P", "AWS171P", "ECE194", "NETA173P", "ECE166P", "ECE153", "ECE118P", "ECE127", "AENG", "GEN_ED" } }
+            };
+
+            try
+            {
+                // 🔹 Fetch regular courses (Loop through all years & terms)
+                foreach (int year in years)
+                {
+                    foreach (int term in terms)
+                    {
+                        CollectionReference termRef = db.Collection("curriculums").Document(studentCurriculum).Collection(year.ToString()).Document($"term_{term}").Collection("courses");
+                        QuerySnapshot snapshot = await termRef.GetSnapshotAsync();
+
+                        List<CourseNode> courses = new List<CourseNode>();
+
+                        foreach (var doc in snapshot.Documents)
+                        {
+                            Dictionary<string, object> data = doc.ToDictionary(); // Get raw document data
+
+                            CourseNode course = new CourseNode
+                            {
+                                Code = data.ContainsKey("code") ? data["code"].ToString() : "",
+                                Name = data.ContainsKey("name") ? data["name"].ToString() : "",
+                                Units = data.ContainsKey("units") ? Convert.ToInt32(data["units"]) : 0,
+                                YearLevel = data.ContainsKey("yearLevel") ? Convert.ToInt32(data["yearLevel"]) : 0,
+                                Term = data.ContainsKey("term") ? Convert.ToInt32(data["term"]) : 0,
+
+                                // Handling lists safely
+                                Prerequisites = data.ContainsKey("prerequisites") && data["prerequisites"] is List<object> prereqList
+                                    ? prereqList.Select(p => p.ToString()).ToList()
+                                    : new List<string>(),
+
+                                CoRequisites = data.ContainsKey("coRequisites") && data["coRequisites"] is List<object> coreqList
+                                    ? coreqList.Select(c => c.ToString()).ToList()
+                                    : new List<string>(),
+
+                                RegularTerms = data.ContainsKey("regularTerms") && data["regularTerms"] is List<object> termList
+                                    ? termList.Select(t => Convert.ToInt32(t)).ToList()
+                                    : new List<int>(),
+
+                                Taken = data.ContainsKey("taken") ? Convert.ToBoolean(data["taken"]) : false
+                            };
+
+                            courses.Add(course);
+                        }
+
+
+                        if (courses.Any())
+                        {
+                            if (!courseGraph.ContainsKey(year))
+                                courseGraph[year] = new Dictionary<int, List<CourseNode>>();
+
+                            if (!courseGraph[year].ContainsKey(term))
+                                courseGraph[year][term] = new List<CourseNode>();
+
+                            courseGraph[year][term].AddRange(courses);
+                        }
+                    }
+                }
+
+                // 🔹 Fetch electives if the curriculum has them
+                if (electiveCategories.ContainsKey(curriculumId))
+                {
+                    foreach (string category in electiveCategories[curriculumId])
+                    {
+                        CollectionReference electiveRef = db.Collection("curriculums").Document(curriculumId).Collection("electives").Document(category).Collection("courses");
+                        QuerySnapshot snapshot = await electiveRef.GetSnapshotAsync();
+
+                        electiveCourses.AddRange(snapshot.Documents.Select(doc => doc.ConvertTo<CourseNode>()));
+                    }
+                }
+                // 🔹 Return the structured course graph
+                return courseGraph;
+                
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error fetching curriculum courses: {ex.Message}");
+                return null;
+            }
+        }
+
+        public async Task UpdateCompletedCourses(string studentId, string courseCode, bool isChecked)
+        {
+            try
+            {
+                DocumentReference studentRef = db.Collection("students").Document(studentId);
+                DocumentSnapshot snapshot = await studentRef.GetSnapshotAsync();
+
+                if (snapshot.Exists)
+                {
+                    // 🔹 Fetch existing completedCourses or initialize if empty
+                    List<string> completedCourses = snapshot.ContainsField("completedCourses")
+                        ? snapshot.GetValue<List<string>>("completedCourses")
+                        : new List<string>();
+
+                    // 🔹 Add or Remove the course based on isChecked
+                    if (isChecked)
+                        completedCourses.Add(courseCode);
+                    else
+                        completedCourses.Remove(courseCode);
+
+                    // 🔹 Update Firestore with modified list
+                    await studentRef.UpdateAsync("completedCourses", completedCourses);
+                    Debug.WriteLine($"✅ Updated completedCourses for {studentId}: {string.Join(", ", completedCourses)}");
+                }
+                else
+                {
+                    Debug.WriteLine($"⚠ Student {studentId} not found in Firestore.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Error updating completed courses: {ex.Message}");
+            }
+        }
+
+
 
     }
 }
