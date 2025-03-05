@@ -290,6 +290,42 @@ namespace DSA_Group1_Final_Project.Classes.Connection
             }
         }
 
+        //Functions for getting next available courses...
+        private CourseGraph courseGraph;
+        private List<(CourseNode, string)> availableCourses = new();
+
+        public async Task<List<(CourseNode, string)>> GetAvailableCoursesStudent(StudentDocument student, int selectedTerm)
+        {
+            Debug.WriteLine($"FirestoreService: Starting computeAvailableCourses() for Student:{student.Name}, Term: {selectedTerm}");
+
+            // Ensure courseGraph is available
+            if (courseGraph == null)
+            {
+                Debug.WriteLine("FirestoreService: Course graph is null, retrieving from Firestore...");
+                courseGraph = await GetCurriculumCourses(student.Curriculum); // Fetch curriculum graph from Firestore
+            }
+
+            if (courseGraph != null)
+            {
+                Debug.WriteLine($"FirestoreService: Course graph for student {student.Name} successfully retrieved.");
+
+                // Fetch completed courses for the student from the student object
+                var studentCompletedCourses = new HashSet<string>(student.CompletedCourses);
+                Debug.WriteLine($"FirestoreService: Retrieved completed courses for Student ID: {student.Name} from local reference.");
+                Debug.WriteLine($"FirestoreService: Student {student.Name}'s Completed Courses: {string.Join(", ", studentCompletedCourses)}");
+
+                // Fetch next available courses based on completed courses and selected term
+                Debug.WriteLine($"FirestoreService: Fetching next available courses for Term {selectedTerm}...");
+                availableCourses = courseGraph.GetNextAvailableCourses(selectedTerm, studentCompletedCourses);
+            }
+            else
+            {
+                Debug.WriteLine("FirestoreService: Course graph is null even after waiting, returning empty list.");
+                availableCourses = new List<(CourseNode, string)>();
+            }
+
+            return availableCourses;
+        }
 
 
     }

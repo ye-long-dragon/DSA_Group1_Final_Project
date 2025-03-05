@@ -71,15 +71,15 @@ namespace DSA_Group1_Final_Project.Classes.Models
             inDegree[courseCode] = inDegree.ContainsKey(courseCode) ? inDegree[courseCode] + 1 : 1;
         }
 
-        public List<Tuple<CourseNode, string>> GetNextAvailableCourses(int enrolledTerm, HashSet<string> completedCourses)
+        public List<(CourseNode Course, string Color)> GetNextAvailableCourses(int enrolledTerm, HashSet<string> completedCourses)
         {
-            List<Tuple<CourseNode, string>> availableCourses = new List<Tuple<CourseNode, string>>();
-            PriorityQueue<CourseNode, (int, int, string)> queue = new PriorityQueue<CourseNode, (int, int, string)>();
+            List<(CourseNode, string)> availableCourses = new();
+            PriorityQueue<CourseNode, (int Year, int Term, string Code)> queue = new();
 
-            // Step 1: Initialize queue with courses that have all prerequisites completed
+            // 🔹 Step 1: Enqueue courses with prerequisites met
             foreach (var course in courses.Values)
             {
-                bool prerequisitesMet = course.Prerequisites.All(prerequisite => completedCourses.Contains(prerequisite));
+                bool prerequisitesMet = course.Prerequisites.All(completedCourses.Contains);
 
                 if (prerequisitesMet && !completedCourses.Contains(course.Code))
                 {
@@ -87,34 +87,33 @@ namespace DSA_Group1_Final_Project.Classes.Models
                 }
             }
 
-            // Step 2: Process courses using Kahn’s Algorithm with priority queue
+            // 🔹 Step 2: Process courses using Kahn’s Algorithm with PriorityQueue
             while (queue.Count > 0)
             {
                 var course = queue.Dequeue();
                 string colorCode = course.RegularTerms.Contains(enrolledTerm) ? "green" : "orange";
-                availableCourses.Add(Tuple.Create(course, colorCode));
+                availableCourses.Add((course, colorCode));
 
-                foreach (var dependent in adjacencyList[course.Code])
+                if (adjacencyList.TryGetValue(course.Code, out var dependents))
                 {
-                    inDegree[dependent]--;
-
-                    if (inDegree[dependent] == 0 && !completedCourses.Contains(dependent))
+                    foreach (var dependent in dependents)
                     {
-                        queue.Enqueue(courses[dependent], (courses[dependent].YearLevel, courses[dependent].Term, courses[dependent].Code));
+                        if (--inDegree[dependent] == 0 && !completedCourses.Contains(dependent))
+                        {
+                            queue.Enqueue(courses[dependent], (courses[dependent].YearLevel, courses[dependent].Term, courses[dependent].Code));
+                        }
                     }
                 }
             }
 
-            // Step 3: Process electives
-            foreach (var elective in electives)
-            {
-                if (!completedCourses.Contains(elective.Code))
-                {
-                    availableCourses.Add(Tuple.Create(elective, "blue"));
-                }
-            }
+            // 🔹 Step 3: Add Electives Efficiently
+            availableCourses.AddRange(
+                electives.Where(elective => !completedCourses.Contains(elective.Code))
+                         .Select(elective => (elective, "blue"))
+            );
 
             return availableCourses;
         }
+
     }
 }
