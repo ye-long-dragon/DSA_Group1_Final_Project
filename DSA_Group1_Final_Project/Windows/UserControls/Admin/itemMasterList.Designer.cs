@@ -205,6 +205,8 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
+            BorderStyle = BorderStyle.Fixed3D;
             Controls.Add(btnRemove);
             Controls.Add(btnAvailableCourses);
             Controls.Add(btnDetails);
@@ -217,7 +219,7 @@
             Controls.Add(lblEmail);
             Controls.Add(lblName);
             Name = "itemMasterList";
-            Size = new Size(1000, 300);
+            Size = new Size(996, 296);
             ResumeLayout(false);
             PerformLayout();
         }

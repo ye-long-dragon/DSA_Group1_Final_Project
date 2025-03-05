@@ -1,5 +1,6 @@
 ﻿using DSA_Group1_Final_Project.Classes.Connection;
 using DSA_Group1_Final_Project.Classes.Models;
+using DSA_Group1_Final_Project.Windows.Pop_ups;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,18 +15,37 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
 {
     public partial class itemMasterList : UserControl
     {
+
+        
         private FirestoreServices firestoreService = new FirestoreServices();
         StudentDocument student;
         public itemMasterList(StudentDocument s)
         {
             InitializeComponent();
+            
             student = s;
+            Dictionary<string, string> curriculumMapping = new Dictionary<string, string>
+                {
+                    { "1", "BS Computer Engineering 2022-2023" },
+                    { "2", "BS Electrical Engineering 2024-2025" },
+                    { "3", "BS Computer Engineering 2021-2022" },
+                    { "4", "BS Electronics and Communications Engineering 2022-2023" }
+                };
+            string cur;
+            if (student.Curriculum != null && curriculumMapping.TryGetValue(student.Curriculum.ToString(), out cur))
+            {
+                 cur = curriculumMapping[student.Curriculum.ToString()];
 
-            lblName.Text = student.Name;
-            lblEmail.Text = student.Email;
-            lblProgram.Text = student.Program;
-            lblCurriculum.Text = student.Curriculum;
-            lblStatus.Text = student.ApprovalStatus;
+            }
+            else
+            {
+                cur = "Curriculum not found";
+            }
+            lblName.Text = "Student: "+student.Name;
+            lblEmail.Text = "Email: "+student.Email;
+            lblProgram.Text = "Program: "+student.Program;
+            lblCurriculum.Text = "Current Curriculum: "+cur;
+            lblStatus.Text = "Approval Status: "+student.ApprovalStatus;
 
         }
 
@@ -34,28 +54,40 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
         public event EventHandler btncurriculumClick;
         public event EventHandler btnRemoveClick;
 
+
+
+
         private void btnProgram_Click(object sender, EventArgs e)
         {
-            // Create ContextMenuStrip (dropdown)
-            ContextMenuStrip menu = new ContextMenuStrip();
+            
+            MainPopUpWindow mainPopUpWindow = new MainPopUpWindow("Program",student);
+            mainPopUpWindow.Show();
+            
 
-            // List of programs
-            string[] programs = { "BS Computer Engineering", "BS Electronics and Communications Engineering", "BS Electrical Engineering" };
 
-            foreach (string program in programs)
-            {
-                ToolStripMenuItem item = new ToolStripMenuItem(program);
-                item.Click += async (s, ev) => await ChangeProgram(student, program, e); // Attach click event
-                menu.Items.Add(item);
-            }
+            /* // Create ContextMenuStrip (dropdown)
+             ContextMenuStrip menu = new ContextMenuStrip();
 
-            // Show dropdown below the clicked button
-            if (sender is Button btn)
-            {
-                Point location = new Point(0, btn.Height);
-                menu.Show(btn, location); // Show below button
-            }
+             // List of programs
+             string[] programs = { "BS Computer Engineering", "BS Electronics and Communications Engineering", "BS Electrical Engineering" };
+
+
+
+             foreach (string program in programs)
+             {
+                 ToolStripMenuItem item = new ToolStripMenuItem(program);
+                 item.Click += async (s, ev) => await ChangeProgram(student, program, e); // Attach click event
+                 menu.Items.Add(item);
+             }
+
+             // Show dropdown below the clicked button
+             if (sender is Button btn)
+             {
+                 Point location = new Point(0, btn.Height);
+                 menu.Show(btn, location); // Show below button
+             }*/
         }
+
 
 
 
@@ -72,7 +104,13 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
 
         private void btnStatus_Click(object sender, EventArgs e)
         {
-            // Create ContextMenuStrip (dropdown)
+            
+            MainPopUpWindow mainPopUpWindow = new MainPopUpWindow("Status", student);
+            mainPopUpWindow.Show();
+            
+
+
+            /*// Create ContextMenuStrip (dropdown)
             ContextMenuStrip menu = new ContextMenuStrip();
 
             // List of approval Status
@@ -91,7 +129,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
                 menu.Show(btn, new Point(0, btn.Height)); // Show below button
             }
 
-            btnStatusClick?.Invoke(this, e);
+            btnStatusClick?.Invoke(this, e);*/
         }
 
         private async Task ChangeApprovalStatus(StudentDocument student, string newApprovalStatus)
@@ -107,7 +145,11 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
 
         private void btnCuriculum_Click(object sender, EventArgs e)
         {
-            // Create ContextMenuStrip (dropdown)
+            
+            MainPopUpWindow mainPopUpWindow = new MainPopUpWindow("Curriculum", student);
+            mainPopUpWindow.Show();
+
+            /* // Create ContextMenuStrip (dropdown)
             ContextMenuStrip menu = new ContextMenuStrip();
 
             // 🔥 List of Curriculums (User-friendly Names)
@@ -130,7 +172,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
             {
                 menu.Show(btn, new Point(0, btn.Height)); // Show below button
             }
-            btncurriculumClick?.Invoke(this, e);
+            btncurriculumClick?.Invoke(this, e);*/
         }
 
 
@@ -199,6 +241,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
         }
 
         public event EventHandler btnAvailableCoursesClick;
+
         private void btnAvailableCourses_Click(object sender, EventArgs e)
         {
             btnAvailableCoursesClick?.Invoke(this, e);
