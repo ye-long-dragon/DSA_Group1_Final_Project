@@ -13,12 +13,13 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && components != null)
             {
                 components.Dispose();
             }
             base.Dispose(disposing);
         }
+
 
         #region Component Designer generated code
 
@@ -35,7 +36,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Name = "AdminNextAvailableCourses";
-            Size = new Size(463, 457);
+            Size = new Size(695, 566);
             ResumeLayout(false);
         }
 
