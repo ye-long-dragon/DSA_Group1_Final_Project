@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DSA_Group1_Final_Project.Classes.Models;
 using System.Diagnostics;
+using FirebaseAdmin;
 
 namespace DSA_Group1_Final_Project.Classes.Connection
 {
@@ -15,9 +16,16 @@ namespace DSA_Group1_Final_Project.Classes.Connection
 
         public FirestoreServices()
         {
-            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"C:\Users\barla\Downloads\mmcm-curriculum-tracker-app-firebase-adminsdk-fbsvc-96d137e620.json"); //Replace with your json file path
-            db = FirestoreDb.Create("mmcm-curriculum-tracker-app"); // Replace with your Firebase project ID
-            Debug.WriteLine("Connected to Firestore.");
+            // Ensure Firebase is initialized using Authentication.cs
+            if (!FirebaseApp.DefaultInstance.Equals(null))
+            {
+                db = FirestoreDb.Create("mmcm-curriculum-tracker-app");
+                Debug.WriteLine("Connected to Firestore.");
+            }
+            else
+            {
+                throw new Exception("Firebase has not been initialized. Ensure Authentication.CreateAsync() is called first.");
+            }
         }
 
         public async Task<List<StudentDocument>> GetAllStudentsAsync()
