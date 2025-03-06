@@ -1,24 +1,24 @@
-﻿using FirebaseAdmin;
+﻿using Firebase.Auth;
+using FirebaseAdmin;
 using FirebaseAdmin.Auth;
 using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Firestore;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
-using System.Collections;
 using DSA_Group1_Final_Project.Classes.User_Class;
+using Firebase.Auth.Providers;
 
 namespace DSA_Group1_Final_Project.Classes.Connection
 {
     public class Authentication
     {
+        private static Authentication _instance;
+        private static readonly object _lock = new object();
+
         private FirestoreDb db;
-        private FirebaseAuth auth;
+        private FirebaseAuthClient authProvider;
         private static bool firebaseInitialized = false;
+        private static FirebaseAuth authAdmin;
 
         private Authentication() { } // Private constructor to prevent direct instantiation
 
@@ -28,30 +28,43 @@ namespace DSA_Group1_Final_Project.Classes.Connection
             await instance.InitializeAsync();
             return instance;
         }
+        public static Authentication Instance
+        {
+            get
+            {
+                lock (_lock)
+                {
+                    if (_instance == null)
+                    {
+                        _instance = new Authentication();
+                        _instance.InitializeAsync().Wait(); // Initialize synchronously
+                    }
+                    return _instance;
+                }
+            }
+        }
+        public FirebaseAuthClient AuthProvider => authProvider;
 
         private async Task InitializeAsync()
         {
             try
             {
                 string projectId = "mmcm-curriculum-tracker-app";
+                string apiKey = "AIzaSyCNQSEw2JZFg4u8rEvKs29_cOnum9ACoF4"; // ✅ Needed for FirebaseAuthentication.net
 
-                // 🔹 Fetch credentials asynchronously
+                // 🔹 Fetch credentials from Firestore
                 string base64Credentials = await FetchCredentialsFromFirestore();
                 if (string.IsNullOrEmpty(base64Credentials))
                 {
-                    throw new Exception("Failed to retrieve Firebase credentials from Firestore.");
+                    throw new Exception("Failed to retrieve Firebase credentials.");
                 }
 
-                // 🔹 Decode and set credentials
                 string jsonCredentials = Encoding.UTF8.GetString(Convert.FromBase64String(base64Credentials));
                 string tempJsonPath = Path.Combine(Path.GetTempPath(), "firebase_credentials.json");
                 File.WriteAllText(tempJsonPath, jsonCredentials);
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", tempJsonPath);
 
-                // ✅ Log output
-                Console.WriteLine("Firebase credentials saved at: " + tempJsonPath);
-
-                // 🔹 Initialize FirebaseApp only once
+                // ✅ Initialize Firebase Admin SDK only once
                 if (!firebaseInitialized)
                 {
                     var credential = GoogleCredential.FromJson(jsonCredentials)
@@ -66,9 +79,21 @@ namespace DSA_Group1_Final_Project.Classes.Connection
                     firebaseInitialized = true;
                 }
 
-                // 🔹 Initialize Firestore
+                // 🔹 Initialize Firestore & FirebaseAuth Admin
                 db = FirestoreDb.Create(projectId);
-                auth = FirebaseAuth.DefaultInstance;
+                authAdmin = FirebaseAuth.DefaultInstance;
+
+                // ✅ Initialize FirebaseAuthProvider for client authentication
+                authProvider = new FirebaseAuthClient(new FirebaseAuthConfig
+                {
+                    ApiKey = apiKey,
+                    AuthDomain = $"{projectId}.firebaseapp.com",
+                    Providers = new FirebaseAuthProvider[]
+                    {
+                        new EmailProvider()
+                    }
+
+                });
 
                 Console.WriteLine("Firebase successfully initialized.");
             }
@@ -79,6 +104,55 @@ namespace DSA_Group1_Final_Project.Classes.Connection
             }
         }
 
+        public async Task<string> LoginUser(string email, string password)
+        {
+            try
+            {
+                // ✅ FIXED: Use correct method for authentication
+                var userCredential = await authProvider.SignInWithEmailAndPasswordAsync(email, password);
+
+                string userId = userCredential.User.Uid;
+                string idToken = await userCredential.User.GetIdTokenAsync(); // ✅ Corrected Token Retrieval
+
+                return $"Login successful! User ID: {userId}, Token: {idToken}";
+            }
+            catch (Firebase.Auth.FirebaseAuthException ex) // ✅ Explicitly specify Firebase.Auth
+            {
+                return "Login failed: " + ex.Message;
+            }
+        }
+
+        
+
+        public async Task LogoutUser()
+        {
+            // ✅ Firebase Authentication SDK does not maintain sessions, but we can revoke tokens
+            await authAdmin.RevokeRefreshTokensAsync(authProvider.User.Uid);
+        }
+        public void Cleanup()
+        {
+            authProvider = null; // Remove reference to authentication client
+            db = null; // Remove reference to Firestore
+            Console.WriteLine("Authentication resources cleaned up.");
+        }
+
+        /*public async Task<string> GetCurrentUserId(string firebaseToken)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(firebaseToken))
+                {
+                    return "Invalid token. User not authenticated.";
+                }
+
+                var user = await authAdmin.VerifyIdTokenAsync(firebaseToken);
+                return user.Uid; // ✅ Returns correct Firebase UID
+            }
+            catch (Exception ex)
+            {
+                return "Error fetching user: " + ex.Message;
+            }
+        }*/
         private async Task<string> FetchCredentialsFromFirestore()
         {
             try
@@ -210,7 +284,7 @@ namespace DSA_Group1_Final_Project.Classes.Connection
                     Email = email,
                     Password = password
                 };
-                UserRecord userRecord = await auth.CreateUserAsync(userArgs);
+                UserRecord userRecord = await authAdmin.CreateUserAsync(userArgs);
 
                 Dictionary<string, object> userData = new Dictionary<string, object>
                 {
@@ -297,9 +371,6 @@ namespace DSA_Group1_Final_Project.Classes.Connection
                 return null;
             }
         }
-
-
-
 
 
     }
