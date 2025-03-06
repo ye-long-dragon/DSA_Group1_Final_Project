@@ -1,10 +1,12 @@
-﻿using DSA_Group1_Final_Project.Windows.UserControls.Auth;
+﻿using FirebaseAdmin.Auth;
+using DSA_Group1_Final_Project.Classes.Connection;
 
 namespace DSA_Group1_Final_Project.Windows.AuthScreens
 {
     public partial class LoginControl : UserControl // Change Form → UserControl
     {
         public event Action OnRegisterRequested;
+        public event Action<string> OnLoginSuccess;
 
         private int parentWidth;
         private int parentHeight;
@@ -111,20 +113,65 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             txtPassword.UseSystemPasswordChar = !showPassRadioButton.Checked;
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private async void btnLogin_Click(object sender, EventArgs e)
         {
-            // Example login logic
-            string email = txtEmail.Text;
-            string password = txtPassword.Text;
+            string email = txtEmail.Text.Trim();
+            string password = txtPassword.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
             {
                 MessageBox.Show("Please enter email and password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            MessageBox.Show("Login Click!");
 
+            try
+            {
+                var authInstance = await Authentication.CreateAsync();
+                var authClient = authInstance.AuthProvider;
 
+                var userCredential = await authClient.SignInWithEmailAndPasswordAsync(email, password);
+                var user = userCredential.User;
+
+                if (user != null)
+                {
+                    string userId = user.Uid;
+                    string role = await Program.GetUserRole(userId);
+
+                    // 🔹 Save user session locally
+                    Properties.Settings.Default.UserId = userId;
+                    Properties.Settings.Default.Save();
+
+                    // Notify AuthForm instead of opening MainScreen here
+                    OnLoginSuccess?.Invoke(role);
+                }
+            }
+            catch (FirebaseAuthException ex)
+            {
+                MessageBox.Show("Login failed: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+
+        /*
+                private async Task<string> GetUserRole(string userId)
+                {
+                    try
+                    {
+                        FirestoreDb db = FirestoreDb.Create("mmcm-curriculum-tracker-app");
+                        DocumentReference userDoc = db.Collection("users").Document(userId);
+                        DocumentSnapshot snapshot = await userDoc.GetSnapshotAsync();
+
+                        if (snapshot.Exists && snapshot.ContainsField("role"))
+                        {
+                            return snapshot.GetValue<string>("role");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error fetching user role: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    return "Unknown";
+                }*/
     }
 }
