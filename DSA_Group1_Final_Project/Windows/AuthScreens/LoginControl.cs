@@ -1,5 +1,6 @@
 ﻿using FirebaseAdmin.Auth;
 using DSA_Group1_Final_Project.Classes.Connection;
+using System.Diagnostics;
 
 namespace DSA_Group1_Final_Project.Windows.AuthScreens
 {
@@ -137,12 +138,35 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
                     string userId = user.Uid;
                     string role = await Program.GetUserRole(userId);
 
-                    // 🔹 Save user session locally
+                    // ✅ Save user session locally
                     Properties.Settings.Default.UserId = userId;
                     Properties.Settings.Default.Save();
 
-                    // Notify AuthForm instead of opening MainScreen here
-                    OnLoginSuccess?.Invoke(role);
+                    if (role == "Student")
+                    {
+                        string curriculum = await Program.GetStudentCurriculum(userId);
+                        if (string.IsNullOrWhiteSpace(curriculum))
+                        {
+                            Debug.WriteLine("No curriculum found, opening ChooseCurriculumForm.");
+
+                            // ✅ Close AuthForm before opening ChooseCurriculumForm
+                            Form authForm = this.FindForm();
+                            authForm?.Hide();
+
+                            ChooseCurriculumForm chooseCurriculumForm = new ChooseCurriculumForm(userId);
+                            chooseCurriculumForm.Show();
+
+                            authForm?.Hide(); // Close AuthForm after curriculum selection
+                            return; // Stop execution to prevent opening MainScreen prematurely
+                        }
+                    }
+
+                    // ✅ Close AuthForm and open MainScreen
+                    Form parentForm = this.FindForm();
+                    parentForm?.Hide();
+
+                    MainScreen mainScreen = new MainScreen(role);
+                    mainScreen.Show();
                 }
             }
             catch (FirebaseAuthException ex)
@@ -150,6 +174,8 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
                 MessageBox.Show("Login failed: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
 
         /*

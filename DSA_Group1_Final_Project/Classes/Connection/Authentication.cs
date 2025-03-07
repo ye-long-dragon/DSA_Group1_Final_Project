@@ -135,24 +135,6 @@ namespace DSA_Group1_Final_Project.Classes.Connection
             db = null; // Remove reference to Firestore
             Console.WriteLine("Authentication resources cleaned up.");
         }
-
-        /*public async Task<string> GetCurrentUserId(string firebaseToken)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(firebaseToken))
-                {
-                    return "Invalid token. User not authenticated.";
-                }
-
-                var user = await authAdmin.VerifyIdTokenAsync(firebaseToken);
-                return user.Uid; // ✅ Returns correct Firebase UID
-            }
-            catch (Exception ex)
-            {
-                return "Error fetching user: " + ex.Message;
-            }
-        }*/
         private async Task<string> FetchCredentialsFromFirestore()
         {
             try
@@ -371,6 +353,23 @@ namespace DSA_Group1_Final_Project.Classes.Connection
                 return null;
             }
         }
+        /*public async Task<string> GetCurrentUserId(string firebaseToken)
+    {
+        try
+        {
+            if (string.IsNullOrEmpty(firebaseToken))
+            {
+                return "Invalid token. User not authenticated.";
+            }
+
+            var user = await authAdmin.VerifyIdTokenAsync(firebaseToken);
+            return user.Uid; // ✅ Returns correct Firebase UID
+        }
+        catch (Exception ex)
+        {
+            return "Error fetching user: " + ex.Message;
+        }
+    }*/
 
 
     }

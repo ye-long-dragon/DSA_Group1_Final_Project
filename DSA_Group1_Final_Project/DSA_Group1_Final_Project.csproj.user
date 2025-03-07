@@ -10,6 +10,9 @@
     <Compile Update="Windows\AuthScreens\AuthForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Windows\AuthScreens\ChooseCurriculumForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Windows\AuthScreens\Login.cs">
       <SubType>Form</SubType>
     </Compile>
