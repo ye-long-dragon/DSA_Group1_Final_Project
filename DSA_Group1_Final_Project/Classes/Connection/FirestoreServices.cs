@@ -122,10 +122,15 @@ namespace DSA_Group1_Final_Project.Classes.Connection
         {
             try
             {
-                DocumentReference docRef = db.Collection("students").Document(studentId);
-                await docRef.DeleteAsync(); // Delete the student document
+                DocumentReference studentRef = db.Collection("students").Document(studentId);
+                await studentRef.DeleteAsync(); // Delete the student document
 
                 Debug.WriteLine($"Student ID {studentId} successfully deleted from Firestore.");
+
+                DocumentReference userRef = db.Collection("users").Document(studentId);
+                await userRef.DeleteAsync(); // Delete the student document
+
+
                 return true; // Success
             }
             catch (Exception ex)
@@ -334,7 +339,7 @@ namespace DSA_Group1_Final_Project.Classes.Connection
 
             return availableCourses;
         }
-
+        
 
     }
 }

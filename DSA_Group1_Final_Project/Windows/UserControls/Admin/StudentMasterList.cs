@@ -15,11 +15,12 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
     public partial class StudentMasterList : UserControl
     {
         private FirestoreServices firestoreService;
-        private TestForm mainForm; // Store reference to TestForm
-        public StudentMasterList()
+        private MainScreen mainScreen; // Store reference to TestForm
+        public StudentMasterList(MainScreen mainScreen)
         {
             InitializeComponent();
             firestoreService = new FirestoreServices();// 🔥 Store reference to TestForm
+            this.mainScreen = mainScreen;
         }
 
         private async void StudentMasterList_Load(object sender, EventArgs e)
@@ -27,7 +28,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
             await LoadStudents();
         }
 
-        private async Task LoadStudents()
+        public async Task LoadStudents()
         {
             flpStudentList.Controls.Clear(); // Clear previous entries
 
@@ -36,13 +37,13 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
             foreach (var student in students)
             {
 
-                itemMasterList itemMasterList = new itemMasterList(student);
+                itemMasterList itemMasterList = new itemMasterList(student, this, mainScreen);
                 itemMasterList.btnProgramClick += ItemMasterList_btnProgramClick;// 🔥 Add event handler
                 itemMasterList.btnStatusClick += ItemMasterList_btnStatusClick;// 🔥 Add event handler
                 itemMasterList.btncurriculumClick += ItemMasterList_btncurriculumClick;// 🔥 Add event handler
                 itemMasterList.btnRemoveClick += ItemMasterList_btnRemoveClick;// 🔥 Add event handler
-                itemMasterList.btnAvailableCoursesClick += (s, e) => ItemMasterList_btnDetailsClick(s, e, student);
-                itemMasterList.btnAvailableCoursesClick += (s, e) => ItemMasterList_btnAvailableCoursesClick(s, e, student);
+                itemMasterList.btnDetailsClick += ItemMasterList_btnDetailsClick;
+                itemMasterList.btnAvailableCoursesClick += ItemMasterList_btnAvailableCoursesClick;
                 flpStudentList.Controls.Add(itemMasterList);
 
 
@@ -304,34 +305,34 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
 
         }
 
-        private void ItemMasterList_btnDetailsClick(object? sender, EventArgs e, StudentDocument student)
+        private async void ItemMasterList_btnDetailsClick(object? sender, EventArgs e)
         {
-            ViewCurriculumDetails(sender, e, student);
+            await LoadStudents();
         }
 
-        private void ItemMasterList_btnAvailableCoursesClick(object? sender, EventArgs e, StudentDocument student)
+        private async void ItemMasterList_btnAvailableCoursesClick(object? sender, EventArgs e)
         {
-            NextAvailableCourses(sender, e, student);
+            await LoadStudents();
         }
 
-        private void ViewCurriculumDetails(object sender, EventArgs e, StudentDocument student)
-        {
-            // 🔥 Create new ViewCurriculumDetails UserControl
-            ViewCurriculumDetails curriculumDetailsControl = new ViewCurriculumDetails(student);
+        //private void ViewCurriculumDetails(object sender, EventArgs e, StudentDocument student)
+        //{
+        //    // 🔥 Create new ViewCurriculumDetails UserControl
+        //    ViewCurriculumDetails curriculumDetailsControl = new ViewCurriculumDetails(student);
 
-            // 🔥 Call LoadUserControl() from TestForm to switch screens
-            //mainForm.LoadUserControl(curriculumDetailsControl);
+        //    // 🔥 Call LoadUserControl() from TestForm to switch screens
+        //    mainForm.LoadUserControl(curriculumDetailsControl);
 
-        }
+        //}
 
-        private void NextAvailableCourses(object sender, EventArgs e, StudentDocument student)
-        {
-            // 🔥 Create new ViewCurriculumDetails UserControl
-            AdminNextAvailableCourses nextAvailableCoursesControl = new AdminNextAvailableCourses(student);
+        //private void NextAvailableCourses(object sender, EventArgs e, StudentDocument student)
+        //{
+        //    // 🔥 Create new ViewCurriculumDetails UserControl
+        //    AdminNextAvailableCourses nextAvailableCoursesControl = new AdminNextAvailableCourses(student);
 
-            // 🔥 Call LoadUserControl() from TestForm to switch screens
-            //mainForm.LoadUserControl(nextAvailableCoursesControl);
-        }
+        //    // 🔥 Call LoadUserControl() from TestForm to switch screens
+        //    mainForm.LoadUserControl(nextAvailableCoursesControl);
+        //}
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {

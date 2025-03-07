@@ -1,5 +1,6 @@
 ﻿using DSA_Group1_Final_Project.Classes.Connection;
 using DSA_Group1_Final_Project.Classes.Models;
+using DSA_Group1_Final_Project.Windows.UserControls.Admin;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,12 +18,16 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Pop_ups
         private FirestoreServices firestoreService = new FirestoreServices();
         string prevStatus;
         StudentDocument s = new StudentDocument();
-        public UpdateApproval(StudentDocument studentDocument)
+        StudentMasterList parentUserControl;
+
+        public UpdateApproval(StudentDocument studentDocument, StudentMasterList parentUserControl)
         {
             InitializeComponent();
             prevStatus = studentDocument.ApprovalStatus;
             name.Text = studentDocument.Name;
             s = studentDocument;
+            this.parentUserControl = parentUserControl;
+
 
             if (studentDocument.ApprovalStatus == "Approved")
             {
@@ -59,9 +64,10 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Pop_ups
         {
             if(prevStatus != s.ApprovalStatus)
             {
-                MessageBox.Show("Status Updated");
                 await firestoreService.UpdateStudentField(s.StudentID, "approvalStatus", s.ApprovalStatus);
                 MessageBox.Show($"{s.Name}'s approval status updated to {s.ApprovalStatus}.", "Success");
+                await parentUserControl.LoadStudents();
+                this.ParentForm?.Close();
             }
             else
             {

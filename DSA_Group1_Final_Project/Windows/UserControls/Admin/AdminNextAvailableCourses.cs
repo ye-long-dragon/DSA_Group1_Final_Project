@@ -239,12 +239,12 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
         private void GoBack()
         {
             // Find the parent form and cast it to TestForm
-            TestForm? parentForm = this.FindForm() as TestForm;
+            MainScreen mainScreen = this.FindForm() as MainScreen;
 
-            if (parentForm != null) // ✅ Ensure the form is found
+            if (mainScreen != null) // ✅ Ensure the form is found
             {
                 // 🔹 Switch back to StudentMasterList and pass `parentForm`
-                parentForm.LoadUserControl(new StudentMasterList(parentForm));
+                mainScreen.LoadUserControl(new StudentMasterList(mainScreen));
             }
             else
             {
