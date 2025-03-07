@@ -27,7 +27,7 @@ namespace DSA_Group1_Final_Project.Windows.Pop_ups
             }
             else if (s == "Status")
             {
-                UpdateApproval updateStatus = new UpdateApproval(studentDocument);  
+                UpdateApproval updateStatus = new UpdateApproval(studentDocument);
                 updateStatus.Dock = DockStyle.Fill;
                 pnlMain.Controls.Clear();
                 pnlMain.Controls.Add(updateStatus);
@@ -46,6 +46,11 @@ namespace DSA_Group1_Final_Project.Windows.Pop_ups
         }
 
         private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void guna2ImageButton1_Click(object sender, EventArgs e)
         {
             this.Close();
         }

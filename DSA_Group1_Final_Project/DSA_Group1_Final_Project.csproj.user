@@ -37,6 +37,9 @@
     <Compile Update="Windows\UserControls\Admin\AdminNextAvailableCourses.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Windows\UserControls\Admin\homeAdmin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Windows\UserControls\Admin\itemMasterList.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -71,6 +74,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Windows\UserControls\Student\CourseList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Windows\UserControls\Student\homeStudent.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Windows\UserControls\Student\itemCourses.cs">

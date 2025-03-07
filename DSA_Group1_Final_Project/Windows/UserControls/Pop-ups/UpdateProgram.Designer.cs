@@ -82,6 +82,7 @@
             cmbProgram.ShadowDecoration.CustomizableEdges = customizableEdges2;
             cmbProgram.Size = new Size(544, 36);
             cmbProgram.TabIndex = 3;
+            cmbProgram.SelectedIndexChanged += cmbProgram_SelectedIndexChanged;
             // 
             // btnUpdate
             // 

@@ -1,4 +1,5 @@
-﻿using DSA_Group1_Final_Project.Classes.Models;
+﻿using DSA_Group1_Final_Project.Classes.Connection;
+using DSA_Group1_Final_Project.Classes.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,9 +11,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DSA_Group1_Final_Project.Windows.UserControls.Pop_ups
-{
+{    
     public partial class UpdateApproval : UserControl
     {
+        private FirestoreServices firestoreService = new FirestoreServices();
         string prevStatus;
         StudentDocument s = new StudentDocument();
         public UpdateApproval(StudentDocument studentDocument)
@@ -53,11 +55,13 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Pop_ups
             //add code to update the status in the database
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private async void btnUpdate_Click(object sender, EventArgs e)
         {
             if(prevStatus != s.ApprovalStatus)
             {
                 MessageBox.Show("Status Updated");
+                await firestoreService.UpdateStudentField(s.StudentID, "approvalStatus", s.ApprovalStatus);
+                MessageBox.Show($"{s.Name}'s approval status updated to {s.ApprovalStatus}.", "Success");
             }
             else
             {

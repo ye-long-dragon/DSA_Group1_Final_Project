@@ -35,6 +35,7 @@ namespace DSA_Group1_Final_Project
             {
                 btnAvailableCourses.Visible = false;
                 btnCourseList.Visible = false;
+                lblScreenView.Text = "Admin Dashboard";
 
                 btnManageCurriculums.Location = new Point(0, 335);
                 btnDevelopers.Location = new Point(0, 397);
@@ -45,6 +46,7 @@ namespace DSA_Group1_Final_Project
             }
             else
             {
+                lblScreenView.Text = "Student Dashboard";
                 btnSettings.Text = "Settings";
                 btnManageCurriculums.Visible = false;
                 btnStudentMasterList.Visible = false;
@@ -108,10 +110,15 @@ namespace DSA_Group1_Final_Project
         }
         private void MainScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
-              Authentication.Instance?.Cleanup(); // Call cleanup before exiting
-            
-              Application.Exit();
+
+            Authentication.Instance?.Cleanup(); // Call cleanup before exiting
+
+            Application.Exit();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

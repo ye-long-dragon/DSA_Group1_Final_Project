@@ -1,4 +1,5 @@
-﻿using DSA_Group1_Final_Project.Classes.Models;
+﻿using DSA_Group1_Final_Project.Classes.Connection;
+using DSA_Group1_Final_Project.Classes.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,8 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Pop_ups
 {
     public partial class UpdateCurriculum : UserControl
     {
-        int prevCurriculum;
+        private FirestoreServices firestoreService = new FirestoreServices();
+        int prevCurriculum,newCurriculum;
         StudentDocument s = new StudentDocument();
         public UpdateCurriculum(StudentDocument studentDocument)
         {
@@ -24,7 +26,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Pop_ups
                 "BS Computer Engineering 2021-2022",
                 "BS Electronics and Communications Engineering 2022-2023"
             };
-            prevCurriculum = Convert.ToInt32(studentDocument.Curriculum);
+            prevCurriculum = Convert.ToInt32(studentDocument.Curriculum); // must be number
 
             s = studentDocument;
 
@@ -35,17 +37,32 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Pop_ups
             }
 
             name.Text = studentDocument.Name;
-            cmbCurriculum.SelectedIndex = Convert.ToInt32(studentDocument.Curriculum) - 1;
+            cmbCurriculum.SelectedIndex = Convert.ToInt32(studentDocument.Curriculum) - 1; // must be number
 
 
         }
 
         private void cmbCurriculum_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (cmbCurriculum.SelectedIndex == 0)
+            {
+                newCurriculum = 1;
+            }
+            else if (cmbCurriculum.SelectedIndex == 1)
+            {
+                newCurriculum = 2;
+            }
+            else if (cmbCurriculum.SelectedIndex == 2)
+            {
+                newCurriculum = 3;
+            }
+            else if (cmbCurriculum.SelectedIndex == 3)
+            {
+                newCurriculum = 4;
+            }
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private async void btnUpdate_Click(object sender, EventArgs e)
         {
             if (prevCurriculum == cmbCurriculum.SelectedIndex + 1)
             {
@@ -53,7 +70,10 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Pop_ups
             }
             else
             {
+                await firestoreService.UpdateStudentField(s.StudentID, "curriculum", Convert.ToString(newCurriculum));
+                MessageBox.Show($"{s.Name}'s curriculum updated to {Convert.ToString(newCurriculum)}.", "Success");
                 MessageBox.Show("Curriculum Updated");// add code to update the curriculum in the database
+                
             }
         }
     }

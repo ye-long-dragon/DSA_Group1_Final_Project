@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -44,6 +45,7 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainScreen));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -61,13 +63,15 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(components);
             pnlTopBar = new Guna.UI2.WinForms.Guna2Panel();
+            lblScreenView = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            btnClose = new Guna.UI2.WinForms.Guna2ImageButton();
             guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             pnlMain = new Guna.UI2.WinForms.Guna2Panel();
             guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
             btnManageCurriculums = new Guna.UI2.WinForms.Guna2Button();
             btnDevelopers = new Guna.UI2.WinForms.Guna2Button();
-            guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
+            imgMMCM = new Guna.UI2.WinForms.Guna2PictureBox();
             lblNavigation = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblSettings = new Guna.UI2.WinForms.Guna2HtmlLabel();
             btnProfile = new Guna.UI2.WinForms.Guna2Button();
@@ -80,7 +84,7 @@
             pnlTopBar.SuspendLayout();
             guna2Panel1.SuspendLayout();
             guna2Panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)imgMMCM).BeginInit();
             SuspendLayout();
             // 
             // guna2BorderlessForm1
@@ -92,25 +96,53 @@
             // pnlTopBar
             // 
             pnlTopBar.BackColor = Color.FromArgb(0, 0, 64);
+            pnlTopBar.Controls.Add(lblScreenView);
+            pnlTopBar.Controls.Add(btnClose);
             pnlTopBar.Controls.Add(guna2Panel3);
-            pnlTopBar.CustomizableEdges = customizableEdges29;
+            pnlTopBar.CustomizableEdges = customizableEdges30;
             pnlTopBar.Dock = DockStyle.Top;
             pnlTopBar.Location = new Point(0, 0);
             pnlTopBar.Margin = new Padding(3, 4, 3, 4);
             pnlTopBar.Name = "pnlTopBar";
-            pnlTopBar.ShadowDecoration.CustomizableEdges = customizableEdges30;
+            pnlTopBar.ShadowDecoration.CustomizableEdges = customizableEdges31;
             pnlTopBar.Size = new Size(1371, 37);
             pnlTopBar.TabIndex = 40;
             pnlTopBar.MouseDown += pnlTopBar_MouseDown;
             // 
+            // lblScreenView
+            // 
+            lblScreenView.BackColor = Color.Transparent;
+            lblScreenView.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblScreenView.ForeColor = Color.White;
+            lblScreenView.Location = new Point(12, 8);
+            lblScreenView.Name = "lblScreenView";
+            lblScreenView.Size = new Size(128, 22);
+            lblScreenView.TabIndex = 0;
+            lblScreenView.Text = "guna2HtmlLabel1";
+            // 
+            // btnClose
+            // 
+            btnClose.CheckedState.ImageSize = new Size(64, 64);
+            btnClose.HoverState.ImageSize = new Size(64, 64);
+            btnClose.Image = (Image)resources.GetObject("btnClose.Image");
+            btnClose.ImageOffset = new Point(0, 0);
+            btnClose.ImageRotate = 0F;
+            btnClose.Location = new Point(1297, 3);
+            btnClose.Name = "btnClose";
+            btnClose.PressedState.ImageSize = new Size(64, 64);
+            btnClose.ShadowDecoration.CustomizableEdges = customizableEdges27;
+            btnClose.Size = new Size(71, 31);
+            btnClose.TabIndex = 42;
+            btnClose.Click += btnClose_Click;
+            // 
             // guna2Panel3
             // 
             guna2Panel3.BackColor = Color.WhiteSmoke;
-            guna2Panel3.CustomizableEdges = customizableEdges27;
+            guna2Panel3.CustomizableEdges = customizableEdges28;
             guna2Panel3.Location = new Point(3, 45);
             guna2Panel3.Margin = new Padding(3, 4, 3, 4);
             guna2Panel3.Name = "guna2Panel3";
-            guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges28;
+            guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges29;
             guna2Panel3.Size = new Size(229, 133);
             guna2Panel3.TabIndex = 41;
             // 
@@ -141,7 +173,7 @@
             guna2Panel4.BackColor = Color.FromArgb(0, 0, 64);
             guna2Panel4.Controls.Add(btnManageCurriculums);
             guna2Panel4.Controls.Add(btnDevelopers);
-            guna2Panel4.Controls.Add(guna2PictureBox1);
+            guna2Panel4.Controls.Add(imgMMCM);
             guna2Panel4.Controls.Add(lblNavigation);
             guna2Panel4.Controls.Add(lblSettings);
             guna2Panel4.Controls.Add(btnProfile);
@@ -193,34 +225,38 @@
             btnDevelopers.Text = "About The Developers";
             btnDevelopers.Click += btnDevelopers_Click;
             // 
-            // guna2PictureBox1
+            // imgMMCM
             // 
-            guna2PictureBox1.CustomizableEdges = customizableEdges7;
-            guna2PictureBox1.ImageRotate = 0F;
-            guna2PictureBox1.Location = new Point(25, 25);
-            guna2PictureBox1.Name = "guna2PictureBox1";
-            guna2PictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2PictureBox1.Size = new Size(161, 117);
-            guna2PictureBox1.TabIndex = 11;
-            guna2PictureBox1.TabStop = false;
+            imgMMCM.CustomizableEdges = customizableEdges7;
+            imgMMCM.Image = (Image)resources.GetObject("imgMMCM.Image");
+            imgMMCM.ImageRotate = 0F;
+            imgMMCM.Location = new Point(40, 24);
+            imgMMCM.Name = "imgMMCM";
+            imgMMCM.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            imgMMCM.Size = new Size(161, 117);
+            imgMMCM.SizeMode = PictureBoxSizeMode.Zoom;
+            imgMMCM.TabIndex = 11;
+            imgMMCM.TabStop = false;
             // 
             // lblNavigation
             // 
             lblNavigation.BackColor = Color.Transparent;
+            lblNavigation.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblNavigation.ForeColor = Color.White;
             lblNavigation.Location = new Point(12, 174);
             lblNavigation.Name = "lblNavigation";
-            lblNavigation.Size = new Size(76, 22);
+            lblNavigation.Size = new Size(80, 22);
             lblNavigation.TabIndex = 10;
             lblNavigation.Text = "Navigation";
             // 
             // lblSettings
             // 
             lblSettings.BackColor = Color.Transparent;
+            lblSettings.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblSettings.ForeColor = Color.White;
             lblSettings.Location = new Point(6, 601);
             lblSettings.Name = "lblSettings";
-            lblSettings.Size = new Size(56, 22);
+            lblSettings.Size = new Size(60, 22);
             lblSettings.TabIndex = 9;
             lblSettings.Text = "Settings";
             // 
@@ -352,10 +388,11 @@
             Name = "MainScreen";
             Text = "userPage";
             pnlTopBar.ResumeLayout(false);
+            pnlTopBar.PerformLayout();
             guna2Panel1.ResumeLayout(false);
             guna2Panel4.ResumeLayout(false);
             guna2Panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)imgMMCM).EndInit();
             ResumeLayout(false);
         }
 
@@ -377,7 +414,9 @@
         private Guna.UI2.WinForms.Guna2Button btnCourseList;
         private Guna.UI2.WinForms.Guna2Button btnProfile;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblSettings;
-        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
+        private Guna.UI2.WinForms.Guna2PictureBox imgMMCM;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblNavigation;
+        private Guna.UI2.WinForms.Guna2ImageButton btnClose;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblScreenView;
     }
 }
