@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Developers));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             lblDev = new Guna.UI2.WinForms.Guna2HtmlLabel();
             pcbMamogkat = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             pcbBastasa = new Guna.UI2.WinForms.Guna2CirclePictureBox();
@@ -54,127 +55,144 @@
             // lblDev
             // 
             lblDev.BackColor = Color.Transparent;
+            lblDev.Font = new Font("Segoe UI", 26.25F, FontStyle.Bold);
             lblDev.Location = new Point(67, 73);
             lblDev.Name = "lblDev";
-            lblDev.Size = new Size(144, 22);
+            lblDev.Size = new Size(442, 62);
             lblDev.TabIndex = 0;
             lblDev.Text = "Meet The Developers";
             // 
             // pcbMamogkat
             // 
+            pcbMamogkat.Image = (Image)resources.GetObject("pcbMamogkat.Image");
             pcbMamogkat.ImageRotate = 0F;
             pcbMamogkat.Location = new Point(239, 163);
             pcbMamogkat.Name = "pcbMamogkat";
-            pcbMamogkat.ShadowDecoration.CustomizableEdges = customizableEdges1;
+            pcbMamogkat.ShadowDecoration.CustomizableEdges = customizableEdges5;
             pcbMamogkat.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             pcbMamogkat.Size = new Size(138, 133);
+            pcbMamogkat.SizeMode = PictureBoxSizeMode.Zoom;
             pcbMamogkat.TabIndex = 1;
             pcbMamogkat.TabStop = false;
             // 
             // pcbBastasa
             // 
+            pcbBastasa.Image = (Image)resources.GetObject("pcbBastasa.Image");
             pcbBastasa.ImageRotate = 0F;
             pcbBastasa.Location = new Point(753, 163);
             pcbBastasa.Name = "pcbBastasa";
-            pcbBastasa.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            pcbBastasa.ShadowDecoration.CustomizableEdges = customizableEdges6;
             pcbBastasa.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             pcbBastasa.Size = new Size(138, 133);
+            pcbBastasa.SizeMode = PictureBoxSizeMode.Zoom;
             pcbBastasa.TabIndex = 2;
             pcbBastasa.TabStop = false;
             // 
             // pcbBaraclan
             // 
+            pcbBaraclan.Image = (Image)resources.GetObject("pcbBaraclan.Image");
             pcbBaraclan.ImageRotate = 0F;
             pcbBaraclan.Location = new Point(239, 490);
             pcbBaraclan.Name = "pcbBaraclan";
-            pcbBaraclan.ShadowDecoration.CustomizableEdges = customizableEdges3;
+            pcbBaraclan.ShadowDecoration.CustomizableEdges = customizableEdges7;
             pcbBaraclan.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             pcbBaraclan.Size = new Size(138, 133);
+            pcbBaraclan.SizeMode = PictureBoxSizeMode.Zoom;
             pcbBaraclan.TabIndex = 3;
             pcbBaraclan.TabStop = false;
             // 
             // pcbSitoy
             // 
+            pcbSitoy.Image = (Image)resources.GetObject("pcbSitoy.Image");
             pcbSitoy.ImageRotate = 0F;
             pcbSitoy.Location = new Point(753, 490);
             pcbSitoy.Name = "pcbSitoy";
-            pcbSitoy.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            pcbSitoy.ShadowDecoration.CustomizableEdges = customizableEdges8;
             pcbSitoy.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             pcbSitoy.Size = new Size(138, 133);
+            pcbSitoy.SizeMode = PictureBoxSizeMode.Zoom;
             pcbSitoy.TabIndex = 4;
             pcbSitoy.TabStop = false;
             // 
             // lblMamogkatName
             // 
             lblMamogkatName.BackColor = Color.Transparent;
-            lblMamogkatName.Location = new Point(256, 338);
+            lblMamogkatName.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblMamogkatName.Location = new Point(144, 338);
             lblMamogkatName.Name = "lblMamogkatName";
-            lblMamogkatName.Size = new Size(121, 22);
+            lblMamogkatName.Size = new Size(365, 30);
             lblMamogkatName.TabIndex = 5;
-            lblMamogkatName.Text = "guna2HtmlLabel1";
+            lblMamogkatName.Text = "Mohammad Jameel Jibreel Mamogkat";
             // 
             // lblMamogkatRole
             // 
             lblMamogkatRole.BackColor = Color.Transparent;
-            lblMamogkatRole.Location = new Point(256, 366);
+            lblMamogkatRole.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblMamogkatRole.Location = new Point(225, 374);
             lblMamogkatRole.Name = "lblMamogkatRole";
-            lblMamogkatRole.Size = new Size(121, 22);
+            lblMamogkatRole.Size = new Size(184, 27);
             lblMamogkatRole.TabIndex = 6;
-            lblMamogkatRole.Text = "guna2HtmlLabel1";
+            lblMamogkatRole.Text = "Principal Lead Engineer";
             // 
             // lblBastasaRole
             // 
             lblBastasaRole.BackColor = Color.Transparent;
-            lblBastasaRole.Location = new Point(753, 366);
+            lblBastasaRole.Font = new Font("Segoe UI", 10.8F);
+            lblBastasaRole.Location = new Point(741, 374);
             lblBastasaRole.Name = "lblBastasaRole";
-            lblBastasaRole.Size = new Size(121, 22);
+            lblBastasaRole.Size = new Size(150, 27);
             lblBastasaRole.TabIndex = 8;
-            lblBastasaRole.Text = "guna2HtmlLabel1";
+            lblBastasaRole.Text = "Database Engineer";
             // 
             // lblBastasaName
             // 
             lblBastasaName.BackColor = Color.Transparent;
+            lblBastasaName.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblBastasaName.Location = new Point(753, 338);
             lblBastasaName.Name = "lblBastasaName";
-            lblBastasaName.Size = new Size(121, 22);
+            lblBastasaName.Size = new Size(124, 30);
             lblBastasaName.TabIndex = 7;
-            lblBastasaName.Text = "guna2HtmlLabel1";
+            lblBastasaName.Text = "Duff Bastasa";
             // 
             // lblBaraclanRole
             // 
             lblBaraclanRole.BackColor = Color.Transparent;
-            lblBaraclanRole.Location = new Point(256, 686);
+            lblBaraclanRole.Font = new Font("Segoe UI", 10.8F);
+            lblBaraclanRole.Location = new Point(239, 694);
             lblBaraclanRole.Name = "lblBaraclanRole";
-            lblBaraclanRole.Size = new Size(121, 22);
+            lblBaraclanRole.Size = new Size(155, 27);
             lblBaraclanRole.TabIndex = 10;
-            lblBaraclanRole.Text = "guna2HtmlLabel1";
+            lblBaraclanRole.Text = "Front-End Engineer";
             // 
             // lblBaraclanName
             // 
             lblBaraclanName.BackColor = Color.Transparent;
-            lblBaraclanName.Location = new Point(256, 658);
+            lblBaraclanName.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblBaraclanName.Location = new Point(203, 658);
             lblBaraclanName.Name = "lblBaraclanName";
-            lblBaraclanName.Size = new Size(121, 22);
+            lblBaraclanName.Size = new Size(238, 30);
             lblBaraclanName.TabIndex = 9;
-            lblBaraclanName.Text = "guna2HtmlLabel1";
+            lblBaraclanName.Text = "Vince Lawrence Baraclan";
             // 
             // lblSitoyRole
             // 
             lblSitoyRole.BackColor = Color.Transparent;
-            lblSitoyRole.Location = new Point(753, 686);
+            lblSitoyRole.Font = new Font("Segoe UI", 10.8F);
+            lblSitoyRole.Location = new Point(741, 694);
             lblSitoyRole.Name = "lblSitoyRole";
-            lblSitoyRole.Size = new Size(121, 22);
+            lblSitoyRole.Size = new Size(155, 27);
             lblSitoyRole.TabIndex = 12;
-            lblSitoyRole.Text = "guna2HtmlLabel1";
+            lblSitoyRole.Text = "Front-End Engineer";
             // 
             // lblSitoyName
             // 
             lblSitoyName.BackColor = Color.Transparent;
-            lblSitoyName.Location = new Point(753, 658);
+            lblSitoyName.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblSitoyName.Location = new Point(770, 658);
             lblSitoyName.Name = "lblSitoyName";
-            lblSitoyName.Size = new Size(121, 22);
+            lblSitoyName.Size = new Size(98, 30);
             lblSitoyName.TabIndex = 11;
-            lblSitoyName.Text = "guna2HtmlLabel1";
+            lblSitoyName.Text = "Jojit Sitoy";
             // 
             // Developers
             // 

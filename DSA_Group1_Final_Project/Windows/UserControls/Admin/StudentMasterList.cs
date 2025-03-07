@@ -42,7 +42,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
                 itemMasterList.btncurriculumClick += ItemMasterList_btncurriculumClick;// 🔥 Add event handler
                 itemMasterList.btnRemoveClick += ItemMasterList_btnRemoveClick;// 🔥 Add event handler
                 itemMasterList.btnAvailableCoursesClick += (s, e) => ItemMasterList_btnDetailsClick(s, e, student);
-                itemMasterList.btnAvailableCoursesClick += (s, e) => ItemMasterList_btnAvailableCoursesClick(s, e, student); 
+                itemMasterList.btnAvailableCoursesClick += (s, e) => ItemMasterList_btnAvailableCoursesClick(s, e, student);
                 flpStudentList.Controls.Add(itemMasterList);
 
 
@@ -197,7 +197,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
             ContextMenuStrip menu = new ContextMenuStrip();
 
             // List of approval Status
-            string[] approvalStatus = { "Approved", "Pending"};
+            string[] approvalStatus = { "Approved", "Pending" };
 
             foreach (string status in approvalStatus)
             {
@@ -321,7 +321,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
 
             // 🔥 Call LoadUserControl() from TestForm to switch screens
             //mainForm.LoadUserControl(curriculumDetailsControl);
-            
+
         }
 
         private void NextAvailableCourses(object sender, EventArgs e, StudentDocument student)
@@ -332,7 +332,12 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
             // 🔥 Call LoadUserControl() from TestForm to switch screens
             //mainForm.LoadUserControl(nextAvailableCoursesControl);
         }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadStudents();
+        }
     }
-    
+
 }
 
