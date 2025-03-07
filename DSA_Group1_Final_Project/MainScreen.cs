@@ -37,12 +37,13 @@ namespace DSA_Group1_Final_Project
                 btnCourseList.Visible = false;
                 lblScreenView.Text = "Admin Dashboard";
 
-                btnManageCurriculums.Location = new Point(0, 335);
-                btnDevelopers.Location = new Point(0, 397);
-                lblSettings.Location = new Point(6, 481);
-                btnProfile.Location = new Point(0, 531);
-                btnSettings.Location = new Point(0, 593);
-                btnLogout.Location = new Point(0, 655);
+                btnStudentMasterList.Location = new Point(0, 335);
+                btnManageCurriculums.Location = new Point(0, 335+62);
+                btnDevelopers.Location = new Point(0, 397+62);
+                lblSettings.Location = new Point(6, 481 + 62);
+                btnProfile.Location = new Point(0, 531 + 62);
+                btnSettings.Location = new Point(0, 593 + 62);
+                btnLogout.Location = new Point(0, 655 + 62);
             }
             else
             {
