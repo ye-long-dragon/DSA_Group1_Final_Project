@@ -30,19 +30,17 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
         {
             if (panelContainer == null) return;
 
-            // Clear existing controls
             panelContainer.Controls.Clear();
 
-            // Create LoginControl
             LoginControl loginControl = new LoginControl(authPanelWidth, authPanelHeight)
             {
-                Dock = DockStyle.Fill // Ensure it fully fills panelContainer
+                Dock = DockStyle.Fill
             };
 
-            // Attach the event to handle redirection
+            // Attach event handlers
             loginControl.OnRegisterRequested += ShowRegister;
+            loginControl.OnLoginSuccess += OpenMainScreen; // Handle login success
 
-            // Add LoginControl to panelContainer
             panelContainer.Controls.Add(loginControl);
         }
 
@@ -65,7 +63,17 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             // Add RegisterControl to panelContainer
             panelContainer.Controls.Add(registerControl);
         }
-
+        // This method will switch to the main screen
+        private void OpenMainScreen(string role)
+        {
+            this.Invoke(new Action(() =>
+            {
+                this.Hide(); // Hide AuthForm
+                MainScreen mainScreen = new MainScreen(role);
+                mainScreen.Show();
+                mainScreen.FormClosed += (s, e) => this.Close(); // Close AuthForm only when MainScreen is closed
+            }));
+        }
 
     }
 }

@@ -215,7 +215,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
             if (parentForm != null) // ✅ Ensure the form is found
             {
                 // 🔹 Switch back to StudentMasterList and pass `parentForm`
-                parentForm.LoadUserControl(new StudentMasterList(parentForm));
+                parentForm.LoadUserControl(new StudentMasterList());
             }
             else
             {

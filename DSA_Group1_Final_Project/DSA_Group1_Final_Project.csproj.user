@@ -1,10 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Compile Update="MainPopUpWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="TestForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Windows\AuthScreens\AuthForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Windows\AuthScreens\ChooseCurriculumForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Windows\AuthScreens\Login.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Windows\AuthScreens\LoginControl.cs">
@@ -19,10 +28,16 @@
     <Compile Update="MainScreen.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Windows\AuthScreens\StartupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Windows\AuthScreens\VerifyOTPForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Windows\UserControls\Admin\AdminNextAvailableCourses.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Windows\UserControls\Admin\homeAdmin.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Windows\UserControls\Admin\itemMasterList.cs">
@@ -46,10 +61,22 @@
     <Compile Update="Windows\UserControls\General Screens\StudentProfile.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Windows\UserControls\Pop-ups\UpdateApproval.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Windows\UserControls\Pop-ups\UpdateCurriculum.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Windows\UserControls\Pop-ups\UpdateProgram.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Windows\UserControls\Student\AvailableCourses.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Windows\UserControls\Student\CourseList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Windows\UserControls\Student\homeStudent.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Windows\UserControls\Student\itemCourses.cs">

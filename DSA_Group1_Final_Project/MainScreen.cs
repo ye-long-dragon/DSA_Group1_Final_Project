@@ -1,17 +1,11 @@
-﻿using DSA_Group1_Final_Project.Windows.AuthScreens;
+﻿
 using DSA_Group1_Final_Project.Windows.UserControls.Admin;
 using DSA_Group1_Final_Project.Windows.UserControls.General_Screens;
 using DSA_Group1_Final_Project.Windows.UserControls.Student;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+using DSA_Group1_Final_Project.Classes.Connection;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using DSA_Group1_Final_Project.Windows.AuthScreens;
+
 
 namespace DSA_Group1_Final_Project
 {
@@ -41,16 +35,19 @@ namespace DSA_Group1_Final_Project
             {
                 btnAvailableCourses.Visible = false;
                 btnCourseList.Visible = false;
+                lblScreenView.Text = "Admin Dashboard";
 
-                btnManageCurriculums.Location = new Point(0, 335);
-                btnDevelopers.Location = new Point(0, 397);
-                lblSettings.Location = new Point(6, 481);
-                btnProfile.Location = new Point(0, 531);
-                btnSettings.Location = new Point(0, 593);
-                btnLogout.Location = new Point(0, 655);
+                btnStudentMasterList.Location = new Point(0, 335);
+                btnManageCurriculums.Location = new Point(0, 335+62);
+                btnDevelopers.Location = new Point(0, 397+62);
+                lblSettings.Location = new Point(6, 481 + 62);
+                btnProfile.Location = new Point(0, 531 + 62);
+                btnSettings.Location = new Point(0, 593 + 62);
+                btnLogout.Location = new Point(0, 655 + 62);
             }
             else
             {
+                lblScreenView.Text = "Student Dashboard";
                 btnSettings.Text = "Settings";
                 btnManageCurriculums.Visible = false;
                 btnStudentMasterList.Visible = false;
@@ -76,10 +73,10 @@ namespace DSA_Group1_Final_Project
 
         private void btnStudentMasterList_Click(object sender, EventArgs e)
         {
-            //StudentMasterList studentMasterList = new StudentMasterList();
-            //studentMasterList.Dock = DockStyle.Fill;
-            //pnlMain.Controls.Clear();
-            //pnlMain.Controls.Add(studentMasterList);
+            StudentMasterList studentMasterList = new StudentMasterList();
+            studentMasterList.Dock = DockStyle.Fill;
+            pnlMain.Controls.Clear();
+            pnlMain.Controls.Add(studentMasterList);
         }
 
         private void btnCourseList_Click_1(object sender, EventArgs e)
@@ -96,12 +93,32 @@ namespace DSA_Group1_Final_Project
             //availableCourses.Dock = DockStyle.Fill;
             pnlMain.Controls.Clear();
             //pnlMain.Controls.Add(availableCourses);
+
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
             //Login login = new Login();
             //login.Show();
+            // 🔹 Clear saved session
+            Properties.Settings.Default.UserId = "";
+            Properties.Settings.Default.Save();
+
+            AuthForm authForm = new AuthForm();
+            authForm.Show(); // Show the AuthForm
+
+            this.Close();
+        }
+        private void MainScreen_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            Authentication.Instance?.Cleanup(); // Call cleanup before exiting
+
+            Application.Exit();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
     }
