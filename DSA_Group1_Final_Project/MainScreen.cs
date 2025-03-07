@@ -16,7 +16,16 @@ namespace DSA_Group1_Final_Project
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private static extern void SendMessage(System.IntPtr one, int two, int three, int four);
+        
+        private static MainScreen instance;
 
+        // 🔥 Function to Switch Screens (Replaces mainPanel's content)
+        public void LoadUserControl(UserControl newControl)
+        {
+            pnlMain.Controls.Clear(); // Remove existing controls
+            newControl.Dock = DockStyle.Fill; // Ensure it fills the entire panel
+            pnlMain.Controls.Add(newControl); // Add new UserControl
+        }
 
         private void pnlTopBar_MouseDown(object sender, MouseEventArgs e)
         {
@@ -29,6 +38,7 @@ namespace DSA_Group1_Final_Project
         public MainScreen(string r)
         {
             InitializeComponent();
+            instance = this;
             role = r;
 
             if (role == "Admin")
@@ -62,21 +72,18 @@ namespace DSA_Group1_Final_Project
             }
 
         }
+        public static MainScreen Instance => instance;
 
         private void btnDevelopers_Click(object sender, EventArgs e)
         {
             Developers developers = new Developers();
-            developers.Dock = DockStyle.Fill;
-            pnlMain.Controls.Clear();
-            pnlMain.Controls.Add(developers);
+            LoadUserControl(developers);
         }
 
         private void btnStudentMasterList_Click(object sender, EventArgs e)
         {
-            StudentMasterList studentMasterList = new StudentMasterList();
-            studentMasterList.Dock = DockStyle.Fill;
-            pnlMain.Controls.Clear();
-            pnlMain.Controls.Add(studentMasterList);
+            StudentMasterList studentMasterList = new StudentMasterList(MainScreen.Instance);
+            LoadUserControl(studentMasterList);
         }
 
         private void btnCourseList_Click_1(object sender, EventArgs e)

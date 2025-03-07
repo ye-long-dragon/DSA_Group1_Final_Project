@@ -1,5 +1,6 @@
 ﻿using DSA_Group1_Final_Project.Classes.Connection;
 using DSA_Group1_Final_Project.Classes.Models;
+using DSA_Group1_Final_Project.Windows.UserControls.Admin;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,9 +18,11 @@ namespace DSA_Group1_Final_Project.Windows.Pop_ups
         private FirestoreServices firestoreService = new FirestoreServices();
         string prevProgram;
         StudentDocument student;
-        public UpdateProgram(StudentDocument studentDocument)
+        StudentMasterList parentUserControl;
+        public UpdateProgram(StudentDocument studentDocument, StudentMasterList parentUserControl)
         {
             InitializeComponent();
+            this.parentUserControl = parentUserControl;
             prevProgram = studentDocument.Program;
             student = studentDocument;
             Dictionary<string, int> curriculumMapping = new Dictionary<string, int>
@@ -57,7 +60,8 @@ namespace DSA_Group1_Final_Project.Windows.Pop_ups
             {                
                 await firestoreService.UpdateStudentField(student.StudentID, "program", student.Program);
                 MessageBox.Show($"{student.Name}'s program updated to {student.Program}.", "Success");
-                MessageBox.Show("Program Updated");
+                await parentUserControl.LoadStudents();
+                this.ParentForm?.Close();
             }
         }
 

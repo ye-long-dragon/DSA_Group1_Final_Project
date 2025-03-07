@@ -19,10 +19,14 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
         
         private FirestoreServices firestoreService = new FirestoreServices();
         StudentDocument student;
-        public itemMasterList(StudentDocument s)
+        StudentMasterList parentUserControl;
+        MainScreen mainScreen;
+        public itemMasterList(StudentDocument s, StudentMasterList parentUserControl, MainScreen mainScreen)
         {
             InitializeComponent();
-            
+            this.parentUserControl = parentUserControl;
+            this.mainScreen = mainScreen;
+
             student = s;
             Dictionary<string, string> curriculumMapping = new Dictionary<string, string>
                 {
@@ -34,19 +38,18 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
             string cur;
             if (student.Curriculum != null && curriculumMapping.TryGetValue(student.Curriculum.ToString(), out cur))
             {
-                 cur = curriculumMapping[student.Curriculum.ToString()];
+                cur = curriculumMapping[student.Curriculum.ToString()];
 
             }
             else
             {
                 cur = "Curriculum not found";
             }
-            lblName.Text = "Student: "+student.Name;
-            lblEmail.Text = "Email: "+student.Email;
-            lblProgram.Text = "Program: "+student.Program;
-            lblCurriculum.Text = "Current Curriculum: "+cur;
-            lblStatus.Text = "Approval Status: "+student.ApprovalStatus;
-
+            lblName.Text = "Student: " + student.Name;
+            lblEmail.Text = "Email: " + student.Email;
+            lblProgram.Text = "Program: " + student.Program;
+            lblCurriculum.Text = "Current Curriculum: " + cur;
+            lblStatus.Text = "Approval Status: " + student.ApprovalStatus;
         }
 
         public event EventHandler btnProgramClick;
@@ -60,7 +63,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
         private void btnProgram_Click(object sender, EventArgs e)
         {
             
-            MainPopUpWindow mainPopUpWindow = new MainPopUpWindow("Program",student);
+            MainPopUpWindow mainPopUpWindow = new MainPopUpWindow("Program",student, parentUserControl);
             mainPopUpWindow.Show();
             
 
@@ -72,7 +75,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
              string[] programs = { "BS Computer Engineering", "BS Electronics and Communications Engineering", "BS Electrical Engineering" };
 
 
-
+            
              foreach (string program in programs)
              {
                  ToolStripMenuItem item = new ToolStripMenuItem(program);
@@ -90,22 +93,22 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
 
 
 
+        //Unused function
+        //private async Task ChangeProgram(StudentDocument student, string newProgram, EventArgs e)
+        //{
+        //    if (student.Program != newProgram)
+        //    {
+        //        await firestoreService.UpdateStudentField(student.StudentID, "program", newProgram);
+        //        MessageBox.Show($"{student.Name}'s program updated to {newProgram}.", "Success");
+        //        btnProgramClick?.Invoke(this, e);
 
-        private async Task ChangeProgram(StudentDocument student, string newProgram, EventArgs e)
-        {
-            if (student.Program != newProgram)
-            {
-                await firestoreService.UpdateStudentField(student.StudentID, "program", newProgram);
-                MessageBox.Show($"{student.Name}'s program updated to {newProgram}.", "Success");
-                btnProgramClick?.Invoke(this, e);
-
-            }
-        }
+        //    }
+        //}
 
         private void btnStatus_Click(object sender, EventArgs e)
         {
             
-            MainPopUpWindow mainPopUpWindow = new MainPopUpWindow("Status", student);
+            MainPopUpWindow mainPopUpWindow = new MainPopUpWindow("Status", student, parentUserControl);
             mainPopUpWindow.Show();
             
 
@@ -146,7 +149,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
         private void btnCuriculum_Click(object sender, EventArgs e)
         {
             
-            MainPopUpWindow mainPopUpWindow = new MainPopUpWindow("Curriculum", student);
+            MainPopUpWindow mainPopUpWindow = new MainPopUpWindow("Curriculum", student, parentUserControl);
             mainPopUpWindow.Show();
 
             /* // Create ContextMenuStrip (dropdown)
@@ -237,6 +240,12 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
         public event EventHandler btnDetailsClick;
         private void btnDetails_Click(object sender, EventArgs e)
         {
+            // 🔥 Create new ViewCurriculumDetails UserControl
+            ViewCurriculumDetails curriculumDetailsControl = new ViewCurriculumDetails(student);
+
+            // 🔥 Call LoadUserControl() from TestForm to switch screens
+            mainScreen.LoadUserControl(curriculumDetailsControl);
+
             btnDetailsClick?.Invoke(this, e);
         }
 
@@ -244,6 +253,9 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
 
         private void btnAvailableCourses_Click(object sender, EventArgs e)
         {
+            AdminNextAvailableCourses adminNextAvailableCourses = new AdminNextAvailableCourses(student);
+            mainScreen.LoadUserControl(adminNextAvailableCourses);
+
             btnAvailableCoursesClick?.Invoke(this, e);
         }
     }

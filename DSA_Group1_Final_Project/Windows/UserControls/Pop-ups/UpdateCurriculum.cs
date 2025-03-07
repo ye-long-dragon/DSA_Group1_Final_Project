@@ -1,5 +1,6 @@
 ﻿using DSA_Group1_Final_Project.Classes.Connection;
 using DSA_Group1_Final_Project.Classes.Models;
+using DSA_Group1_Final_Project.Windows.UserControls.Admin;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,9 +18,13 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Pop_ups
         private FirestoreServices firestoreService = new FirestoreServices();
         int prevCurriculum,newCurriculum;
         StudentDocument s = new StudentDocument();
-        public UpdateCurriculum(StudentDocument studentDocument)
+        StudentMasterList parentUserControl;
+
+        public UpdateCurriculum(StudentDocument studentDocument, StudentMasterList parentUserControl)
         {
             InitializeComponent();
+            this.parentUserControl = parentUserControl;
+
             string[] curriculums = {
                 "BS Computer Engineering 2022-2023",
                 "BS Electrical Engineering 2024-2025",
@@ -71,9 +76,10 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Pop_ups
             else
             {
                 await firestoreService.UpdateStudentField(s.StudentID, "curriculum", Convert.ToString(newCurriculum));
-                MessageBox.Show($"{s.Name}'s curriculum updated to {Convert.ToString(newCurriculum)}.", "Success");
-                MessageBox.Show("Curriculum Updated");// add code to update the curriculum in the database
-                
+                MessageBox.Show($"{s.Name}'s curriculum updated to {FirestoreServices.GetCurriculumString(Convert.ToString(newCurriculum))}.", "Success");
+                await parentUserControl.LoadStudents();
+                this.ParentForm?.Close();
+
             }
         }
     }
