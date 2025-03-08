@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace DSA_Group1_Final_Project.Windows.AuthScreens
 {
@@ -9,8 +11,9 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
     {
         private PictureBox logoPictureBox;
         private ProgressBar progressBar;
-        private Label titleLabel; // Add a label for the title
+        private Label titleLabel;
         private int progressValue = 0;
+        private CancellationTokenSource _cancellationTokenSource;
 
         public StartupForm()
         {
@@ -27,21 +30,21 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             this.Size = new Size(400, 300);
 
             // Padding values
-            int padding = 20; // You can adjust this value as needed
+            int padding = 20;
 
             // Logo Image
             logoPictureBox = new PictureBox
             {
                 SizeMode = PictureBoxSizeMode.Zoom,
                 Size = new Size(200, 100),
-                Location = new Point((Width - 200) / 2, padding) // Position logo with padding
+                Location = new Point((Width - 200) / 2, padding)
             };
 
             // Load logo image with error handling
             try
             {
                 string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Pictures", "mmcm_logo.png");
-                logoPictureBox.Image = Image.FromFile(imagePath); // Ensure logo is in the executable folder
+                logoPictureBox.Image = Image.FromFile(imagePath);
             }
             catch (Exception ex)
             {
@@ -51,15 +54,15 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             this.Controls.Add(logoPictureBox);
 
             // Title Labels
-            titleLabel = new Label // Use the class-level titleLabel instead of creating a new one
+            titleLabel = new Label
             {
                 Text = "MMCM CURRICULUM TRACKER",
                 AutoSize = true,
                 TextAlign = ContentAlignment.MiddleCenter,
-                Location = new Point(0, logoPictureBox.Bottom + padding), // Position below the logo with padding
-                Width = this.Width // Center the label based on the form's width
+                Location = new Point(0, logoPictureBox.Bottom + padding),
+                Width = this.Width
             };
-            titleLabel.Font = new Font("Arial", 12, FontStyle.Bold); // Decrease font size
+            titleLabel.Font = new Font("Arial", 12, FontStyle.Bold);
             titleLabel.ForeColor = Color.Red;
             titleLabel.BackColor = Color.White;
 
@@ -70,7 +73,7 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             {
                 Style = ProgressBarStyle.Continuous,
                 Size = new Size(300, 20),
-                Location = new Point((Width - 300) / 2, titleLabel.Bottom + padding), // Position below the title with padding
+                Location = new Point((Width - 300) / 2, titleLabel.Bottom + padding),
                 Value = 0
             };
             this.Controls.Add(progressBar);
@@ -78,13 +81,21 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
 
         private async Task StartProgressBar()
         {
-            while (progressValue < 100)
+            _cancellationTokenSource = new CancellationTokenSource();
+            try
             {
-                await Task.Delay(50); // Asynchronously wait for 50 milliseconds
-                progressValue += 2;
-                progressBar.Value = progressValue;
+                while (progressValue < 100)
+                {
+                    await Task.Delay(50, _cancellationTokenSource.Token); // Asynchronously wait for 50 milliseconds
+                    progressValue += 2;
+                    progressBar.Value = progressValue;
+                }
+                await InitializeApp(); // Call the next form after progress finishes
             }
-            await InitializeApp(); // Call the next form after progress finishes
+            catch (TaskCanceledException)
+            {
+                // Handle cancellation if needed
+            }
         }
 
         private async Task InitializeApp()
@@ -92,6 +103,13 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             var initialForm = await Program.GetInitialForm();
             initialForm.Show();
             this.Hide(); // Hide the StartupForm instead of closing it
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            // Cancel the progress task if the form is closing
+            _cancellationTokenSource?.Cancel();
+            base.OnFormClosing(e);
         }
     }
 }

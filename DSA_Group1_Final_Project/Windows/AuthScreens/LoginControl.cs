@@ -8,6 +8,7 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
     {
         public event Action OnRegisterRequested;
         public event Action<string> OnLoginSuccess;
+        public event Action OnForgotPasswordRequested;
 
         private int parentWidth;
         private int parentHeight;
@@ -18,8 +19,25 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
 
             parentWidth = width;
             parentHeight = height;
-
+            txtEmail.KeyPress += TextBox_KeyPress;
+            txtPassword.KeyPress += TextBox_KeyPress;
             ResizeLoginControl();
+        }
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Space)
+            {
+                e.Handled = true;
+            }
+        }
+        private Label CreateErrorLabel()
+        {
+            return new Label
+            {
+                ForeColor = Color.Red,
+                Visible = false
+                
+            };
         }
 
         private void ResizeLoginControl()
@@ -36,7 +54,7 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             int containerWidth = parentWidth - 100; // Adjust width to fit within the parent
             int containerHeight = parentHeight - 100; // Adjust height to fit within the parent
 
-            // Create a container panel to hold the controls
+
             Panel containerPanel = new Panel
             {
                 Size = new Size(containerWidth, containerHeight),
@@ -44,11 +62,22 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
                 BackColor = Color.Transparent
             };
 
-            // Center the container panel
             containerPanel.Location = new Point(
                 (this.Width - containerPanel.Width) / 2,
                 (this.Height - containerPanel.Height) / 2
             );
+
+            int buttonWidth = 340;
+            int buttonHeight = 45;
+
+            Label loginLabel = new Label
+            {
+                Text = "Welcome",
+                Font = new Font("Arial", 24, FontStyle.Bold),
+                Size = new Size(buttonWidth, 60), 
+                TextAlign = ContentAlignment.MiddleCenter, 
+                Location = new Point((containerPanel.Width - buttonWidth) / 2, padding) 
+            };
 
             // Remove existing parent before adding to new container
             if (txtEmail.Parent != null) txtEmail.Parent.Controls.Remove(txtEmail);
@@ -56,45 +85,77 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             if (label1.Parent != null) label1.Parent.Controls.Remove(label1);
             if (label2.Parent != null) label2.Parent.Controls.Remove(label2);
 
-            // 🔹 Adjusted panel height to fit the textbox
-            Panel emailPanel = new Panel { Size = new Size(containerWidth, 100), BackColor = Color.Transparent };
+          
+            Panel emailPanel = new Panel
+            {
+                Size = new Size(containerWidth, 125), 
+                BackColor = Color.Transparent
+            };
+
             label1.Location = new Point(0, 0);
             txtEmail.Location = new Point(0, label1.Height + 5);
-            txtEmail.Size = new Size(containerWidth, 50); // Set proper height
+            txtEmail.Size = new Size(containerWidth, 50); 
+
+            lblEmailError.Location = new Point(0, txtEmail.Bottom);
+            lblEmailError.Size = new Size(containerWidth, 50);
             emailPanel.Controls.Add(label1);
             emailPanel.Controls.Add(txtEmail);
+            emailPanel.Controls.Add(lblEmailError);
+            lblEmailError.BringToFront();
 
-            // 🔹 Adjusted panel height to fit the textbo
-            Panel passwordPanel = new Panel { Size = new Size(containerWidth, 100), BackColor = Color.Transparent };
+            Panel passwordPanel = new Panel { Size = new Size(containerWidth, 125), BackColor = Color.Transparent };
             label2.Location = new Point(0, 0);
             txtPassword.Location = new Point(0, label2.Height + 5);
-            txtPassword.Size = new Size(containerWidth, 50); // Set proper height
+            txtPassword.Size = new Size(containerWidth, 50); 
+            lblPasswordError.Location = new Point(0, txtPassword.Bottom);
+            lblPasswordError.Size = new Size(containerWidth, 50); 
             passwordPanel.Controls.Add(label2);
             passwordPanel.Controls.Add(txtPassword);
+            passwordPanel.Controls.Add(lblPasswordError);
+            passwordPanel.Controls.Add(showPassCheckBox);
+            showPassCheckBox.Location = new Point(txtPassword.Width - 100, txtPassword.Top + 15);
 
-            // Add controls in the right order
+
             List<Control> orderedControls = new List<Control>
     {
+        loginLabel, // Add the login label first
         emailPanel,
         passwordPanel,
-        showPassRadioButton,
+        showPassCheckBox,
         btnLogin,
         btnForgotPassword,
         btnRegister
     };
 
-            int yOffset = padding;
+            int yOffset = padding + loginLabel.Height + controlSpacing; // Adjust yOffset for the label
 
-            // Position controls inside container panel
+      
             foreach (Control ctrl in orderedControls)
             {
-                ctrl.Width = containerPanel.Width - (2 * padding);
-                ctrl.Location = new Point(padding, yOffset);
+            
+                if (ctrl == btnLogin || ctrl == btnForgotPassword || ctrl == btnRegister)
+                {
+                    ctrl.Width = buttonWidth;
+                    ctrl.Height = buttonHeight;
+
+                    // Center the button
+                    ctrl.Location = new Point(
+                        (containerPanel.Width - ctrl.Width) / 2, 
+                        yOffset // Keep the same vertical position
+                    );
+                }
+                else
+                {
+                    // For other controls, set their width
+                    ctrl.Width = containerPanel.Width - (2 * padding);
+                    ctrl.Location = new Point(padding, yOffset); // Keeping the same location for non-buttons
+                }
+
+                // Update the yOffset for the next control
                 yOffset += ctrl.Height + controlSpacing;
                 containerPanel.Controls.Add(ctrl);
             }
 
-            // Clear previous controls and add container panel
             this.Controls.Clear();
             this.Controls.Add(containerPanel);
         }
@@ -105,23 +166,35 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
         }
         private void btnForgotPassword_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Forgot Password Clicked!"); // You will replace this with navigation logic
+            OnForgotPasswordRequested?.Invoke();
         }
-
-        private void showPassRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void showPassCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            // Toggle password visibility
-            txtPassword.UseSystemPasswordChar = !showPassRadioButton.Checked;
+
+            txtPassword.PasswordChar = showPassCheckBox.Checked ? '\0' : '●';
         }
 
         private async void btnLogin_Click(object sender, EventArgs e)
         {
             string email = txtEmail.Text.Trim();
             string password = txtPassword.Text.Trim();
+            lblEmailError.Visible = false;
+            lblPasswordError.Visible = false;
+            ResetBorders();
 
-            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrWhiteSpace(email))
             {
-                MessageBox.Show("Please enter email and password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtEmail.BorderColor = Color.Red;
+                lblEmailError.Text = "Email is required";
+                lblEmailError.Visible = true;
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                txtPassword.BorderColor = Color.Red;
+                lblPasswordError.Text = "Password is required";
+                lblPasswordError.Visible = true;
                 return;
             }
 
@@ -129,6 +202,16 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             {
                 var authInstance = await Authentication.CreateAsync();
                 var authClient = authInstance.AuthProvider;
+                // Check if the email exists in the database
+                bool emailExists = await authInstance.CheckEmailExists(email);
+
+                if (!emailExists)
+                {
+                    txtEmail.BorderColor = Color.Red;
+                    lblEmailError.Text = "Email is not registered.";
+                    lblEmailError.Visible = true;
+                    return;
+                }
 
                 var userCredential = await authClient.SignInWithEmailAndPasswordAsync(email, password);
                 var user = userCredential.User;
@@ -138,7 +221,7 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
                     string userId = user.Uid;
                     string role = await Program.GetUserRole(userId);
 
-                    // ✅ Save user session locally
+                    //Save user session locally
                     Properties.Settings.Default.UserId = userId;
                     Properties.Settings.Default.Save();
 
@@ -149,7 +232,7 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
                         {
                             Debug.WriteLine("No curriculum found, opening ChooseCurriculumForm.");
 
-                            // ✅ Close AuthForm before opening ChooseCurriculumForm
+                            //  Close AuthForm before opening ChooseCurriculumForm
                             Form authForm = this.FindForm();
                             authForm?.Hide();
 
@@ -161,7 +244,7 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
                         }
                     }
 
-                    // ✅ Close AuthForm and open MainScreen
+                    // Close AuthForm and open MainScreen
                     Form parentForm = this.FindForm();
                     parentForm?.Hide();
 
@@ -169,35 +252,25 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
                     mainScreen.Show();
                 }
             }
-            catch (FirebaseAuthException ex)
+            catch (Firebase.Auth.FirebaseAuthException ex)
             {
-                MessageBox.Show("Login failed: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Check if the error is due to incorrect password
+                if (ex.Message.Contains("INVALID_LOGIN_CREDENTIALS"))
+                {
+                    txtPassword.BorderColor = Color.Red;
+                    lblPasswordError.Text = "Incorrect password.";
+                    lblPasswordError.Visible = true;
+                }
+                else
+                {
+                    MessageBox.Show("Login failed: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
-
-
-
-
-        /*
-                private async Task<string> GetUserRole(string userId)
-                {
-                    try
-                    {
-                        FirestoreDb db = FirestoreDb.Create("mmcm-curriculum-tracker-app");
-                        DocumentReference userDoc = db.Collection("users").Document(userId);
-                        DocumentSnapshot snapshot = await userDoc.GetSnapshotAsync();
-
-                        if (snapshot.Exists && snapshot.ContainsField("role"))
-                        {
-                            return snapshot.GetValue<string>("role");
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error fetching user role: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
-                    return "Unknown";
-                }*/
+        private void ResetBorders()
+        {
+            txtEmail.BorderColor = Color.Gray;
+            txtPassword.BorderColor = Color.Gray;
+        }
     }
 }

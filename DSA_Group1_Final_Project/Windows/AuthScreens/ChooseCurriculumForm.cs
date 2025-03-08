@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Google.Cloud.Firestore;
+﻿using Google.Cloud.Firestore;
 
 namespace DSA_Group1_Final_Project.Windows.AuthScreens
 {
     public partial class ChooseCurriculumForm : Form
     {
+        private CancellationTokenSource _cancellationTokenSource;
         private string userId;
         private FirestoreDb db;
+        private Button btnLogout;
 
         private Dictionary<string, string> curriculumOptions = new Dictionary<string, string>
         {
@@ -24,9 +22,21 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             this.userId = userId;
             db = FirestoreDb.Create("mmcm-curriculum-tracker-app");
 
-            // ✅ Initialize UI elements
-            InitializeComponent(); // Call the designer's InitializeComponent method
+
+            InitializeComponent(); 
             PopulateCurriculumDropdown();
+
+            this.Size = new System.Drawing.Size(500, 400); 
+            this.StartPosition = FormStartPosition.CenterScreen; 
+
+            btnLogout = new Button();
+            btnLogout.Text = "Logout";
+            btnLogout.Size = new System.Drawing.Size(100, 30);
+            btnLogout.Location = new System.Drawing.Point(10, saveButton.Bottom + 10); 
+            btnLogout.Click += btnLogout_Click;
+            this.Controls.Add(btnLogout); 
+
+            _cancellationTokenSource = new CancellationTokenSource(); 
         }
 
         private void PopulateCurriculumDropdown()
@@ -62,22 +72,19 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             {
                 DocumentReference studentRef = db.Collection("students").Document(userId);
                 await studentRef.SetAsync(new Dictionary<string, object>
-        {
-            { "name", fullName },
-            { "curriculum", curriculumId }
-        }, SetOptions.MergeAll);
+                {
+                    { "name", fullName },
+                    { "curriculum", curriculumId }
+                }, SetOptions.MergeAll);
 
                 MessageBox.Show("Curriculum updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Close AuthForm explicitly if it's still open
                 Form authForm = Application.OpenForms.OfType<AuthForm>().FirstOrDefault();
-                authForm?.Close(); // 🔥 Ensure AuthForm is properly closed
+                authForm?.Close(); 
 
-                // Close ChooseCurriculumForm and open MainScreen
-                this.Hide();
                 MainScreen mainScreen = new MainScreen("Student");
                 mainScreen.Show();
-                this.Close();
+                this.Hide(); 
             }
             catch (Exception ex)
             {
@@ -85,5 +92,21 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             }
         }
 
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.UserId = "";
+            Properties.Settings.Default.Save();
+
+            AuthForm authForm = new AuthForm();
+            authForm.Show(); 
+            this.Hide(); 
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            _cancellationTokenSource?.Cancel();
+            base.OnFormClosing(e);
+            Application.Exit(); 
+        }
     }
 }

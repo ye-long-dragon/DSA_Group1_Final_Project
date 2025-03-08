@@ -6,10 +6,10 @@ using System.Windows.Forms;
 namespace DSA_Group1_Final_Project.Windows.AuthScreens
 {
     public partial class AuthForm : Form
-
     {
         private int authPanelWidth;
         private int authPanelHeight;
+
         public AuthForm()
         {
             InitializeComponent();
@@ -40,6 +40,7 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             // Attach event handlers
             loginControl.OnRegisterRequested += ShowRegister;
             loginControl.OnLoginSuccess += OpenMainScreen; // Handle login success
+            loginControl.OnForgotPasswordRequested += ShowForgotPassword;
 
             panelContainer.Controls.Add(loginControl);
         }
@@ -63,6 +64,7 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             // Add RegisterControl to panelContainer
             panelContainer.Controls.Add(registerControl);
         }
+
         // This method will switch to the main screen
         private void OpenMainScreen(string role)
         {
@@ -75,5 +77,67 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             }));
         }
 
+        public void ShowForgotPassword()
+        {
+            if (panelContainer == null) return;
+
+            panelContainer.Controls.Clear();
+
+            ForgotPasswordControl forgotPasswordControl = new ForgotPasswordControl(authPanelWidth, authPanelHeight)
+            {
+                Dock = DockStyle.Fill
+            };
+
+            forgotPasswordControl.OnOtpSent += ShowVerifyOtp;
+            forgotPasswordControl.OnBackToLogin += ShowLogin;
+
+            panelContainer.Controls.Add(forgotPasswordControl);
+        }
+
+        private void ShowVerifyOtp(string email)
+        {
+            if (panelContainer == null) return;
+
+            panelContainer.Controls.Clear();
+
+            VerifyOtpPasswordControl verifyOtpControl = new VerifyOtpPasswordControl(email, authPanelWidth, authPanelHeight)
+            {
+                Dock = DockStyle.Fill
+            };
+
+            verifyOtpControl.OnPasswordChanged += ShowLogin;
+
+            panelContainer.Controls.Add(verifyOtpControl);
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            // Unsubscribe from events to prevent memory leaks
+            foreach (Control control in panelContainer.Controls)
+            {
+                if (control is LoginControl loginControl)
+                {
+                    loginControl.OnRegisterRequested -= ShowRegister;
+                    loginControl.OnLoginSuccess -= OpenMainScreen;
+                    loginControl.OnForgotPasswordRequested -= ShowForgotPassword;
+                }
+                else if (control is RegisterControl registerControl)
+                {
+                    registerControl.OnLoginRequested -= ShowLogin;
+                }
+                else if (control is ForgotPasswordControl forgotPasswordControl)
+                {
+                    forgotPasswordControl.OnOtpSent -= ShowVerifyOtp;
+                    forgotPasswordControl.OnBackToLogin -= ShowLogin;
+                }
+                else if (control is VerifyOtpPasswordControl verifyOtpControl)
+                {
+                    verifyOtpControl.OnPasswordChanged -= ShowLogin;
+                }
+            }
+
+            base.OnFormClosing(e);
+            Application.Exit(); // Ensure the application exits completely
+        }
     }
 }

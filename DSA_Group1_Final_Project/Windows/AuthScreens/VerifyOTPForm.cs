@@ -37,13 +37,12 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             if (result == "Registration successful.")
             {
                 MessageBox.Show("Registration successful! You can now log in.");
-                this.Close(); // Close OTP form
+                this.Close(); 
 
-                // Return to MainForm and show login
                 AuthForm mainForm = Application.OpenForms.OfType<AuthForm>().FirstOrDefault();
                 if (mainForm != null)
                 {
-                    mainForm.ShowLogin(); // Switch back to Login screen
+                    mainForm.ShowLogin();
                 }
             }
             else
