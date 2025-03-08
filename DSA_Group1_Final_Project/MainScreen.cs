@@ -5,10 +5,12 @@ using DSA_Group1_Final_Project.Windows.UserControls.Student;
 using DSA_Group1_Final_Project.Classes.Connection;
 using System.Runtime.InteropServices;
 using DSA_Group1_Final_Project.Windows.AuthScreens;
+using System.Threading;
 
 
 namespace DSA_Group1_Final_Project
 {
+
     public partial class MainScreen : Form
     {
 
@@ -16,7 +18,8 @@ namespace DSA_Group1_Final_Project
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private static extern void SendMessage(System.IntPtr one, int two, int three, int four);
-        
+        private CancellationTokenSource _cancellationTokenSource;
+
         private static MainScreen instance;
 
         // 🔥 Function to Switch Screens (Replaces mainPanel's content)
@@ -116,17 +119,29 @@ namespace DSA_Group1_Final_Project
 
             this.Close();
         }
-        private void MainScreen_FormClosing(object sender, FormClosingEventArgs e)
+        protected override void OnFormClosing(FormClosingEventArgs e)
         {
-
-            Authentication.Instance?.Cleanup(); // Call cleanup before exiting
-
-            Application.Exit();
+            // Cancel the progress task if the form is closing
+            _cancellationTokenSource?.Cancel();
+            base.OnFormClosing(e);
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            this.Close();
+            // Perform any necessary cleanup before closing
+            Authentication.Instance?.Cleanup(); // Call cleanup if needed
+
+            // Optionally, you can confirm the exit with the user
+            var confirmResult = MessageBox.Show("Are you sure you want to exit?",
+                                                 "Confirm Exit",
+                                                 MessageBoxButtons.YesNo,
+                                                 MessageBoxIcon.Question);
+            if (confirmResult == DialogResult.Yes)
+            {
+                this.Close(); // Close the MainScreen
+                Application.Exit();
+            }
         }
+
     }
 }

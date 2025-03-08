@@ -214,7 +214,7 @@ namespace DSA_Group1_Final_Project.Classes.Connection
                 var jsonPayload = JsonConvert.SerializeObject(new { email, otp });
                 var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
 
-                using (HttpClient httpClient = new HttpClient()) // ✅ Fix: Declare it inside the method
+                using (HttpClient httpClient = new HttpClient())
                 {
                     HttpResponseMessage response = await httpClient.PostAsync(
                         "https://us-central1-mmcm-curriculum-tracker-app.cloudfunctions.net/sendOtpEmail", content
@@ -256,6 +256,77 @@ namespace DSA_Group1_Final_Project.Classes.Connection
                 return "Error verifying OTP: " + ex.Message;
             }
         }
+        // ---------------------BELOW IS FOR PASSWORD CHANGE---------------------
+        public async Task<string> VerifyOtpForPasswordChange(string email, string enteredOtp)
+        {
+            try
+            {
+                DocumentReference otpDoc = db.Collection("otps").Document(email);
+                DocumentSnapshot snapshot = await otpDoc.GetSnapshotAsync();
+
+                if (snapshot.Exists)
+                {
+                    string storedOtp = snapshot.GetValue<string>("otp");
+                    Timestamp expiresAt = snapshot.GetValue<Timestamp>("expiresAt");
+
+                    if (storedOtp == enteredOtp && expiresAt.ToDateTime() > DateTime.UtcNow)
+                    {
+                        return "OTP verified successfully.";
+                    }
+                }
+
+                return "Invalid or expired OTP.";
+            }
+            catch (Exception ex)
+            {
+                return "Error verifying OTP: " + ex.Message;
+            }
+        }
+
+        public async Task ChangePassword(string email, string newPassword)
+        {
+            try
+            {
+                var json = new
+                {
+                    email = email,
+                    newPassword = newPassword
+                };
+
+                var jsonPayload = JsonConvert.SerializeObject(json);
+                var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    httpClient.Timeout = TimeSpan.FromSeconds(60);
+                    HttpResponseMessage response = await httpClient.PostAsync(
+                        "https://us-central1-mmcm-curriculum-tracker-app.cloudfunctions.net/updateUserPassword", content
+                    );
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Console.WriteLine("Password updated successfully.");
+                    }
+                    else
+                    {
+                        throw new Exception($"Error updating password: HTTP {response.StatusCode}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error updating password: " + ex.Message);
+            }
+
+        }
+        public async Task<bool> CheckEmailExists(string email)
+        {
+            var query = db.Collection("users").WhereEqualTo("email", email);
+            var snapshot = await query.GetSnapshotAsync();
+
+            return snapshot.Documents.Count > 0; // Returns true if at least one document is found
+        }
+        // ---------------------ABOVE FOR PASSWORD CHANGE---------------------
 
         private async Task<string> RegisterNewUser(string email, string password, string role, string program)
         {

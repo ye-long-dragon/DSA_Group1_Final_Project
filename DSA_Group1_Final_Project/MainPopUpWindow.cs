@@ -15,6 +15,7 @@ namespace DSA_Group1_Final_Project.Windows.Pop_ups
 {
     public partial class MainPopUpWindow : Form
     {
+        private CancellationTokenSource _cancellationTokenSource;
         public MainPopUpWindow(string s, StudentDocument studentDocument, StudentMasterList parentUserControl)
         {
             InitializeComponent();
@@ -55,5 +56,13 @@ namespace DSA_Group1_Final_Project.Windows.Pop_ups
         {
             this.Close();
         }
+        // ----------------- TO REMOVE BACKGROUND APPLICATION WHEN CLOSING-----------------
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            // Cancel the progress task if the form is closing
+            _cancellationTokenSource?.Cancel();
+            base.OnFormClosing(e);
+        }
+        // ----------------- TO REMOVE BACKGROUND APPLICATION WHEN CLOSING-----------------
     }
 }

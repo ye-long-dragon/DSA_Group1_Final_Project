@@ -25,7 +25,7 @@
             txtEmail = new Guna.UI2.WinForms.Guna2TextBox();
             label2 = new Label();
             txtPassword = new Guna.UI2.WinForms.Guna2TextBox();
-            showPassRadioButton = new Guna.UI2.WinForms.Guna2RadioButton();
+            showPassCheckBox = new Guna.UI2.WinForms.Guna2CheckBox();
             btnLogin = new Guna.UI2.WinForms.Guna2Button();
             btnRegister = new Button();
             btnForgotPassword = new Button();
@@ -76,25 +76,31 @@
             txtPassword.Location = new Point(50, 220);
             txtPassword.Margin = new Padding(4, 5, 4, 5);
             txtPassword.Name = "txtPassword";
-            txtPassword.PasswordChar = '*';
+            txtPassword.PasswordChar = '●';
             txtPassword.PlaceholderText = "";
             txtPassword.SelectedText = "";
             txtPassword.ShadowDecoration.CustomizableEdges = customizableEdges4;
             txtPassword.Size = new Size(1804, 40);
             txtPassword.TabIndex = 3;
             // 
-            // showPassRadioButton
+            // showPassCheckBox
             // 
-            showPassRadioButton.AutoSize = true;
-            showPassRadioButton.CheckedState.BorderThickness = 0;
-            showPassRadioButton.Font = new Font("Segoe UI", 9F);
-            showPassRadioButton.Location = new Point(50, 270);
-            showPassRadioButton.Name = "showPassRadioButton";
-            showPassRadioButton.Size = new Size(161, 29);
-            showPassRadioButton.TabIndex = 4;
-            showPassRadioButton.Text = "Show Password";
-            showPassRadioButton.UncheckedState.BorderThickness = 0;
-            showPassRadioButton.CheckedChanged += showPassRadioButton_CheckedChanged;
+            showPassCheckBox = new Guna.UI2.WinForms.Guna2CheckBox();
+            showPassCheckBox.AutoSize = true;
+            showPassCheckBox.Font = new Font("Segoe UI", 9F);
+            showPassCheckBox.Location = new Point(50, 270);
+            showPassCheckBox.Name = "showPassCheckBox";
+            showPassCheckBox.Size = new Size(161, 29);
+            showPassCheckBox.TabIndex = 4;
+            showPassCheckBox.Text = "Show Password";
+            showPassCheckBox.CheckedState.BorderThickness = 0;
+            showPassCheckBox.UncheckedState.BorderThickness = 0;
+            showPassCheckBox.CheckedState.FillColor = Color.Transparent;
+            showPassCheckBox.UncheckedState.FillColor = Color.Transparent;
+            showPassCheckBox.CheckedState.BorderColor = Color.Transparent;
+            showPassCheckBox.UncheckedState.BorderColor = Color.Transparent;
+            showPassCheckBox.CheckedChanged += showPassCheckBox_CheckedChanged;
+            this.Controls.Add(showPassCheckBox);
             // 
             // btnLogin
             // 
@@ -131,6 +137,14 @@
             btnForgotPassword.TabIndex = 6;
             btnForgotPassword.Text = "Forgot Password?";
             btnForgotPassword.Click += btnForgotPassword_Click;
+            // Initialize error labels
+            lblEmailError = CreateErrorLabel();
+/*            lblEmailError.Location = new Point(50, 200);*/ // Set appropriate location
+            this.Controls.Add(lblEmailError);
+
+            lblPasswordError = CreateErrorLabel();
+/*            lblPasswordError.Location = new Point(50, 300);*/ // Set appropriate location
+            this.Controls.Add(lblPasswordError);
             // 
             // LoginControl
             // 
@@ -138,19 +152,17 @@
             Controls.Add(txtEmail);
             Controls.Add(label2);
             Controls.Add(txtPassword);
-            Controls.Add(showPassRadioButton);
+            Controls.Add(showPassCheckBox);
             Controls.Add(btnLogin);
             Controls.Add(btnForgotPassword);
             Controls.Add(btnRegister);
+            Controls.Add(lblEmailError); // Add the error label to the control
+            Controls.Add(lblPasswordError);
             Name = "LoginControl";
             Size = new Size(1504, 880);
             ResumeLayout(false);
             PerformLayout();
         }
-
-
-
-
 
         private System.Windows.Forms.Button btnRegister;
         private System.Windows.Forms.Button btnForgotPassword;
@@ -158,7 +170,9 @@
         private Guna.UI2.WinForms.Guna2TextBox txtEmail;
         private System.Windows.Forms.Label label2;
         private Guna.UI2.WinForms.Guna2TextBox txtPassword;
-        private Guna.UI2.WinForms.Guna2RadioButton showPassRadioButton;
+        private Guna.UI2.WinForms.Guna2CheckBox showPassCheckBox;
         private Guna.UI2.WinForms.Guna2Button btnLogin;
+        private System.Windows.Forms.Label lblEmailError;
+        private System.Windows.Forms.Label lblPasswordError;
     }
 }

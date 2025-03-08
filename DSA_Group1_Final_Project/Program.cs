@@ -2,24 +2,36 @@
 using Google.Cloud.Firestore;
 using DSA_Group1_Final_Project.Windows.AuthScreens;
 using System.Diagnostics;
+using System.Threading;
 
 namespace DSA_Group1_Final_Project
 {
     internal static class Program
     {
+        private static Mutex mutex;
         [STAThread]
         static void Main()
         {
+
+
+
+            const string appName = "DSA_Group1_Final_Project";
+            bool createdNew;
+
+            mutex = new Mutex(true, appName, out createdNew);
+
+            if (!createdNew)
+            {
+                MessageBox.Show("The application is already running.");
+                return; 
+            }
             ApplicationConfiguration.Initialize();
 
-            // Ensure Firebase initializes before starting
             var auth = Authentication.Instance; // Use the singleton instance
 
-            // Run on the UI Thread
             Application.Run(new StartupForm());
         }
 
-        // 🔥 Make this method PUBLIC so StartupForm can access it
         public static async Task<Form> GetInitialForm()
         {
             var savedUserId = Properties.Settings.Default.UserId;
@@ -33,9 +45,9 @@ namespace DSA_Group1_Final_Project
                 if (role == "Student")
                 {
                     string curriculum = await GetStudentCurriculum(savedUserId);
-                    Debug.WriteLine($"Fetched curriculum from Firestore: '{curriculum}'");  // 🔍 Debugging
+                    Debug.WriteLine($"Fetched curriculum from Firestore: '{curriculum}'");  
 
-                    if (string.IsNullOrWhiteSpace(curriculum)) // ✅ Fix: Checks empty & spaces
+                    if (string.IsNullOrWhiteSpace(curriculum)) 
                     {
                         Debug.WriteLine("No curriculum found, redirecting to ChooseCurriculumForm.");
                         return new ChooseCurriculumForm(savedUserId);
@@ -48,7 +60,7 @@ namespace DSA_Group1_Final_Project
                 }
             }
 
-            return new AuthForm(); // Default to login screen if no user is found
+            return new AuthForm();
         }
 
         public static async Task<string> GetStudentCurriculum(string userId)
@@ -62,8 +74,8 @@ namespace DSA_Group1_Final_Project
 
                 if (snapshot.Exists && snapshot.ContainsField("curriculum"))
                 {
-                    string curriculum = snapshot.GetValue<string>("curriculum")?.Trim() ?? ""; // ✅ Trim spaces
-                    Debug.WriteLine($"Retrieved curriculum: '{curriculum}'");  // 🔍 Debugging
+                    string curriculum = snapshot.GetValue<string>("curriculum")?.Trim() ?? ""; 
+                    Debug.WriteLine($"Retrieved curriculum: '{curriculum}'");  
                     return curriculum;
                 }
             }
@@ -86,14 +98,14 @@ namespace DSA_Group1_Final_Project
                     DocumentSnapshot snapshot = await userDoc.GetSnapshotAsync();
 
                     string role = snapshot.Exists && snapshot.ContainsField("role") ? snapshot.GetValue<string>("role") : "Unknown";
-                    Debug.WriteLine($"User role: {role}");  // 🔍 Debugging
+                    Debug.WriteLine($"User role: {role}");  
                     return role;
                 });
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error fetching user role: " + ex.Message);
-                return "Unknown"; // Default if role is not found
+                return "Unknown"; 
             }
         }
     }
