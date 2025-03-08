@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DSA_Group1_Final_Project.Classes.Models;
 using System.Diagnostics;
 using FirebaseAdmin;
+using FirebaseAdmin.Auth;
 
 namespace DSA_Group1_Final_Project.Classes.Connection
 {
@@ -122,16 +123,26 @@ namespace DSA_Group1_Final_Project.Classes.Connection
         {
             try
             {
+                // 1️⃣ Delete from Firestore (Students Collection)
                 DocumentReference studentRef = db.Collection("students").Document(studentId);
-                await studentRef.DeleteAsync(); // Delete the student document
+                await studentRef.DeleteAsync();
+
+                // 2️⃣ Delete from Firestore (Users Collection, if applicable)
+                DocumentReference userRef = db.Collection("users").Document(studentId);
+                await userRef.DeleteAsync();
 
                 Debug.WriteLine($"Student ID {studentId} successfully deleted from Firestore.");
 
-                DocumentReference userRef = db.Collection("users").Document(studentId);
-                await userRef.DeleteAsync(); // Delete the student document
-
+                // 3️⃣ Delete from Firebase Authentication
+                await FirebaseAuth.DefaultInstance.DeleteUserAsync(studentId);
+                Debug.WriteLine($"User ID {studentId} successfully deleted from Firebase Authentication.");
 
                 return true; // Success
+            }
+            catch (FirebaseAuthException authEx)
+            {
+                Debug.WriteLine($"Error deleting Firebase Auth user: {authEx.Message}");
+                return false;
             }
             catch (Exception ex)
             {

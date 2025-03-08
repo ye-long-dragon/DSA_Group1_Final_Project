@@ -106,7 +106,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
             // 🔹 Panel to Center Progress Bar
 
             progressBar.Anchor = AnchorStyles.Top;
-            progressBar.Location = new Point(((contentPanel.Width - progressBar.Width) / 2), 100); // ✅ Centered
+            progressBar.Location = new Point((contentPanel.Width - progressBar.Width) / 2, 100); // ✅ Centered
 
             // 🔹 Add Components to Content Panel (ENSURE PROPER ORDER)
             // Manually position the label
