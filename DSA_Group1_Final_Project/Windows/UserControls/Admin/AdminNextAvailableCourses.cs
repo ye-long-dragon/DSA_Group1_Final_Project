@@ -1,4 +1,5 @@
-﻿using DSA_Group1_Final_Project.Classes.Connection;
+﻿using DSA_Group1_Final_Project.Classes;
+using DSA_Group1_Final_Project.Classes.Connection;
 using DSA_Group1_Final_Project.Classes.Models;
 using System;
 using System.Collections.Generic;
@@ -33,73 +34,79 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
         private void InitializeUI()
         {
             this.Dock = DockStyle.Fill;
-            this.BackColor = Color.White;
+            this.BackColor = MMCMColors.White;
 
-            // ✅ Container Panel for Vertical Layout
+            // 🔹 Top Bar (MMCM Blue)
+            Panel topBar = new Panel
+            {
+                Dock = DockStyle.Top,
+                Height = 50,
+                BackColor = MMCMColors.Blue
+            };
+            this.Controls.Add(topBar);
+
+            // 🔹 Title Label (Inside Top Bar)
+            Label titleLabel = new Label
+            {
+                Text = "Next Available Courses",
+                Font = new Font("Arial", 14, FontStyle.Bold),
+                ForeColor = MMCMColors.White,
+                AutoSize = false,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Dock = DockStyle.Fill
+            };
+            topBar.Controls.Add(titleLabel);
+
+            // 🔹 Main Container Panel (Fixed Layout)
             Panel containerPanel = new Panel
             {
                 Dock = DockStyle.Fill,
-                AutoScroll = true
+                Padding = new Padding(10, 60, 10, 10), // ✅ Prevents overlap with top bar
+                AutoScroll = false // ✅ Disable to avoid double scrollbars
             };
 
-            // ✅ FlowLayoutPanel for stacking components top-down
+            // 🔹 FlowLayoutPanel for Layout Management
             FlowLayoutPanel mainLayout = new FlowLayoutPanel
             {
                 Dock = DockStyle.Fill,
                 FlowDirection = FlowDirection.TopDown,
                 WrapContents = false,
-                AutoScroll = true
-            };
-            //Back Button
-            Button btnBack = new Button
-            {
-                Text = "Back",
-                BackColor = Color.White,
-                ForeColor = Color.Black,
-                AutoSize = true,
-                Margin = new Padding(5)
-            };
-            btnBack.Click += (s, e) => GoBack();
-
-            // ✅ Title Label
-            Label titleLabel = new Label
-            {
-                Text = "Next Available Courses",
-                Font = new Font("Arial", 14, FontStyle.Bold),
-                ForeColor = Color.Blue,
-                AutoSize = true,
-                Padding = new Padding(10, 10, 10, 10) // Spacing
+                Margin = new Padding(30),
+                AutoScroll = true // ✅ Only this panel should have scrolling
             };
 
-            // ✅ Student Email Label
+            // 🔹 Student Email Label
             studentEmailLabel = new Label
             {
                 Text = "Fetching Email...",
-                Font = new Font("Arial", 10),
+                Font = new Font("Arial", 20, FontStyle.Bold),
+                ForeColor = MMCMColors.Red,
                 AutoSize = true,
                 Padding = new Padding(5)
             };
 
-            // ✅ Term Dropdown (Fixed)
+            // 🔹 Term Dropdown Label
             Label lblTermDropDown = new Label
             {
                 Text = "Select Term:",
-                Font = new Font("Arial", 10),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = MMCMColors.Black,
                 AutoSize = true,
                 Padding = new Padding(5)
             };
 
+            // 🔹 Term Dropdown (Dropdown Selection)
             termDropdown = new ComboBox
             {
                 DropDownStyle = ComboBoxStyle.DropDownList,
-                Width = 150,  // ✅ Set Width instead of Dock
+                Width = 150,
                 Margin = new Padding(5, 5, 5, 10),
             };
             termDropdown.Items.AddRange(new object[] { 1, 2, 3 });
             termDropdown.SelectedIndex = 0;
             termDropdown.SelectedIndexChanged += async (s, e) => await LoadAvailableCourses();
 
-            // ✅ Course Panel (FlowLayoutPanel)
+            // 🔹 Course Panel (Fixed Width)
             coursesPanel = new FlowLayoutPanel
             {
                 AutoScroll = true,
@@ -108,22 +115,35 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
                 Padding = new Padding(10),
                 Dock = DockStyle.Fill,
                 AutoSize = true,
-                MinimumSize = new Size(500, 500)  // ✅ Set a minimum width if needed
+                MaximumSize = new Size(900, 0) // ✅ Prevents it from becoming too wide
             };
 
-
-            // ✅ Add Components in the Correct Order
-            mainLayout.Controls.Add(btnBack);
-            mainLayout.Controls.Add(titleLabel);
+            // 🔹 Add Components to Main Layout
             mainLayout.Controls.Add(studentEmailLabel);
             mainLayout.Controls.Add(lblTermDropDown);
             mainLayout.Controls.Add(termDropdown);
             mainLayout.Controls.Add(coursesPanel);
 
-            // ✅ Add to Container Panel and to Main Control
+            // 🔹 Back Button (Fixed at Bottom)
+            Button btnBack = new Button
+            {
+                Text = "Back",
+                BackColor = MMCMColors.Red,
+                ForeColor = MMCMColors.White,
+                Height = 50,
+                Dock = DockStyle.Bottom, // ✅ Now stays fixed at bottom
+                FlatStyle = FlatStyle.Flat
+            };
+            btnBack.FlatAppearance.BorderSize = 0;
+            btnBack.Click += (s, e) => GoBack();
+
+            // 🔹 Add to Container Panel and Main Control
             containerPanel.Controls.Add(mainLayout);
             this.Controls.Add(containerPanel);
+            this.Controls.Add(btnBack); // ✅ Back button is now outside scrolling area
         }
+
+
 
 
         private async void LoadStudentData()

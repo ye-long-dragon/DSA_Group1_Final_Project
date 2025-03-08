@@ -1,4 +1,5 @@
-﻿using DSA_Group1_Final_Project.Classes.Connection;
+﻿using DSA_Group1_Final_Project.Classes;
+using DSA_Group1_Final_Project.Classes.Connection;
 using DSA_Group1_Final_Project.Classes.Models;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
         private StudentDocument student;
         private FirestoreServices firestoreService;
         private TableLayoutPanel tableCourses = new TableLayoutPanel(); // 🔹 Initialize here
+        private ProgressBar progressBar;
 
         public ViewCurriculumDetails(StudentDocument student)
         {
@@ -35,73 +37,122 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
         private void InitializeUI()
         {
             this.Dock = DockStyle.Fill;
+            this.BackColor = MMCMColors.White; // Set background color
 
-            // 🔹 Title Label
+            // 🔹 Top Bar (MMCM Blue)
+            Panel topBar = new Panel
+            {
+                Dock = DockStyle.Top,
+                Height = 50,
+                BackColor = MMCMColors.Blue
+            };
+            this.Controls.Add(topBar);
+
+            // 🔹 Title Label (Inside Top Bar)
             Label lblTitle = new Label
             {
                 Text = "Curriculum Overview",
                 Font = new Font("Arial", 14, FontStyle.Bold),
-                Dock = DockStyle.Top,
+                ForeColor = MMCMColors.White, // White text
+                AutoSize = false,
                 TextAlign = ContentAlignment.MiddleCenter,
-                Padding = new Padding(10)
+                Dock = DockStyle.Fill
             };
-            this.Controls.Add(lblTitle);
+            topBar.Controls.Add(lblTitle);
 
-            // 🔹 TableLayoutPanel for Courses
-            tableCourses = new TableLayoutPanel
+            // 🔹 Container Panel (Ensures Proper Layout)
+            Panel contentPanel = new Panel
             {
                 Dock = DockStyle.Fill,
-                ColumnCount = 2,
                 AutoScroll = true
             };
-            this.Controls.Add(tableCourses);
 
-            // 🔹 Back Button
+            // 🔹 Label for Student Information
+            lblStudentInfo.Text = $"Showing Curriculum Checklist for Student: {student.Name}";
+            lblStudentInfo.Font = new Font("Arial", 14, FontStyle.Italic);
+            lblStudentInfo.ForeColor = MMCMColors.Red;
+            lblStudentInfo.AutoSize = true;
+            lblStudentInfo.Padding = new Padding(5);
+
+
+            // 🔹 TableLayoutPanel for Courses (Centered & Starts AFTER Label)
+            tableCourses = new TableLayoutPanel
+            {
+                AutoScroll = true,
+                ColumnCount = 2,
+                Padding = new Padding(10),
+                Margin = new Padding(0, 10, 0, 0), // ✅ Ensure No Extra Margin
+                AutoSize = true,
+                MaximumSize = new Size(1500, 0)
+
+            };
+
+
+            // ✅ Ensure column styles are set BEFORE adding controls
+            tableCourses.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60)); // 🔹 First Column (Course Name)
+            tableCourses.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40)); // 🔹 Second Column (Checkbox)
+
+
+
+            // 🔹 Progress Bar (Centered)
+            progressBar = new ProgressBar
+            {
+                Style = ProgressBarStyle.Marquee,
+                Width = 500,
+                Height = 30,
+                Visible = true
+            };
+
+            // 🔹 Panel to Center Progress Bar
+
+            progressBar.Anchor = AnchorStyles.Top;
+            progressBar.Location = new Point(((contentPanel.Width - progressBar.Width) / 2), 100); // ✅ Centered
+
+            // 🔹 Add Components to Content Panel (ENSURE PROPER ORDER)
+            // Manually position the label
+            lblStudentInfo.Location = new Point(20, 60); // X = 20, Y = 20
+            contentPanel.Controls.Add(lblStudentInfo);
+
+            // Position the loading
+            contentPanel.Controls.Add(progressBar);
+
+            // Position the tableCourses below the loading panel
+            tableCourses.Location = new Point(20, 100);
+            contentPanel.Controls.Add(tableCourses);
+
+            // 🔹 Back Button (Fixed at Bottom)
             Button btnBack = new Button
             {
                 Text = "Back",
                 Dock = DockStyle.Bottom,
-                Height = 40
+                Height = 50,
+                BackColor = MMCMColors.Red,
+                ForeColor = MMCMColors.White,
+                FlatStyle = FlatStyle.Flat
             };
+            btnBack.FlatAppearance.BorderSize = 0;
             btnBack.Click += (s, e) => GoBack();
+
+            // 🔹 Add Components to Form
+            this.Controls.Add(contentPanel);
             this.Controls.Add(btnBack);
         }
 
+
+
+
+
         private async void LoadCurriculum()
         {
+            progressBar.Visible = true; // Show progress indicator
+            tableCourses.Visible = false; // Hide courses until loaded
+
             var courseData = await firestoreService.GetCurriculumCourses(student.Curriculum);
 
             if (courseData == null)
             {
                 Debug.WriteLine("Failed to fetch curriculum data.");
                 return;
-            }
-
-            Debug.WriteLine("Course Data:");
-            foreach (var (year, terms) in courseData.groupedCourses)
-            {
-                Debug.WriteLine($"Year {year}");
-                foreach (var (term, courses) in terms)
-                {
-                    Debug.WriteLine($"  Term {term}");
-                    foreach (var course in courses)
-                    {
-                        Debug.WriteLine($"    {course.Code} - {course.Name}");
-                    }
-                }
-            }
-
-            // 🔹 Print Electives
-            if (courseData.electives.Any())
-            {
-                Debug.WriteLine("Elective Courses:");
-                foreach (var elective in courseData.electives)
-                {
-                    Debug.WriteLine($"  {elective.Code} - {elective.Name}");
-                }
-            }
-            else { 
-                Debug.WriteLine("No Elective Courses"); 
             }
 
             var completedCourses = new HashSet<string>(student.CompletedCourses); // Convert to HashSet for fast lookup
@@ -122,11 +173,11 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
                 Label lblYear = new Label
                 {
                     Text = $"Year {year}",
-                    Font = new Font("Arial", 12, FontStyle.Bold),
-                    ForeColor = Color.Blue,
-                    Dock = DockStyle.Top,
+                    Font = new Font("Arial", 18, FontStyle.Bold),
+                    ForeColor = MMCMColors.Blue,
+                    Anchor = AnchorStyles.Left,  // ✅ Fix position instead of DockStyle.Top
                     AutoSize = true,
-                    Padding = new Padding(10)
+                    Padding = new Padding(5)
                 };
                 tableCourses.Controls.Add(lblYear, 0, row++);
 
@@ -136,9 +187,9 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
                     Label lblTerm = new Label
                     {
                         Text = $"Term {term}",
-                        Font = new Font("Arial", 10, FontStyle.Bold),
-                        ForeColor = Color.Red,
-                        Dock = DockStyle.Top,
+                        Font = new Font("Arial", 15, FontStyle.Bold),
+                        ForeColor = MMCMColors.Red,
+                        Anchor = AnchorStyles.Left,  // ✅ Fix position instead of DockStyle.Top
                         AutoSize = true,
                         Padding = new Padding(5)
                     };
@@ -159,9 +210,9 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
                 Label lblElectives = new Label
                 {
                     Text = "Elective Courses",
-                    Font = new Font("Arial", 12, FontStyle.Bold),
-                    ForeColor = Color.DarkGreen,
-                    Dock = DockStyle.Top,
+                    Font = new Font("Arial", 18, FontStyle.Bold),
+                    ForeColor = MMCMColors.Blue,
+                    Anchor = AnchorStyles.Left,
                     AutoSize = true,
                     Padding = new Padding(10)
                 };
@@ -173,6 +224,11 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
                     AddCourseRow(elective, completedCourses, ref row);
                 }
             }
+
+
+            progressBar.Visible = false; // Hide progress indicator
+            tableCourses.BringToFront();
+            tableCourses.Visible = true; // Show courses
         }
 
         // 🔥 Helper Method to Add a Course Row (Handles Regular & Elective Courses)
@@ -181,8 +237,8 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
             Label lblCourse = new Label
             {
                 Text = course.Name,
+                Font = new Font("Arial", 13),
                 AutoSize = true,
-                MaximumSize = new Size(400, 0), // Restrict width, allow multiline
                 Padding = new Padding(5),
                 TextAlign = ContentAlignment.MiddleLeft
             };
