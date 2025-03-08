@@ -115,7 +115,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
                 Padding = new Padding(10),
                 Dock = DockStyle.Fill,
                 AutoSize = true,
-                MaximumSize = new Size(900, 0) // ✅ Prevents it from becoming too wide
+                MaximumSize = new Size(1200, 0), 
             };
 
             // 🔹 Add Components to Main Layout
@@ -206,16 +206,16 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
             {
                 BackColor = GetColorFromCode(colorCode),
                 AutoSize = true,
-                Padding = new Padding(10),
-                Margin = new Padding(5),
+                Padding = new Padding(15, 15, 15, 15),
+                Margin = new Padding(5,5,5,5),
                 Width = coursesPanel.Width - 20
             };
 
             Label courseLabel = new Label
             {
                 Text = $"{course.Name} ({course.Code})",
-                ForeColor = Color.White,
-                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = MMCMColors.White,
+                Font = new Font("Poppins", 13, FontStyle.Bold),
                 AutoSize = true
             };
             coursePanel.Controls.Add(courseLabel);
@@ -225,10 +225,11 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
                 Button shareButton = new Button
                 {
                     Text = "Share",
-                    BackColor = Color.White,
-                    ForeColor = Color.Black,
+                    BackColor = MMCMColors.White,
+                    ForeColor = MMCMColors.Black,
+                    FlatStyle = FlatStyle.Flat,
                     AutoSize = true,
-                    Margin = new Padding(5)
+
                 };
                 shareButton.Click += (s, e) => CopyToClipboard($"{course.Name} ({course.Code})");
                 coursePanel.Controls.Add(shareButton);
