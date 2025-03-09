@@ -27,8 +27,6 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
             this.student = student;
             this.firestoreService = new FirestoreServices();
 
-            // Use student.CompletedCourses directly instead of calling Firestore
-
             // 🔥 Setup UI dynamically
             InitializeUI();
             LoadCurriculum();
@@ -226,7 +224,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
             }
 
 
-            progressBar.Visible = false; // Hide progress indicator
+            //progressBar.Visible = false; // Hide progress indicator
             tableCourses.BringToFront();
             tableCourses.Visible = true; // Show courses
         }
