@@ -1,6 +1,7 @@
 ﻿using DSA_Group1_Final_Project.Classes;
 using DSA_Group1_Final_Project.Classes.Connection;
 using DSA_Group1_Final_Project.Classes.Models;
+using DSA_Group1_Final_Project.Windows.UserControls.Student;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,12 +21,14 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
         private FirestoreServices firestoreService;
         private TableLayoutPanel tableCourses = new TableLayoutPanel(); // 🔹 Initialize here
         private ProgressBar progressBar;
+        string r;
 
-        public ViewCurriculumDetails(StudentDocument student)
+        public ViewCurriculumDetails(StudentDocument student,string role)
         {
             InitializeComponent();
             this.student = student;
             this.firestoreService = new FirestoreServices();
+            r = role;
 
             // 🔥 Setup UI dynamically
             InitializeUI();
@@ -73,22 +76,49 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
             lblStudentInfo.Padding = new Padding(5);
 
 
-            // 🔹 TableLayoutPanel for Courses (Centered & Starts AFTER Label)
-            tableCourses = new TableLayoutPanel
-            {
-                AutoScroll = true,
-                ColumnCount = 2,
-                Padding = new Padding(10),
-                Margin = new Padding(0, 10, 0, 0), // ✅ Ensure No Extra Margin
-                AutoSize = true,
-                MaximumSize = new Size(1500, 0)
 
-            };
+            // 🔹 TableLayoutPanel for Courses (Centered & Starts AFTER Label)
+
+            if (r == "Admin")
+            {
+                tableCourses = new TableLayoutPanel
+                {
+                    AutoScroll = true,
+                    ColumnCount = 2,
+                    Padding = new Padding(10),
+                    Margin = new Padding(0, 10, 0, 0), // ✅ Ensure No Extra Margin
+                    AutoSize = true,
+                    MaximumSize = new Size(1500, 0)
+
+                };
+
+            }
+            else
+            {
+                tableCourses = new TableLayoutPanel
+                {
+                    AutoScroll = true,
+                    ColumnCount = 1,
+                    Padding = new Padding(10),
+                    Margin = new Padding(0, 10, 0, 0), // ✅ Ensure No Extra Margin
+                    AutoSize = true,
+                    MaximumSize = new Size(1500, 0)
+                };
+            }
 
 
             // ✅ Ensure column styles are set BEFORE adding controls
-            tableCourses.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60)); // 🔹 First Column (Course Name)
-            tableCourses.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40)); // 🔹 Second Column (Checkbox)
+
+            if (r == "Admin")
+            {
+                tableCourses.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60)); // 🔹 First Column (Course Name)
+                tableCourses.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40)); // 🔹 Second Column (Checkbox)
+            }
+            else
+            {
+                tableCourses.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60)); // 🔹 First Column (Course Name)                
+            }
+            
 
 
 
@@ -277,8 +307,14 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
 
             if (mainScreen != null) // ✅ Ensure the form is found
             {
-                // 🔹 Switch back to StudentMasterList and pass `parentForm`
-                mainScreen.LoadUserControl(new StudentMasterList(mainScreen));
+                if (r == "Admin")
+                { // 🔹 Switch back to StudentMasterList and pass `parentForm`
+                    mainScreen.LoadUserControl(new StudentMasterList(mainScreen));
+                }
+                else
+                {
+                    mainScreen.LoadUserControl(new homeStudent(student, r));
+                }
             }
             else
             {

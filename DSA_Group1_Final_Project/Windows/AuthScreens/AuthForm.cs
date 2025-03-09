@@ -71,7 +71,7 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             this.Invoke(new Action(() =>
             {
                 this.Hide(); // Hide AuthForm
-                MainScreen mainScreen = new MainScreen(role);
+                MainScreen mainScreen = new MainScreen(role, "userId");
                 mainScreen.Show();
                 mainScreen.FormClosed += (s, e) => this.Close(); // Close AuthForm only when MainScreen is closed
             }));

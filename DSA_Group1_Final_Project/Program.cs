@@ -40,7 +40,7 @@ namespace DSA_Group1_Final_Project
             {
                 string role = await GetUserRole(savedUserId);
                 if (role == "Admin")
-                    return new MainScreen(role);
+                    return new MainScreen(role, savedUserId);
 
                 if (role == "Student")
                 {
@@ -55,7 +55,7 @@ namespace DSA_Group1_Final_Project
                     else
                     {
                         Debug.WriteLine($"Curriculum found: {curriculum}, redirecting to MainScreen.");
-                        return new MainScreen(role);
+                        return new MainScreen(role, savedUserId);
                     }
                 }
             }

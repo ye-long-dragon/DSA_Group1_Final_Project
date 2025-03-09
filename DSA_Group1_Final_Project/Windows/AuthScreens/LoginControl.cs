@@ -248,7 +248,7 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
                     Form parentForm = this.FindForm();
                     parentForm?.Hide();
 
-                    MainScreen mainScreen = new MainScreen(role);
+                    MainScreen mainScreen = new MainScreen(role, userId);
                     mainScreen.Show();
                 }
             }

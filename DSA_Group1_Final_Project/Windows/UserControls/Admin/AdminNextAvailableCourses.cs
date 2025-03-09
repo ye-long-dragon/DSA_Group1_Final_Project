@@ -1,6 +1,7 @@
 ﻿using DSA_Group1_Final_Project.Classes;
 using DSA_Group1_Final_Project.Classes.Connection;
 using DSA_Group1_Final_Project.Classes.Models;
+using DSA_Group1_Final_Project.Windows.UserControls.Student;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,13 +25,14 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
         private Label studentEmailLabel;
         private int selectedTerm = 1; // Default term
         private ProgressBar progressBar;
+        string r;
 
-
-        public AdminNextAvailableCourses(StudentDocument student)
+        public AdminNextAvailableCourses(StudentDocument student, string role)
         {
             this.student = student;
             InitializeUI();
             LoadStudentData();
+            r = role;
         }
 
         private void InitializeUI()
@@ -313,7 +315,14 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
             if (mainScreen != null) // ✅ Ensure the form is found
             {
                 // 🔹 Switch back to StudentMasterList and pass `parentForm`
-                mainScreen.LoadUserControl(new StudentMasterList(mainScreen));
+                if (r == "Admin")
+                { // 🔹 Switch back to StudentMasterList and pass `parentForm`
+                    mainScreen.LoadUserControl(new StudentMasterList(mainScreen));
+                }
+                else
+                {
+                    mainScreen.LoadUserControl(new homeStudent(student,r));
+                }
             }
             else
             {

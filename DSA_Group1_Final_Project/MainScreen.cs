@@ -6,6 +6,7 @@ using DSA_Group1_Final_Project.Classes.Connection;
 using System.Runtime.InteropServices;
 using DSA_Group1_Final_Project.Windows.AuthScreens;
 using System.Threading;
+using DSA_Group1_Final_Project.Classes.Models;
 
 
 namespace DSA_Group1_Final_Project
@@ -37,12 +38,15 @@ namespace DSA_Group1_Final_Project
         }
 
 
-        string role;
-        public MainScreen(string r)
+        string r;
+        FirestoreServices db = new FirestoreServices();
+        StudentDocument student = new StudentDocument();
+        public MainScreen(string role, string userId)
         {
             InitializeComponent();
             instance = this;
-            role = r;
+            r = role;
+            student = db.GetCurrentStudentAsync(userId).Result;
 
             if (role == "Admin")
             {
@@ -51,18 +55,23 @@ namespace DSA_Group1_Final_Project
                 lblScreenView.Text = "Admin Dashboard";
 
                 btnStudentMasterList.Location = new Point(0, 335);
-                btnManageCurriculums.Location = new Point(0, 335+62);
-                btnDevelopers.Location = new Point(0, 397+62);
-                lblSettings.Location = new Point(6, 481 + 62);
-                btnProfile.Location = new Point(0, 531 + 62);
-                btnSettings.Location = new Point(0, 593 + 62);
-                btnLogout.Location = new Point(0, 655 + 62);
+
+                btnDevelopers.Location = new Point(0, 335 + 62);
+                lblSettings.Location = new Point(6, 397 + 62);
+                btnProfile.Location = new Point(0, 481 + 62);
+                btnSettings.Location = new Point(0, 531 + 62);
+                btnLogout.Location = new Point(0, 593 + 62);
+
+                homeAdmin homeAdmin = new homeAdmin();
+                homeAdmin.Dock = DockStyle.Fill;
+                pnlMain.Controls.Clear();
+                pnlMain.Controls.Add(homeAdmin);
             }
             else
             {
                 lblScreenView.Text = "Student Dashboard";
                 btnSettings.Text = "Settings";
-                btnManageCurriculums.Visible = false;
+
                 btnStudentMasterList.Visible = false;
 
                 btnAvailableCourses.Location = new Point(0, 273);
@@ -72,6 +81,11 @@ namespace DSA_Group1_Final_Project
                 btnProfile.Location = new Point(0, 531);
                 btnSettings.Location = new Point(0, 593);
                 btnLogout.Location = new Point(0, 655);
+
+                homeStudent homeStudent = new homeStudent(student, r);
+                homeStudent.Dock = DockStyle.Fill;
+                pnlMain.Controls.Clear();
+                pnlMain.Controls.Add(homeStudent);
             }
 
         }
@@ -91,7 +105,7 @@ namespace DSA_Group1_Final_Project
 
         private void btnCourseList_Click_1(object sender, EventArgs e)
         {
-            CourseList courseList = new CourseList();
+            ViewCurriculumDetails courseList = new ViewCurriculumDetails(student, "Student");
             courseList.Dock = DockStyle.Fill;
             pnlMain.Controls.Clear();
             pnlMain.Controls.Add(courseList);
@@ -99,10 +113,10 @@ namespace DSA_Group1_Final_Project
 
         private void btnAvailableCourses_Click(object sender, EventArgs e)
         {
-            //AvailableCourses availableCourses = new AvailableCourses();
-            //availableCourses.Dock = DockStyle.Fill;
+            AdminNextAvailableCourses adminNextAvailableCourses = new AdminNextAvailableCourses(student, "");
+            adminNextAvailableCourses.Dock = DockStyle.Fill;
             pnlMain.Controls.Clear();
-            //pnlMain.Controls.Add(availableCourses);
+            pnlMain.Controls.Add(adminNextAvailableCourses);
 
         }
 
@@ -143,5 +157,22 @@ namespace DSA_Group1_Final_Project
             }
         }
 
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            if (r == "Admin")
+            {
+                homeAdmin homeAdmin = new homeAdmin();
+                homeAdmin.Dock = DockStyle.Fill;
+                pnlMain.Controls.Clear();
+                pnlMain.Controls.Add(homeAdmin);    
+            }
+            else
+            {
+                homeStudent homeStudent = new homeStudent(student, r);
+                homeStudent.Dock = DockStyle.Fill;
+                pnlMain.Controls.Clear();
+                pnlMain.Controls.Add(homeStudent);
+            }
+        }
     }
 }

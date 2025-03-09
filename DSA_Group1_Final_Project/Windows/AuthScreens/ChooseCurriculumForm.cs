@@ -82,7 +82,7 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
                 Form authForm = Application.OpenForms.OfType<AuthForm>().FirstOrDefault();
                 authForm?.Close(); 
 
-                MainScreen mainScreen = new MainScreen("Student");
+                MainScreen mainScreen = new MainScreen("Student", userId);
                 mainScreen.Show();
                 this.Hide(); 
             }

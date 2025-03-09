@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DSA_Group1_Final_Project.Classes.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,21 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
 {
     public partial class homeAdmin : UserControl
     {
+        StudentDocument s;
+        string r;
+        MainScreen MainScreen;
         public homeAdmin()
         {
             InitializeComponent();
+            this.MainScreen = MainScreen;
+        }
+
+        private void btnStudentMasterList_Click(object sender, EventArgs e)
+        {
+            StudentMasterList studentMasterList = new StudentMasterList(MainScreen);
+            studentMasterList.Dock = DockStyle.Fill;
+            MainScreen mainScreen = (MainScreen)Parent.Parent.Parent.Parent;
+            mainScreen.LoadUserControl(studentMasterList);
         }
     }
 }

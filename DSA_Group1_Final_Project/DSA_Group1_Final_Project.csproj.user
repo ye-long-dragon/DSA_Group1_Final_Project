@@ -43,9 +43,6 @@
     <Compile Update="Windows\UserControls\Admin\itemMasterList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Windows\UserControls\Admin\ManageCurriculums.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="Windows\UserControls\Admin\StudentMasterList.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -70,16 +67,7 @@
     <Compile Update="Windows\UserControls\Pop-ups\UpdateProgram.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Windows\UserControls\Student\AvailableCourses.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Windows\UserControls\Student\CourseList.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="Windows\UserControls\Student\homeStudent.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Windows\UserControls\Student\itemCourses.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>

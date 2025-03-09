@@ -241,7 +241,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
         private void btnDetails_Click(object sender, EventArgs e)
         {
             // 🔥 Create new ViewCurriculumDetails UserControl
-            ViewCurriculumDetails curriculumDetailsControl = new ViewCurriculumDetails(student);
+            ViewCurriculumDetails curriculumDetailsControl = new ViewCurriculumDetails(student,"Admin");
 
             // 🔥 Call LoadUserControl() from TestForm to switch screens
             mainScreen.LoadUserControl(curriculumDetailsControl);
@@ -253,7 +253,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
 
         private void btnAvailableCourses_Click(object sender, EventArgs e)
         {
-            AdminNextAvailableCourses adminNextAvailableCourses = new AdminNextAvailableCourses(student);
+            AdminNextAvailableCourses adminNextAvailableCourses = new AdminNextAvailableCourses(student, "Admin");
             mainScreen.LoadUserControl(adminNextAvailableCourses);
 
             btnAvailableCoursesClick?.Invoke(this, e);
