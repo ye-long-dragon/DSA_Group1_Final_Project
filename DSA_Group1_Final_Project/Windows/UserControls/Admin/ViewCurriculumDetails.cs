@@ -137,97 +137,106 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
         }
 
 
-
-
-
         private async void LoadCurriculum()
         {
-            progressBar.Visible = true; // Show progress indicator
-            tableCourses.Visible = false; // Hide courses until loaded
+            progressBar.Visible = true; // ✅ Show progress indicator
+            tableCourses.Visible = false; // ✅ Hide table until loaded
 
             var courseData = await firestoreService.GetCurriculumCourses(student.Curriculum);
 
             if (courseData == null)
             {
                 Debug.WriteLine("Failed to fetch curriculum data.");
+                progressBar.Visible = false;
                 return;
             }
 
-            var completedCourses = new HashSet<string>(student.CompletedCourses); // Convert to HashSet for fast lookup
+            var completedCourses = new HashSet<string>(student.CompletedCourses); // ✅ HashSet for fast lookup
 
-            // Reset table layout to avoid old data stacking
-            tableCourses.Controls.Clear();
-            tableCourses.RowStyles.Clear();
-            tableCourses.ColumnCount = 2; // One for course name, one for checkbox
-            tableCourses.AutoSize = true;
-            tableCourses.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            tableCourses.GrowStyle = TableLayoutPanelGrowStyle.AddRows;
-
-            int row = 0;
-
-            // 🔹 Loop through Years
-            foreach (var (year, terms) in courseData.groupedCourses)
+            // ✅ Run UI updates in the background
+            await Task.Run(() =>
             {
-                Label lblYear = new Label
+                Invoke(new Action(() =>
                 {
-                    Text = $"Year {year}",
-                    Font = new Font("Arial", 18, FontStyle.Bold),
-                    ForeColor = MMCMColors.Blue,
-                    Anchor = AnchorStyles.Left,  // ✅ Fix position instead of DockStyle.Top
-                    AutoSize = true,
-                    Padding = new Padding(5)
-                };
-                tableCourses.Controls.Add(lblYear, 0, row++);
+                    tableCourses.SuspendLayout(); // ✅ Freeze layout updates for performance
+                    tableCourses.Controls.Clear();
+                    tableCourses.RowStyles.Clear();
+                    tableCourses.ColumnCount = 2;
+                    tableCourses.AutoSize = true;
+                    tableCourses.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                    tableCourses.GrowStyle = TableLayoutPanelGrowStyle.AddRows;
 
-                // 🔹 Loop through Terms
-                foreach (var (term, courses) in terms)
-                {
-                    Label lblTerm = new Label
-                    {
-                        Text = $"Term {term}",
-                        Font = new Font("Arial", 15, FontStyle.Bold),
-                        ForeColor = MMCMColors.Red,
-                        Anchor = AnchorStyles.Left,  // ✅ Fix position instead of DockStyle.Top
-                        AutoSize = true,
-                        Padding = new Padding(5)
-                    };
-                    tableCourses.Controls.Add(lblTerm, 0, row++);
-                    tableCourses.SetColumnSpan(lblTerm, 2);
+                    int row = 0;
 
-                    // 🔹 Loop through Courses
-                    foreach (var course in courses)
+                    // 🔹 Loop through Years
+                    foreach (var (year, terms) in courseData.groupedCourses)
                     {
-                        AddCourseRow(course, completedCourses, ref row);
+                        Label lblYear = new Label
+                        {
+                            Text = $"Year {year}",
+                            Font = new Font("Arial", 18, FontStyle.Bold),
+                            ForeColor = MMCMColors.Blue,
+                            Anchor = AnchorStyles.Left,
+                            AutoSize = true,
+                            Padding = new Padding(5)
+                        };
+                        tableCourses.Controls.Add(lblYear, 0, row++);
+
+                        // 🔹 Loop through Terms
+                        foreach (var (term, courses) in terms)
+                        {
+                            Label lblTerm = new Label
+                            {
+                                Text = $"Term {term}",
+                                Font = new Font("Arial", 15, FontStyle.Bold),
+                                ForeColor = MMCMColors.Red,
+                                Anchor = AnchorStyles.Left,
+                                AutoSize = true,
+                                Padding = new Padding(5)
+                            };
+                            tableCourses.Controls.Add(lblTerm, 0, row++);
+                            tableCourses.SetColumnSpan(lblTerm, 2);
+
+                            // 🔹 Loop through Courses
+                            foreach (var course in courses)
+                            {
+                                AddCourseRow(course, completedCourses, ref row);
+                            }
+                        }
                     }
-                }
-            }
 
-            // 🔹 Display Electives
-            if (courseData.electives.Any())
-            {
-                Label lblElectives = new Label
-                {
-                    Text = "Elective Courses",
-                    Font = new Font("Arial", 18, FontStyle.Bold),
-                    ForeColor = MMCMColors.Blue,
-                    Anchor = AnchorStyles.Left,
-                    AutoSize = true,
-                    Padding = new Padding(10)
-                };
-                tableCourses.Controls.Add(lblElectives, 0, row++);
-                tableCourses.SetColumnSpan(lblElectives, 2);
+                    // 🔹 Display Electives
+                    if (courseData.electives.Any())
+                    {
+                        Label lblElectives = new Label
+                        {
+                            Text = "Elective Courses",
+                            Font = new Font("Arial", 18, FontStyle.Bold),
+                            ForeColor = MMCMColors.Blue,
+                            Anchor = AnchorStyles.Left,
+                            AutoSize = true,
+                            Padding = new Padding(10)
+                        };
+                        tableCourses.Controls.Add(lblElectives, 0, row++);
+                        tableCourses.SetColumnSpan(lblElectives, 2);
 
-                foreach (var elective in courseData.electives)
-                {
-                    AddCourseRow(elective, completedCourses, ref row);
-                }
-            }
+                        foreach (var elective in courseData.electives)
+                        {
+                            AddCourseRow(elective, completedCourses, ref row);
+                        }
+                    }
 
-
-            //progressBar.Visible = false; // Hide progress indicator
-            tableCourses.BringToFront();
-            tableCourses.Visible = true; // Show courses
+                    tableCourses.ResumeLayout(); // ✅ Resume layout updates for performance
+                    tableCourses.BringToFront();
+                    tableCourses.Visible = true; // ✅ Show courses after everything is added
+                    progressBar.Visible = false; // ✅ Hide progress bar when done
+                }));
+            });
         }
+
+
+
+
 
         // 🔥 Helper Method to Add a Course Row (Handles Regular & Elective Courses)
         private void AddCourseRow(CourseNode course, HashSet<string> completedCourses, ref int row)
