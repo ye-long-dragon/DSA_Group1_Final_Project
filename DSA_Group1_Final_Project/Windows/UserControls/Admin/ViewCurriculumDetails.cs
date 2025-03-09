@@ -279,22 +279,24 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
                 Padding = new Padding(5),
                 TextAlign = ContentAlignment.MiddleLeft
             };
+            if (r == "Admin") { 
+                CheckBox chkCourse = new CheckBox
+                {
+                    AutoSize = true,
+                    Padding = new Padding(5),
+                    Checked = completedCourses.Contains(course.Code), // ✅ Check if course is completed
+                    Dock = DockStyle.Left
+                };
 
-            CheckBox chkCourse = new CheckBox
-            {
-                AutoSize = true,
-                Padding = new Padding(5),
-                Checked = completedCourses.Contains(course.Code), // ✅ Check if course is completed
-                Dock = DockStyle.Left
-            };
+                chkCourse.CheckedChanged += async (s, e) =>
+                {
+                    await firestoreService.UpdateCompletedCourses(student.StudentID, course.Code, chkCourse.Checked);
+                };
 
-            chkCourse.CheckedChanged += async (s, e) =>
-            {
-                await firestoreService.UpdateCompletedCourses(student.StudentID, course.Code, chkCourse.Checked);
-            };
-
+                tableCourses.Controls.Add(chkCourse, 1, row); // Add Checkbox to second column
+            }
             tableCourses.Controls.Add(lblCourse, 0, row); // Add Label to first column
-            tableCourses.Controls.Add(chkCourse, 1, row); // Add Checkbox to second column
+
             row++; // Move to next row
         }
 

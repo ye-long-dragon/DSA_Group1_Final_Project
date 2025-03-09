@@ -106,7 +106,6 @@ namespace DSA_Group1_Final_Project
         private void btnCourseList_Click_1(object sender, EventArgs e)
         {
             ViewCurriculumDetails courseList = new ViewCurriculumDetails(student, "Student");
-            courseList.Dock = DockStyle.Fill;
             pnlMain.Controls.Clear();
             pnlMain.Controls.Add(courseList);
         }
@@ -114,7 +113,6 @@ namespace DSA_Group1_Final_Project
         private void btnAvailableCourses_Click(object sender, EventArgs e)
         {
             AdminNextAvailableCourses adminNextAvailableCourses = new AdminNextAvailableCourses(student, "");
-            adminNextAvailableCourses.Dock = DockStyle.Fill;
             pnlMain.Controls.Clear();
             pnlMain.Controls.Add(adminNextAvailableCourses);
 
