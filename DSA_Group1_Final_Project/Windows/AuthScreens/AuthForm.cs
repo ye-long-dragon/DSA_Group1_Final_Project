@@ -1,8 +1,4 @@
-﻿using DSA_Group1_Final_Project.Windows.UserControls.Auth;
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-
+﻿
 namespace DSA_Group1_Final_Project.Windows.AuthScreens
 {
     public partial class AuthForm : Form
