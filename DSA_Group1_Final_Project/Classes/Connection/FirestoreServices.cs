@@ -21,7 +21,7 @@ namespace DSA_Group1_Final_Project.Classes.Connection
             if (!FirebaseApp.DefaultInstance.Equals(null))
             {
                 db = FirestoreDb.Create("mmcm-curriculum-tracker-app");
-                Debug.WriteLine("Connected to Firestore.");
+                //Debug.WriteLine("Connected to Firestore.");
             }
             else
             {
@@ -31,53 +31,84 @@ namespace DSA_Group1_Final_Project.Classes.Connection
 
         public async Task<List<StudentDocument>> GetAllStudentsAsync()
         {
-            Debug.WriteLine("Fetching all students from Firestore...");
-            List<StudentDocument> students = new List<StudentDocument>();
+            //Debug.WriteLine("Fetching all students from Firestore...");
 
             try
             {
                 CollectionReference studentsCollection = db.Collection("students");
                 QuerySnapshot snapshot = await studentsCollection.GetSnapshotAsync();
 
-                Debug.WriteLine($"Successfully fetched {snapshot.Count} students.");
+                //Debug.WriteLine($"Successfully fetched {snapshot.Count} students.");
 
-                foreach (DocumentSnapshot document in snapshot.Documents)
+                // ✅ Pre-allocate list size for performance improvement
+                List<StudentDocument> students = new List<StudentDocument>(snapshot.Count);
+
+                // ✅ Use StringBuilder for efficient batch logging
+                StringBuilder logBuilder = new StringBuilder();
+
+                // ✅ Use Parallel.ForEach for faster processing (Avoids async inside loop)
+                Parallel.ForEach(snapshot.Documents, document =>
                 {
                     try
                     {
-                        StudentDocument student = new StudentDocument
+                        Dictionary<string, object> data = document.ToDictionary();
+
+                        // ✅ Faster dictionary lookup with TryGetValue
+                        string studentID = document.Id;
+                        string userID = data.TryGetValue("userID", out var uid) ? uid as string ?? "" : "";
+                        string name = data.TryGetValue("name", out var n) ? n as string ?? "Unknown" : "Unknown";
+                        string email = data.TryGetValue("email", out var em) ? em as string ?? "" : "";
+                        string studentNumber = data.TryGetValue("studentNumber", out var sn) ? sn as string ?? "" : "";
+                        string program = data.TryGetValue("program", out var pr) ? pr as string ?? "" : "";
+                        int termEnrolling = data.TryGetValue("termEnrolling", out var te) && te is long t ? (int)t : 1;
+                        string curriculum = data.TryGetValue("curriculum", out var cur) ? cur as string ?? "" : "";
+                        List<string> completedCourses = data.TryGetValue("completedCourses", out var cc) && cc is List<object> list
+                            ? list.Cast<string>().ToList()
+                            : new List<string>();
+                        string approvalStatus = data.TryGetValue("approvalStatus", out var asv) ? asv as string ?? "" : "";
+
+                        var student = new StudentDocument
                         {
-                            StudentID = document.Id, // Firestore Document ID
-                            UserID = document.ContainsField("userID") ? document.GetValue<string>("userID") : "",
-                            Name = document.ContainsField("name") ? document.GetValue<string>("name") : "Unknown",
-                            Email = document.ContainsField("email") ? document.GetValue<string>("email") : "",
-                            StudentNumber = document.ContainsField("studentNumber") ? document.GetValue<string>("studentNumber") : "",
-                            Program = document.ContainsField("program") ? document.GetValue<string>("program") : "",
-                            TermEnrolling = document.ContainsField("termEnrolling") ? document.GetValue<int>("termEnrolling") : 1,
-                            Curriculum = document.ContainsField("curriculum") ? document.GetValue<string>("curriculum") : "",
-                            CompletedCourses = document.ContainsField("completedCourses") ? document.GetValue<List<string>>("completedCourses") : new List<string>(),
-                            ApprovalStatus = document.ContainsField("approvalStatus") ? document.GetValue<string>("approvalStatus") : ""
+                            StudentID = studentID,
+                            UserID = userID,
+                            Name = name,
+                            Email = email,
+                            StudentNumber = studentNumber,
+                            Program = program,
+                            TermEnrolling = termEnrolling,
+                            Curriculum = curriculum,
+                            CompletedCourses = completedCourses,
+                            ApprovalStatus = approvalStatus
                         };
 
-                        Debug.WriteLine($"Fetched Student ID: {student.StudentID}, Name: {student.Name}, Email: {student.Email}, ApprovalStatus: {student.ApprovalStatus}");
+                        // ✅ Use thread-safe collection for parallel execution
+                        lock (students)
+                        {
+                            students.Add(student);
+                        }
 
-                        students.Add(student);
+                        // ✅ Add logs to StringBuilder instead of logging per iteration
+                        logBuilder.AppendLine($"Fetched Student ID: {student.StudentID}, Name: {student.Name}, Email: {student.Email}, ApprovalStatus: {student.ApprovalStatus}");
                     }
                     catch (Exception e)
                     {
-                        Debug.WriteLine($"Failed to map student fields: {document.Id}, Error: {e.Message}");
+                        //Debug.WriteLine($"⚠️ Failed to map student fields: {document.Id}, Error: {e.Message}");
                     }
+                });
 
-                    Debug.WriteLine($"Total students after filtering: {students.Count}");
-                }
+                // ✅ Batch log after loop to reduce I/O slowdown
+                //Debug.WriteLine(logBuilder.ToString());
+
+                //Debug.WriteLine($"Total students after filtering: {students.Count}");
+                return students;
             }
             catch (Exception e)
             {
-                Debug.WriteLine($"Error fetching students: {e.Message}");
+                //Debug.WriteLine($"❌ Error fetching students: {e.Message}");
+                return new List<StudentDocument>(); // Return an empty list to prevent failures
             }
-
-            return students;
         }
+
 
         // 🔥 Function to update a specific student field
         public async Task UpdateStudentField(string studentId, string fieldName, object newValue)
@@ -153,7 +184,8 @@ namespace DSA_Group1_Final_Project.Classes.Connection
 
         public async Task<CourseGraph> GetCurriculumCourses(string curriculumId)
         {
-            var groupedCourses = new Dictionary<int, Dictionary<int, List<CourseNode>>>();
+            // ✅ Use SortedDictionary to maintain order
+            var groupedCourses = new SortedDictionary<int, SortedDictionary<int, List<CourseNode>>>();
             var electiveCourses = new List<CourseNode>();
             var studentCurriculum = GetCurriculumString(curriculumId);
 
@@ -163,12 +195,12 @@ namespace DSA_Group1_Final_Project.Classes.Connection
 
             // 🔹 Map of elective categories based on curriculumId
             Dictionary<string, List<string>> electiveCategories = new Dictionary<string, List<string>>
-            {
-                { "1", new List<string> { "AWS171P", "EMSY171P", "GEN_ED", "MACH171P", "MICR172P", "NETA172P", "SDEV173P", "SNAD174P" } },
-                { "2", new List<string> { "ADVANCED_ELECTRICAL_SYSTEMS_DESIGN", "ADVANCED_POWER_SYSTEMS", "ADVANCED_SYSTEM_DESIGN", "AGRICULTURAL_ENGINEERING", "GEN_ED", "MECHATRONICS", "OPEN_ELECTIVE" } },
-                { "3", new List<string> { "AWS171P", "EMSY171P", "GEN_ED", "MACH171P", "MICR172P", "NETA172P", "SDEV173P", "SNAD174P" } },
-                { "4", new List<string> { "ECE137P", "ECE110P", "ECE154P", "ECE152P", "SNAD175P", "NETA172P", "AWS171P", "ECE194", "NETA173P", "ECE166P", "ECE153", "ECE118P", "ECE127", "AENG", "GEN_ED" } }
-            };
+    {
+        { "1", new List<string> { "AWS171P", "EMSY171P", "GEN_ED", "MACH171P", "MICR172P", "NETA172P", "SDEV173P", "SNAD174P" } },
+        { "2", new List<string> { "ADVANCED_ELECTRICAL_SYSTEMS_DESIGN", "ADVANCED_POWER_SYSTEMS", "ADVANCED_SYSTEM_DESIGN", "AGRICULTURAL_ENGINEERING", "GEN_ED", "MECHATRONICS", "OPEN_ELECTIVE" } },
+        { "3", new List<string> { "AWS171P", "EMSY171P", "GEN_ED", "MACH171P", "MICR172P", "NETA172P", "SDEV173P", "SNAD174P" } },
+        { "4", new List<string> { "ECE137P", "ECE110P", "ECE154P", "ECE152P", "SNAD175P", "NETA172P", "AWS171P", "ECE194", "NETA173P", "ECE166P", "ECE153", "ECE118P", "ECE127", "AENG", "GEN_ED" } }
+    };
 
             try
             {
@@ -196,8 +228,22 @@ namespace DSA_Group1_Final_Project.Classes.Connection
                 // ✅ Wait for all tasks to complete
                 await Task.WhenAll(fetchTasks);
 
-                // 🔹 Return the structured course graph
-                return new CourseGraph(groupedCourses, electiveCourses);
+                // ✅ Sort courses before returning (final safeguard)
+                foreach (var year in groupedCourses.Keys)
+                {
+                    foreach (var term in groupedCourses[year].Keys)
+                    {
+                        groupedCourses[year][term].Sort((a, b) => a.Code.CompareTo(b.Code)); // Sort courses alphabetically
+                    }
+                }
+
+                // Convert SortedDictionary to Dictionary
+                var normalDictionary = groupedCourses.ToDictionary(
+                    year => year.Key,
+                    year => (Dictionary<int, List<CourseNode>>)year.Value.ToDictionary(term => term.Key, term => term.Value)
+                );
+
+                return new CourseGraph(normalDictionary, electiveCourses);
 
 
                 /// =============================================
@@ -221,7 +267,7 @@ namespace DSA_Group1_Final_Project.Classes.Connection
                         lock (groupedCourses) // Prevent race conditions
                         {
                             if (!groupedCourses.ContainsKey(year))
-                                groupedCourses[year] = new Dictionary<int, List<CourseNode>>();
+                                groupedCourses[year] = new SortedDictionary<int, List<CourseNode>>();
 
                             if (!groupedCourses[year].ContainsKey(term))
                                 groupedCourses[year][term] = new List<CourseNode>();
@@ -326,6 +372,7 @@ namespace DSA_Group1_Final_Project.Classes.Connection
 
 
 
+
         public async Task UpdateCompletedCourses(string studentId, string courseCode, bool isChecked)
         {
             try
@@ -348,16 +395,16 @@ namespace DSA_Group1_Final_Project.Classes.Connection
 
                     // 🔹 Update Firestore with modified list
                     await studentRef.UpdateAsync("completedCourses", completedCourses);
-                    Debug.WriteLine($"✅ Updated completedCourses for {studentId}: {string.Join(", ", completedCourses)}");
+                    //Debug.WriteLine($"✅ Updated completedCourses for {studentId}: {string.Join(", ", completedCourses)}");
                 }
                 else
                 {
-                    Debug.WriteLine($"⚠ Student {studentId} not found in Firestore.");
+                    //Debug.WriteLine($"⚠ Student {studentId} not found in Firestore.");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ Error updating completed courses: {ex.Message}");
+                //Console.WriteLine($"❌ Error updating completed courses: {ex.Message}");
             }
         }
 
@@ -367,31 +414,31 @@ namespace DSA_Group1_Final_Project.Classes.Connection
 
         public async Task<List<(CourseNode, string)>> GetAvailableCoursesStudent(StudentDocument student, int selectedTerm)
         {
-            Debug.WriteLine($"FirestoreService: Starting computeAvailableCourses() for Student:{student.Name}, Term: {selectedTerm}");
+            //Debug.WriteLine($"FirestoreService: Starting computeAvailableCourses() for Student:{student.Name}, Term: {selectedTerm}");
 
             // Ensure courseGraph is available
             if (courseGraph == null)
             {
-                Debug.WriteLine("FirestoreService: Course graph is null, retrieving from Firestore...");
+                //Debug.WriteLine("FirestoreService: Course graph is null, retrieving from Firestore...");
                 courseGraph = await GetCurriculumCourses(student.Curriculum); // Fetch curriculum graph from Firestore
             }
 
             if (courseGraph != null)
             {
-                Debug.WriteLine($"FirestoreService: Course graph for student {student.Name} successfully retrieved.");
+                //Debug.WriteLine($"FirestoreService: Course graph for student {student.Name} successfully retrieved.");
 
                 // Fetch completed courses for the student from the student object
                 var studentCompletedCourses = new HashSet<string>(student.CompletedCourses);
-                Debug.WriteLine($"FirestoreService: Retrieved completed courses for Student ID: {student.Name} from local reference.");
-                Debug.WriteLine($"FirestoreService: Student {student.Name}'s Completed Courses: {string.Join(", ", studentCompletedCourses)}");
+                //Debug.WriteLine($"FirestoreService: Retrieved completed courses for Student ID: {student.Name} from local reference.");
+                //Debug.WriteLine($"FirestoreService: Student {student.Name}'s Completed Courses: {string.Join(", ", studentCompletedCourses)}");
 
                 // Fetch next available courses based on completed courses and selected term
-                Debug.WriteLine($"FirestoreService: Fetching next available courses for Term {selectedTerm}...");
+                //Debug.WriteLine($"FirestoreService: Fetching next available courses for Term {selectedTerm}...");
                 availableCourses = courseGraph.GetNextAvailableCourses(selectedTerm, studentCompletedCourses);
             }
             else
             {
-                Debug.WriteLine("FirestoreService: Course graph is null even after waiting, returning empty list.");
+                //Debug.WriteLine("FirestoreService: Course graph is null even after waiting, returning empty list.");
                 availableCourses = new List<(CourseNode, string)>();
             }
 
