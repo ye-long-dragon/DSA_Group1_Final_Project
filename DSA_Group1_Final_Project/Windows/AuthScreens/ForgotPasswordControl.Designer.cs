@@ -28,30 +28,67 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-
-            // Initialize Guna2TextBox for email
-            this.txtEmail = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtEmail.Location = new System.Drawing.Point(20, 20); // Set appropriate location
-            this.txtEmail.Size = new System.Drawing.Size(200, 36); // Set appropriate size
-            this.txtEmail.PlaceholderText = "Enter your email"; // Optional placeholder text
-            this.Controls.Add(this.txtEmail);
-            // Initialize btnChange using Guna2Button
-            this.btnChange = new Guna.UI2.WinForms.Guna2Button();
-            this.btnChange.Location = new System.Drawing.Point(20, 70); // Set appropriate location
-            this.btnChange.Size = new System.Drawing.Size(200, 36); // Set appropriate size
-            this.btnChange.Text = "Change Password";
-            this.btnChange.Click += new System.EventHandler(this.btnChange_Click);
-            this.Controls.Add(this.btnChange);
-
-            // Initialize btnBackToLogin using Guna2Button
-            this.btnBackToLogin = new Guna.UI2.WinForms.Guna2Button();
-            this.btnBackToLogin.Location = new System.Drawing.Point(20, 120); // Set appropriate location
-            this.btnBackToLogin.Size = new System.Drawing.Size(200, 36); // Set appropriate size
-            this.btnBackToLogin.Text = "Back to Login";
-            this.btnBackToLogin.Click += new System.EventHandler(this.btnBackToLogin_Click);
-            this.Controls.Add(this.btnBackToLogin);
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            txtEmail = new Guna.UI2.WinForms.Guna2TextBox();
+            btnChange = new Guna.UI2.WinForms.Guna2Button();
+            btnBackToLogin = new Guna.UI2.WinForms.Guna2Button();
+            SuspendLayout();
+            // 
+            // txtEmail
+            // 
+            txtEmail.CustomizableEdges = customizableEdges1;
+            txtEmail.DefaultText = "";
+            txtEmail.Font = new Font("Segoe UI", 9F);
+            txtEmail.Location = new Point(20, 20);
+            txtEmail.Name = "txtEmail";
+            txtEmail.PasswordChar = '\0';
+            txtEmail.PlaceholderText = "Enter your email";
+            txtEmail.SelectedText = "";
+            txtEmail.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            txtEmail.Size = new Size(200, 36);
+            txtEmail.TabIndex = 0;
+            // 
+            // btnChange
+            // 
+            btnChange.CustomizableEdges = customizableEdges3;
+            btnChange.Font = new Font("Segoe UI", 9F);
+            btnChange.ForeColor = Color.White;
+            btnChange.Location = new Point(20, 70);
+            btnChange.Name = "btnChange";
+            btnChange.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnChange.Size = new Size(200, 36);
+            btnChange.TabIndex = 1;
+            btnChange.Text = "Change Password";
+            btnChange.Click += btnChange_Click;
+            // 
+            // btnBackToLogin
+            // 
+            btnBackToLogin.CustomizableEdges = customizableEdges5;
+            btnBackToLogin.Font = new Font("Segoe UI", 9F);
+            btnBackToLogin.ForeColor = Color.White;
+            btnBackToLogin.Location = new Point(20, 120);
+            btnBackToLogin.Name = "btnBackToLogin";
+            btnBackToLogin.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            btnBackToLogin.Size = new Size(200, 36);
+            btnBackToLogin.TabIndex = 2;
+            btnBackToLogin.Text = "Back to Login";
+            btnBackToLogin.Click += btnBackToLogin_Click;
+            // 
+            // ForgotPasswordControl
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(txtEmail);
+            Controls.Add(btnChange);
+            Controls.Add(btnBackToLogin);
+            Name = "ForgotPasswordControl";
+            Size = new Size(242, 177);
+            ResumeLayout(false);
         }
 
 

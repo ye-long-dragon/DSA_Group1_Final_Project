@@ -39,5 +39,10 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Student
             MainScreen mainScreen = (MainScreen)Parent.Parent.Parent.Parent;
             mainScreen.LoadUserControl(viewCurriculumDetails);
         }
+
+        private void lblName_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -18,45 +18,54 @@
 
         private void InitializeComponent()
         {
-            this.lblOTP = new System.Windows.Forms.Label();
-            this.txtOTP = new System.Windows.Forms.TextBox();
-            this.btnVerify = new System.Windows.Forms.Button();
-            this.SuspendLayout();
-
+            lblOTP = new Label();
+            txtOTP = new TextBox();
+            btnVerify = new Button();
+            SuspendLayout();
+            // 
             // lblOTP
-            this.lblOTP.AutoSize = true;
-            this.lblOTP.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblOTP.Location = new System.Drawing.Point(30, 20);
-            this.lblOTP.Name = "lblOTP";
-            this.lblOTP.Size = new System.Drawing.Size(75, 20);
-            this.lblOTP.Text = "Enter OTP:";
-
+            // 
+            lblOTP.AutoSize = true;
+            lblOTP.Font = new Font("Segoe UI", 10F);
+            lblOTP.Location = new Point(17, 34);
+            lblOTP.Name = "lblOTP";
+            lblOTP.Size = new Size(73, 19);
+            lblOTP.TabIndex = 0;
+            lblOTP.Text = "Enter OTP:";
+            // 
             // txtOTP
-            this.txtOTP.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtOTP.Location = new System.Drawing.Point(30, 50);
-            this.txtOTP.MaxLength = 6;
-            this.txtOTP.Size = new System.Drawing.Size(200, 25);
-
+            // 
+            txtOTP.Font = new Font("Segoe UI", 10F);
+            txtOTP.Location = new Point(96, 34);
+            txtOTP.MaxLength = 6;
+            txtOTP.Name = "txtOTP";
+            txtOTP.Size = new Size(145, 25);
+            txtOTP.TabIndex = 1;
+            // 
             // btnVerify
-            this.btnVerify.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnVerify.Location = new System.Drawing.Point(30, 90);
-            this.btnVerify.Size = new System.Drawing.Size(100, 30);
-            this.btnVerify.Text = "Verify";
-            this.btnVerify.Click += new System.EventHandler(this.btnVerify_Click);
-
+            // 
+            btnVerify.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnVerify.Location = new Point(153, 91);
+            btnVerify.Name = "btnVerify";
+            btnVerify.Size = new Size(88, 28);
+            btnVerify.TabIndex = 2;
+            btnVerify.Text = "Verify";
+            btnVerify.Click += btnVerify_Click;
+            // 
             // VerifyOTPForm
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(300, 150);
-            this.Controls.Add(this.lblOTP);
-            this.Controls.Add(this.txtOTP);
-            this.Controls.Add(this.btnVerify);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "VerifyOTPForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Verify OTP";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(262, 141);
+            Controls.Add(lblOTP);
+            Controls.Add(txtOTP);
+            Controls.Add(btnVerify);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            Name = "VerifyOTPForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Verify OTP";
+            ResumeLayout(false);
+            PerformLayout();
         }
     }
 }

@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentMasterList));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             btnRefresh = new Guna.UI2.WinForms.Guna2ImageButton();
             lblTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -44,12 +44,13 @@
             guna2CustomGradientPanel1.Controls.Add(btnRefresh);
             guna2CustomGradientPanel1.Controls.Add(lblTitle);
             guna2CustomGradientPanel1.Controls.Add(flpStudentList);
-            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges5;
+            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges2;
             guna2CustomGradientPanel1.Dock = DockStyle.Fill;
             guna2CustomGradientPanel1.Location = new Point(0, 0);
+            guna2CustomGradientPanel1.Margin = new Padding(3, 2, 3, 2);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
-            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2CustomGradientPanel1.Size = new Size(1136, 896);
+            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges3;
+            guna2CustomGradientPanel1.Size = new Size(994, 672);
             guna2CustomGradientPanel1.TabIndex = 0;
             // 
             // btnRefresh
@@ -60,11 +61,12 @@
             btnRefresh.Image = (Image)resources.GetObject("btnRefresh.Image");
             btnRefresh.ImageOffset = new Point(0, 0);
             btnRefresh.ImageRotate = 0F;
-            btnRefresh.Location = new Point(946, 31);
+            btnRefresh.Location = new Point(889, 21);
+            btnRefresh.Margin = new Padding(3, 2, 3, 2);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.PressedState.ImageSize = new Size(64, 64);
-            btnRefresh.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnRefresh.Size = new Size(80, 68);
+            btnRefresh.ShadowDecoration.CustomizableEdges = customizableEdges1;
+            btnRefresh.Size = new Size(56, 51);
             btnRefresh.TabIndex = 3;
             btnRefresh.Click += btnRefresh_Click;
             // 
@@ -72,9 +74,10 @@
             // 
             lblTitle.BackColor = Color.Transparent;
             lblTitle.Font = new Font("Segoe UI", 26.25F, FontStyle.Bold);
-            lblTitle.Location = new Point(44, 31);
+            lblTitle.Location = new Point(38, 23);
+            lblTitle.Margin = new Padding(3, 2, 3, 2);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(407, 62);
+            lblTitle.Size = new Size(326, 49);
             lblTitle.TabIndex = 2;
             lblTitle.Text = "Student Master List";
             // 
@@ -82,18 +85,20 @@
             // 
             flpStudentList.AutoScroll = true;
             flpStudentList.BackColor = SystemColors.ActiveCaption;
-            flpStudentList.Location = new Point(44, 120);
+            flpStudentList.Location = new Point(38, 90);
+            flpStudentList.Margin = new Padding(3, 2, 3, 2);
             flpStudentList.Name = "flpStudentList";
-            flpStudentList.Size = new Size(1037, 736);
+            flpStudentList.Size = new Size(907, 552);
             flpStudentList.TabIndex = 1;
             // 
             // StudentMasterList
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(guna2CustomGradientPanel1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "StudentMasterList";
-            Size = new Size(1136, 896);
+            Size = new Size(994, 672);
             Load += StudentMasterList_Load;
             guna2CustomGradientPanel1.ResumeLayout(false);
             guna2CustomGradientPanel1.PerformLayout();

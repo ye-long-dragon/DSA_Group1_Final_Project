@@ -67,13 +67,13 @@ namespace DSA_Group1_Final_Project
                 btnCourseList.Visible = false;
                 lblScreenView.Text = "Admin Dashboard";
 
-                btnStudentMasterList.Location = new Point(0, 335);
+                btnStudentMasterList.Location = new Point(0, 205);
 
-                btnDevelopers.Location = new Point(0, 335 + 62);
-                lblSettings.Location = new Point(6, 397 + 62);
-                btnProfile.Location = new Point(0, 481 + 62);
-                btnSettings.Location = new Point(0, 531 + 62);
-                btnLogout.Location = new Point(0, 593 + 62);
+                btnDevelopers.Location = new Point(0, 251);
+                lblSettings.Location = new Point(3, 306);
+                btnProfile.Location = new Point(0, 338);
+                btnSettings.Location = new Point(0, 384);
+                btnLogout.Location = new Point(0, 430);
 
                 homeAdmin homeAdmin = new homeAdmin(instance, userId);
                 homeAdmin.Dock = DockStyle.Fill;
@@ -87,13 +87,13 @@ namespace DSA_Group1_Final_Project
 
                 btnStudentMasterList.Visible = false;
 
-                btnAvailableCourses.Location = new Point(0, 273);
-                btnCourseList.Location = new Point(0, 335);
-                btnDevelopers.Location = new Point(0, 397);
-                lblSettings.Location = new Point(6, 481);
-                btnProfile.Location = new Point(0, 531);
-                btnSettings.Location = new Point(0, 593);
-                btnLogout.Location = new Point(0, 655);
+                btnAvailableCourses.Location = new Point(0, 204);
+                btnCourseList.Location = new Point(0, 250);
+                btnDevelopers.Location = new Point(0, 296);
+                lblSettings.Location = new Point(3, 351);
+                btnProfile.Location = new Point(0, 382);
+                btnSettings.Location = new Point(0, 428);
+                btnLogout.Location = new Point(0, 474);
 
                 homeStudent homeStudent = new homeStudent(student, r);
                 homeStudent.Dock = DockStyle.Fill;

@@ -277,5 +277,10 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             base.OnFormClosing(e);
             Application.Exit();
         }
+
+        private void ChooseCurriculumForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

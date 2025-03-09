@@ -40,6 +40,7 @@
             // 
             // btnUpdate
             // 
+            btnUpdate.BorderRadius = 15;
             btnUpdate.CustomizableEdges = customizableEdges1;
             btnUpdate.DisabledState.BorderColor = Color.DarkGray;
             btnUpdate.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -47,10 +48,11 @@
             btnUpdate.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnUpdate.Font = new Font("Segoe UI", 9F);
             btnUpdate.ForeColor = Color.White;
-            btnUpdate.Location = new Point(97, 259);
+            btnUpdate.Location = new Point(89, 206);
+            btnUpdate.Margin = new Padding(3, 2, 3, 2);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btnUpdate.Size = new Size(623, 56);
+            btnUpdate.Size = new Size(545, 42);
             btnUpdate.TabIndex = 9;
             btnUpdate.Text = "Update";
             btnUpdate.Click += btnUpdate_Click;
@@ -58,36 +60,40 @@
             // name
             // 
             name.BackColor = Color.Transparent;
-            name.Location = new Point(176, 98);
+            name.Location = new Point(158, 86);
+            name.Margin = new Padding(3, 2, 3, 2);
             name.Name = "name";
-            name.Size = new Size(121, 22);
+            name.Size = new Size(97, 17);
             name.TabIndex = 7;
             name.Text = "guna2HtmlLabel1";
             // 
             // lblStatus
             // 
             lblStatus.BackColor = Color.Transparent;
-            lblStatus.Location = new Point(80, 147);
+            lblStatus.Location = new Point(74, 122);
+            lblStatus.Margin = new Padding(3, 2, 3, 2);
             lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(63, 22);
+            lblStatus.Size = new Size(52, 17);
             lblStatus.TabIndex = 6;
             lblStatus.Text = "Program: ";
             // 
             // lblName
             // 
             lblName.BackColor = Color.Transparent;
-            lblName.Location = new Point(80, 98);
+            lblName.Location = new Point(74, 86);
+            lblName.Margin = new Padding(3, 2, 3, 2);
             lblName.Name = "lblName";
-            lblName.Size = new Size(46, 22);
+            lblName.Size = new Size(38, 17);
             lblName.TabIndex = 5;
             lblName.Text = "Name:";
             // 
             // rbtnApproved
             // 
             rbtnApproved.AutoSize = true;
-            rbtnApproved.Location = new Point(214, 147);
+            rbtnApproved.Location = new Point(191, 122);
+            rbtnApproved.Margin = new Padding(3, 2, 3, 2);
             rbtnApproved.Name = "rbtnApproved";
-            rbtnApproved.Size = new Size(96, 24);
+            rbtnApproved.Size = new Size(77, 19);
             rbtnApproved.TabIndex = 10;
             rbtnApproved.TabStop = true;
             rbtnApproved.Text = "Approved";
@@ -97,18 +103,19 @@
             // rbtnPending
             // 
             rbtnPending.AutoSize = true;
-            rbtnPending.Location = new Point(430, 147);
+            rbtnPending.Location = new Point(380, 122);
+            rbtnPending.Margin = new Padding(3, 2, 3, 2);
             rbtnPending.Name = "rbtnPending";
-            rbtnPending.Size = new Size(83, 24);
+            rbtnPending.Size = new Size(69, 19);
             rbtnPending.TabIndex = 11;
             rbtnPending.TabStop = true;
             rbtnPending.Text = "Pending";
             rbtnPending.UseVisualStyleBackColor = true;
-            rbtnPending.CheckedChanged += this.rbtnPending_CheckedChanged;
+            rbtnPending.CheckedChanged += rbtnPending_CheckedChanged;
             // 
             // UpdateApproval
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(rbtnPending);
             Controls.Add(rbtnApproved);
@@ -116,8 +123,9 @@
             Controls.Add(name);
             Controls.Add(lblStatus);
             Controls.Add(lblName);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "UpdateApproval";
-            Size = new Size(800, 413);
+            Size = new Size(700, 310);
             ResumeLayout(false);
             PerformLayout();
         }

@@ -47,52 +47,58 @@
             // guna2CirclePictureBox1
             // 
             guna2CirclePictureBox1.ImageRotate = 0F;
-            guna2CirclePictureBox1.Location = new Point(480, 92);
+            guna2CirclePictureBox1.Location = new Point(440, 113);
+            guna2CirclePictureBox1.Margin = new Padding(3, 2, 3, 2);
             guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
             guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges1;
             guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CirclePictureBox1.Size = new Size(151, 147);
+            guna2CirclePictureBox1.Size = new Size(132, 110);
             guna2CirclePictureBox1.TabIndex = 0;
             guna2CirclePictureBox1.TabStop = false;
             // 
             // lblName
             // 
             lblName.BackColor = Color.Transparent;
-            lblName.Location = new Point(114, 309);
+            lblName.Location = new Point(120, 276);
+            lblName.Margin = new Padding(3, 2, 3, 2);
             lblName.Name = "lblName";
-            lblName.Size = new Size(46, 22);
+            lblName.Size = new Size(38, 17);
             lblName.TabIndex = 1;
             lblName.Text = "Name:";
             // 
             // lblProgram
             // 
             lblProgram.BackColor = Color.Transparent;
-            lblProgram.Location = new Point(114, 389);
+            lblProgram.Location = new Point(120, 336);
+            lblProgram.Margin = new Padding(3, 2, 3, 2);
             lblProgram.Name = "lblProgram";
-            lblProgram.Size = new Size(63, 22);
+            lblProgram.Size = new Size(52, 17);
             lblProgram.TabIndex = 2;
             lblProgram.Text = "Program:";
             // 
             // lblDepartment
             // 
             lblDepartment.BackColor = Color.Transparent;
-            lblDepartment.Location = new Point(114, 468);
+            lblDepartment.Location = new Point(120, 395);
+            lblDepartment.Margin = new Padding(3, 2, 3, 2);
             lblDepartment.Name = "lblDepartment";
-            lblDepartment.Size = new Size(86, 22);
+            lblDepartment.Size = new Size(69, 17);
             lblDepartment.TabIndex = 3;
             lblDepartment.Text = "Department:";
             // 
             // lblCurriculum
             // 
             lblCurriculum.BackColor = Color.Transparent;
-            lblCurriculum.Location = new Point(114, 546);
+            lblCurriculum.Location = new Point(120, 454);
+            lblCurriculum.Margin = new Padding(3, 2, 3, 2);
             lblCurriculum.Name = "lblCurriculum";
-            lblCurriculum.Size = new Size(77, 22);
+            lblCurriculum.Size = new Size(66, 17);
             lblCurriculum.TabIndex = 4;
             lblCurriculum.Text = "Curriculum:";
             // 
             // btnChangeProfile
             // 
+            btnChangeProfile.BorderRadius = 18;
             btnChangeProfile.CustomizableEdges = customizableEdges2;
             btnChangeProfile.DisabledState.BorderColor = Color.DarkGray;
             btnChangeProfile.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -100,52 +106,57 @@
             btnChangeProfile.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnChangeProfile.Font = new Font("Segoe UI", 9F);
             btnChangeProfile.ForeColor = Color.White;
-            btnChangeProfile.Location = new Point(114, 667);
+            btnChangeProfile.Location = new Point(120, 544);
+            btnChangeProfile.Margin = new Padding(3, 2, 3, 2);
             btnChangeProfile.Name = "btnChangeProfile";
             btnChangeProfile.ShadowDecoration.CustomizableEdges = customizableEdges3;
-            btnChangeProfile.Size = new Size(898, 42);
+            btnChangeProfile.Size = new Size(786, 32);
             btnChangeProfile.TabIndex = 5;
             btnChangeProfile.Text = "Change Profile";
             // 
             // name
             // 
             name.BackColor = Color.Transparent;
-            name.Location = new Point(270, 310);
+            name.Location = new Point(256, 276);
+            name.Margin = new Padding(3, 2, 3, 2);
             name.Name = "name";
-            name.Size = new Size(121, 22);
+            name.Size = new Size(97, 17);
             name.TabIndex = 6;
             name.Text = "guna2HtmlLabel1";
             // 
             // program
             // 
             program.BackColor = Color.Transparent;
-            program.Location = new Point(270, 389);
+            program.Location = new Point(256, 336);
+            program.Margin = new Padding(3, 2, 3, 2);
             program.Name = "program";
-            program.Size = new Size(46, 22);
+            program.Size = new Size(38, 17);
             program.TabIndex = 7;
             program.Text = "Name:";
             // 
             // Department
             // 
             Department.BackColor = Color.Transparent;
-            Department.Location = new Point(270, 468);
+            Department.Location = new Point(256, 395);
+            Department.Margin = new Padding(3, 2, 3, 2);
             Department.Name = "Department";
-            Department.Size = new Size(46, 22);
+            Department.Size = new Size(38, 17);
             Department.TabIndex = 8;
             Department.Text = "Name:";
             // 
             // Curriculum
             // 
             Curriculum.BackColor = Color.Transparent;
-            Curriculum.Location = new Point(270, 546);
+            Curriculum.Location = new Point(256, 454);
+            Curriculum.Margin = new Padding(3, 2, 3, 2);
             Curriculum.Name = "Curriculum";
-            Curriculum.Size = new Size(46, 22);
+            Curriculum.Size = new Size(38, 17);
             Curriculum.TabIndex = 9;
             Curriculum.Text = "Name:";
             // 
             // StudentProfile
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(Curriculum);
             Controls.Add(Department);
@@ -157,8 +168,9 @@
             Controls.Add(lblProgram);
             Controls.Add(lblName);
             Controls.Add(guna2CirclePictureBox1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "StudentProfile";
-            Size = new Size(1136, 896);
+            Size = new Size(994, 672);
             ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

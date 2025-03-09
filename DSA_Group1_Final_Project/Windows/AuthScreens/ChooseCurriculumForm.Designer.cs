@@ -15,91 +15,100 @@
 
         private void InitializeComponent()
         {
-            this.nameTextBox = new System.Windows.Forms.TextBox();
-            this.lastNameTextBox = new System.Windows.Forms.TextBox();
-            this.curriculumComboBox = new System.Windows.Forms.ComboBox();
-            this.saveButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-
+            nameTextBox = new TextBox();
+            lastNameTextBox = new TextBox();
+            curriculumComboBox = new ComboBox();
+            saveButton = new Button();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            SuspendLayout();
             // 
             // nameTextBox
             // 
-            this.nameTextBox.Location = new System.Drawing.Point(120, 30);
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(200, 20);
-
+            nameTextBox.Location = new Point(140, 35);
+            nameTextBox.Margin = new Padding(4, 3, 4, 3);
+            nameTextBox.Name = "nameTextBox";
+            nameTextBox.Size = new Size(233, 23);
+            nameTextBox.TabIndex = 3;
             // 
             // lastNameTextBox
             // 
-            this.lastNameTextBox.Location = new System.Drawing.Point(120, 70);
-            this.lastNameTextBox.Name = "lastNameTextBox";
-            this.lastNameTextBox.Size = new System.Drawing.Size(200, 20);
-
+            lastNameTextBox.Location = new Point(140, 81);
+            lastNameTextBox.Margin = new Padding(4, 3, 4, 3);
+            lastNameTextBox.Name = "lastNameTextBox";
+            lastNameTextBox.Size = new Size(233, 23);
+            lastNameTextBox.TabIndex = 4;
             // 
             // curriculumComboBox
             // 
-            this.curriculumComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.curriculumComboBox.FormattingEnabled = true;
-            this.curriculumComboBox.Location = new System.Drawing.Point(120, 110);
-            this.curriculumComboBox.Name = "curriculumComboBox";
-            this.curriculumComboBox.Size = new System.Drawing.Size(200, 21);
-
+            curriculumComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            curriculumComboBox.FormattingEnabled = true;
+            curriculumComboBox.Location = new Point(140, 127);
+            curriculumComboBox.Margin = new Padding(4, 3, 4, 3);
+            curriculumComboBox.Name = "curriculumComboBox";
+            curriculumComboBox.Size = new Size(233, 23);
+            curriculumComboBox.TabIndex = 5;
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(120, 150);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(100, 30);
-            this.saveButton.Text = "Save";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
-
+            saveButton.Location = new Point(256, 174);
+            saveButton.Margin = new Padding(4, 3, 4, 3);
+            saveButton.Name = "saveButton";
+            saveButton.Size = new Size(117, 35);
+            saveButton.TabIndex = 6;
+            saveButton.Text = "Save";
+            saveButton.UseVisualStyleBackColor = true;
+            saveButton.Click += saveButton_Click;
             // 
-            // label1 (First Name)
+            // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 13);
-            this.label1.Text = "First Name:";
-
+            label1.AutoSize = true;
+            label1.Location = new Point(23, 35);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(67, 15);
+            label1.TabIndex = 0;
+            label1.Text = "First Name:";
             // 
-            // label2 (Last Name)
+            // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 70);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(58, 13);
-            this.label2.Text = "Last Name:";
-
+            label2.AutoSize = true;
+            label2.Location = new Point(23, 81);
+            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(66, 15);
+            label2.TabIndex = 1;
+            label2.Text = "Last Name:";
             // 
-            // label3 (Curriculum)
+            // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 110);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 13);
-            this.label3.Text = "Curriculum:";
-
+            label3.AutoSize = true;
+            label3.Location = new Point(23, 127);
+            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(70, 15);
+            label3.TabIndex = 2;
+            label3.Text = "Curriculum:";
             // 
             // ChooseCurriculumForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(350, 200);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.nameTextBox);
-            this.Controls.Add(this.lastNameTextBox);
-            this.Controls.Add(this.curriculumComboBox);
-            this.Controls.Add(this.saveButton);
-            this.Name = "ChooseCurriculumForm";
-            this.Text = "Choose Curriculum";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(408, 231);
+            Controls.Add(label1);
+            Controls.Add(label2);
+            Controls.Add(label3);
+            Controls.Add(nameTextBox);
+            Controls.Add(lastNameTextBox);
+            Controls.Add(curriculumComboBox);
+            Controls.Add(saveButton);
+            Margin = new Padding(4, 3, 4, 3);
+            Name = "ChooseCurriculumForm";
+            Text = "Choose Curriculum";
+            Load += ChooseCurriculumForm_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         private System.Windows.Forms.TextBox nameTextBox;

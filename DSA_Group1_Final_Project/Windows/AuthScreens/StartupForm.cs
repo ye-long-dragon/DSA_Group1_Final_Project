@@ -37,7 +37,7 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             {
                 SizeMode = PictureBoxSizeMode.Zoom,
                 Size = new Size(200, 100),
-                Location = new Point((Width - 200) / 2, padding)
+                Location = new Point((Width - 200) / 2, padding + 30)
             };
 
             // Load logo image with error handling
@@ -59,7 +59,7 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
                 Text = "MMCM CURRICULUM TRACKER",
                 AutoSize = true,
                 TextAlign = ContentAlignment.MiddleCenter,
-                Location = new Point(0, logoPictureBox.Bottom + padding),
+                Location = new Point(75, logoPictureBox.Bottom + padding + 30),
                 Width = this.Width
             };
             titleLabel.Font = new Font("Arial", 12, FontStyle.Bold);
@@ -73,7 +73,7 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             {
                 Style = ProgressBarStyle.Continuous,
                 Size = new Size(300, 20),
-                Location = new Point((Width - 300) / 2, titleLabel.Bottom + padding),
+                Location = new Point((Width - 290) / 2, titleLabel.Bottom + padding),
                 Value = 0
             };
             this.Controls.Add(progressBar);
@@ -110,6 +110,11 @@ namespace DSA_Group1_Final_Project.Windows.AuthScreens
             // Cancel the progress task if the form is closing
             _cancellationTokenSource?.Cancel();
             base.OnFormClosing(e);
+        }
+
+        private void StartupForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
