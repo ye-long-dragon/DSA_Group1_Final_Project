@@ -23,6 +23,8 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
         private FlowLayoutPanel coursesPanel;
         private Label studentEmailLabel;
         private int selectedTerm = 1; // Default term
+        private ProgressBar progressBar;
+
 
         public AdminNextAvailableCourses(StudentDocument student)
         {
@@ -106,6 +108,21 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
             termDropdown.SelectedIndex = 0;
             termDropdown.SelectedIndexChanged += async (s, e) => await LoadAvailableCourses();
 
+
+            // 🔹 Progress Bar (Centered)
+            progressBar = new ProgressBar
+            {
+                Style = ProgressBarStyle.Marquee,
+                Width = 500,
+                Height = 30,
+                Visible = true
+            };
+
+            // 🔹 Panel to Center Progress Bar
+
+            progressBar.Anchor = AnchorStyles.Top;
+            progressBar.Location = new Point((containerPanel.Width - progressBar.Width) / 2, 100); // ✅ Centered
+
             // 🔹 Course Panel (Fixed Width)
             coursesPanel = new FlowLayoutPanel
             {
@@ -123,6 +140,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
             mainLayout.Controls.Add(lblTermDropDown);
             mainLayout.Controls.Add(termDropdown);
             mainLayout.Controls.Add(coursesPanel);
+            mainLayout.Controls.Add(progressBar);
 
             // 🔹 Back Button (Fixed at Bottom)
             Button btnBack = new Button
@@ -148,12 +166,12 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
 
         private async void LoadStudentData()
         {
-            Debug.WriteLine($"AdminNextAvailableCoursesScreen: Fetching student data for Student: {student.Name}");
+            //Debug.WriteLine($"AdminNextAvailableCoursesScreen: Fetching student data for Student: {student.Name}");
 
             if (student != null)
             {
                 studentEmailLabel.Text = $"Available Courses for Student: {student.Email}";
-                Debug.WriteLine($"AdminNextAvailableCoursesScreen: Completed courses loaded for Student: {student.Name}");
+                //Debug.WriteLine($"AdminNextAvailableCoursesScreen: Completed courses loaded for Student: {student.Name}");
                 await LoadAvailableCourses();
             }
             else
@@ -169,12 +187,24 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
                 Debug.WriteLine("AdminNextAvailableCoursesScreen: Student data not loaded.");
                 return;
             }
+
             selectedTerm = (int)termDropdown.SelectedItem;
-            Debug.WriteLine($"AdminNextAvailableCoursesScreen: Fetching available courses for Student ID: {student.Name}, term: {selectedTerm}");
+            //Debug.WriteLine($"AdminNextAvailableCoursesScreen: Fetching available courses for Student ID: {student.Name}, term: {selectedTerm}");
 
-            var availableCourses = await firestoreService.GetAvailableCoursesStudent(student, selectedTerm);
+            // ✅ Show progress bar while loading
+            progressBar.Visible = true;
+            progressBar.Style = ProgressBarStyle.Marquee;
 
-            coursesPanel.Controls.Clear(); // Clear old courses
+            // ✅ Fetch courses in the background (non-blocking UI)
+            var availableCourses = await Task.Run(async () =>
+                await firestoreService.GetAvailableCoursesStudent(student, selectedTerm)
+            );
+
+            // ✅ Hide progress bar after fetching
+            progressBar.Visible = false;
+
+            // ✅ Clear old UI safely
+            coursesPanel.Controls.Clear();
 
             if (availableCourses == null || availableCourses.Count == 0)
             {
@@ -187,17 +217,24 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
                     Padding = new Padding(10)
                 };
                 coursesPanel.Controls.Add(noCoursesLabel);
-                Debug.WriteLine("AdminNextAvailableCoursesScreen: No available courses found.");
+                //Debug.WriteLine("AdminNextAvailableCoursesScreen: No available courses found.");
+                return;
             }
-            else
-            {   
-                Debug.WriteLine($"AdminNextAvailableCoursesScreen: Found {availableCourses.Count} available courses for student {student.Name}");
 
-                foreach (var (course, color) in availableCourses)
-                {
-                    coursesPanel.Controls.Add(CreateCourseItem(course, color));
-                }
+            //Debug.WriteLine($"AdminNextAvailableCoursesScreen: Found {availableCourses.Count} available courses for student {student.Name}");
+
+            // ✅ Use a temporary list to reduce UI re-rendering overhead
+            List<Panel> coursePanels = new List<Panel>();
+
+            foreach (var (course, color) in availableCourses)
+            {
+                coursePanels.Add(CreateCourseItem(course, color));
             }
+
+            // ✅ Batch UI update (prevents flickering & speeds up rendering)
+            coursesPanel.SuspendLayout();
+            coursesPanel.Controls.AddRange(coursePanels.ToArray());
+            coursesPanel.ResumeLayout();
         }
 
         private Panel CreateCourseItem(CourseNode course, string colorCode)
@@ -205,20 +242,29 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
             Panel coursePanel = new Panel
             {
                 BackColor = GetColorFromCode(colorCode),
+                AutoSize = true,  // ✅ Allows width to adjust based on content
+                MaximumSize = new Size(coursesPanel.Width - 20, 60), // ✅ Prevents overly wide panels
+                Padding = new Padding(5), // ✅ Reduce padding
+                Margin = new Padding(3, 3, 3, 3), // ✅ Reduce spacing
+            };
+
+            FlowLayoutPanel courseContent = new FlowLayoutPanel
+            {
+                FlowDirection = FlowDirection.LeftToRight,
                 AutoSize = true,
-                Padding = new Padding(15, 15, 15, 15),
-                Margin = new Padding(5,5,5,5),
-                Width = coursesPanel.Width - 20
+                WrapContents = false, // ✅ Keeps buttons aligned
+                Dock = DockStyle.Fill // ✅ Ensures it takes the full width
             };
 
             Label courseLabel = new Label
             {
                 Text = $"{course.Name} ({course.Code})",
                 ForeColor = MMCMColors.White,
-                Font = new Font("Poppins", 13, FontStyle.Bold),
+                Font = new Font("Arial", 11, FontStyle.Bold), // ✅ Reduce font size
                 AutoSize = true
             };
-            coursePanel.Controls.Add(courseLabel);
+
+            courseContent.Controls.Add(courseLabel);
 
             if (colorCode == "green")
             {
@@ -228,14 +274,17 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
                     BackColor = MMCMColors.White,
                     ForeColor = MMCMColors.Black,
                     AutoSize = true,
-
+                    Padding = new Padding(2),  // ✅ Reduce button padding
+                    Margin = new Padding(5, 0, 0, 0) // ✅ Proper spacing from label
                 };
                 shareButton.Click += (s, e) => CopyToClipboard($"{course.Name} ({course.Code})");
-                coursePanel.Controls.Add(shareButton);
+                courseContent.Controls.Add(shareButton);
             }
 
+            coursePanel.Controls.Add(courseContent);
             return coursePanel;
         }
+
 
         private void CopyToClipboard(string text)
         {
