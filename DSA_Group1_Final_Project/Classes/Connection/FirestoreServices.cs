@@ -14,6 +14,7 @@ namespace DSA_Group1_Final_Project.Classes.Connection
     public class FirestoreServices
     {
         private FirestoreDb db;
+        private FirestoreChangeListener studentListener;
 
         public FirestoreServices()
         {
@@ -490,6 +491,48 @@ namespace DSA_Group1_Final_Project.Classes.Connection
             }
 
 
+        }
+
+        // Real-time Listener for Student Status
+        public void ListenForStudentStatusChanges(string userId, Action<StudentDocument> onStudentUpdated)
+        {
+            DocumentReference studentDocRef = db.Collection("students").Document(userId);
+
+            studentListener = studentDocRef.Listen(async snapshot =>
+            {
+                if (!snapshot.Exists)
+                {
+                    Debug.WriteLine($"No student document found for UserID: {userId}");
+                    return;
+                }
+
+                Debug.WriteLine($"Student document updated for UserID: {userId}");
+
+                Dictionary<string, object> data = snapshot.ToDictionary();
+
+                StudentDocument student = new StudentDocument
+                {
+                    StudentID = snapshot.Id,
+                    UserID = data.TryGetValueOrDefault<string>("userID"),
+                    Name = data.TryGetValueOrDefault<string>("name", "Unknown"),
+                    Email = data.TryGetValueOrDefault<string>("email"),
+                    StudentNumber = data.TryGetValueOrDefault<string>("studentNumber"),
+                    Program = data.TryGetValueOrDefault<string>("program"),
+                    TermEnrolling = data.TryGetValueOrDefault<int>("termEnrolling", 1),
+                    Curriculum = data.TryGetValueOrDefault<string>("curriculum"),
+                    CompletedCourses = data.TryGetValueOrDefault<List<string>>("completedCourses", new List<string>()),
+                    ApprovalStatus = data.TryGetValueOrDefault<string>("approvalStatus")
+                };
+
+                // ✅ Trigger the callback function to update UI
+                onStudentUpdated?.Invoke(student);
+            });
+        }
+
+        // Stop Listening
+        public void StopListening()
+        {
+            studentListener?.StopAsync();
         }
 
 

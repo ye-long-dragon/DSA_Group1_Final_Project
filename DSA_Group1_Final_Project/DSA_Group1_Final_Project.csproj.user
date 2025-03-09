@@ -70,5 +70,8 @@
     <Compile Update="Windows\UserControls\Student\homeStudent.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Windows\UserControls\Student\StudentPending.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

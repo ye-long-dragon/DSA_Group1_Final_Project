@@ -41,12 +41,24 @@ namespace DSA_Group1_Final_Project
         string r;
         FirestoreServices db = new FirestoreServices();
         StudentDocument student = new StudentDocument();
+        StudentDocument studentLive = new StudentDocument();
         public MainScreen(string role, string userId)
         {
             InitializeComponent();
             instance = this;
             r = role;
             student = db.GetCurrentStudentAsync(userId).Result;
+
+            // real-time listener for approvalStatus
+            db.ListenForStudentStatusChanges(userId, studentData =>
+            {
+                studentLive = studentData;
+
+                // Refresh UI when approval status updates
+                this.Invoke((MethodInvoker)delegate {
+                    RefreshUI();
+                });
+            });
 
             if (role == "Admin")
             {
@@ -105,17 +117,43 @@ namespace DSA_Group1_Final_Project
 
         private void btnCourseList_Click_1(object sender, EventArgs e)
         {
-            ViewCurriculumDetails courseList = new ViewCurriculumDetails(student, "Student");
-            pnlMain.Controls.Clear();
-            pnlMain.Controls.Add(courseList);
+            if (studentLive.ApprovalStatus == "pending")
+            {
+                LoadUserControl(new StudentPending());
+            }
+            else
+            {
+                // actual Course List screen
+                ViewCurriculumDetails courseList = new ViewCurriculumDetails(student, "Student");
+                pnlMain.Controls.Clear();
+                pnlMain.Controls.Add(courseList);
+            }
         }
 
         private void btnAvailableCourses_Click(object sender, EventArgs e)
         {
-            AdminNextAvailableCourses adminNextAvailableCourses = new AdminNextAvailableCourses(student, "");
-            pnlMain.Controls.Clear();
-            pnlMain.Controls.Add(adminNextAvailableCourses);
-
+            if (studentLive.ApprovalStatus == "pending")
+            {
+                LoadUserControl(new StudentPending());
+            }
+            else
+            {
+                //  actual Available Courses screen
+                AdminNextAvailableCourses adminNextAvailableCourses = new AdminNextAvailableCourses(student, "");
+                pnlMain.Controls.Clear();
+                pnlMain.Controls.Add(adminNextAvailableCourses);
+            }
+        }
+        private void RefreshUI()
+        {
+            if (studentLive.ApprovalStatus == "pending")
+            {
+                LoadUserControl(new StudentPending());
+            }
+            else
+            {
+                LoadUserControl(new homeStudent(student, r));
+            }
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -125,7 +163,7 @@ namespace DSA_Group1_Final_Project
             // 🔹 Clear saved session
             Properties.Settings.Default.UserId = "";
             Properties.Settings.Default.Save();
-
+            db.StopListening();
             AuthForm authForm = new AuthForm();
             authForm.Show(); // Show the AuthForm
 
