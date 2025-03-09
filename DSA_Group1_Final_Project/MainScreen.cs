@@ -22,6 +22,7 @@ namespace DSA_Group1_Final_Project
         private CancellationTokenSource _cancellationTokenSource;
 
         private static MainScreen instance;
+        string userId;
 
         // 🔥 Function to Switch Screens (Replaces mainPanel's content)
         public void LoadUserControl(UserControl newControl)
@@ -74,7 +75,7 @@ namespace DSA_Group1_Final_Project
                 btnSettings.Location = new Point(0, 531 + 62);
                 btnLogout.Location = new Point(0, 593 + 62);
 
-                homeAdmin homeAdmin = new homeAdmin();
+                homeAdmin homeAdmin = new homeAdmin(instance, userId);
                 homeAdmin.Dock = DockStyle.Fill;
                 pnlMain.Controls.Clear();
                 pnlMain.Controls.Add(homeAdmin);
@@ -197,7 +198,7 @@ namespace DSA_Group1_Final_Project
         {
             if (r == "Admin")
             {
-                homeAdmin homeAdmin = new homeAdmin();
+                homeAdmin homeAdmin = new homeAdmin(instance, userId);
                 homeAdmin.Dock = DockStyle.Fill;
                 pnlMain.Controls.Clear();
                 pnlMain.Controls.Add(homeAdmin);    
