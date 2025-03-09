@@ -59,15 +59,5 @@ namespace DSA_Group1_Final_Project.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] mmcm_logo {
-            get {
-                object obj = ResourceManager.GetObject("mmcm_logo", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
     }
 }

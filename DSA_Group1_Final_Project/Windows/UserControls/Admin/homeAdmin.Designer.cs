@@ -104,10 +104,11 @@
             // 
             pcbStudentMasterList.CustomizableEdges = customizableEdges3;
             pcbStudentMasterList.ImageRotate = 0F;
-            pcbStudentMasterList.Location = new Point(338, 427);
+            pcbStudentMasterList.Location = new Point(338, 380);
             pcbStudentMasterList.Name = "pcbStudentMasterList";
             pcbStudentMasterList.ShadowDecoration.CustomizableEdges = customizableEdges4;
             pcbStudentMasterList.Size = new Size(462, 313);
+            pcbStudentMasterList.SizeMode = PictureBoxSizeMode.Zoom;
             pcbStudentMasterList.TabIndex = 9;
             pcbStudentMasterList.TabStop = false;
             // 

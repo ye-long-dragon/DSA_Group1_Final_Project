@@ -535,6 +535,38 @@ namespace DSA_Group1_Final_Project.Classes.Connection
             studentListener?.StopAsync();
         }
 
+        public async Task<string> GetCurrentUserEmailAsync(string userId)
+        {
+            if (string.IsNullOrWhiteSpace(userId))
+            {
+                Debug.WriteLine("[ERROR] Invalid userId provided.");
+                return null;
+            }
+
+            try
+            {
+                Debug.WriteLine($"Fetching email for UserID: {userId}");
+
+                DocumentReference userDocRef = db.Collection("users").Document(userId);
+                DocumentSnapshot snapshot = await userDocRef.GetSnapshotAsync().ConfigureAwait(false);
+
+                if (!snapshot.Exists)
+                {
+                    Debug.WriteLine($"[WARNING] No user document found for UserID: {userId}");
+                    return null;
+                }
+
+                Debug.WriteLine($"User document found for UserID: {userId}");
+
+                // ✅ Extract email safely
+                return snapshot.TryGetValue("email", out string email) ? email : null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[ERROR] Failed to fetch email for UserID {userId}: {ex.Message}");
+                return null;
+            }
+        }
 
     }
 
