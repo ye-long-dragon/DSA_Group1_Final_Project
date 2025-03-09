@@ -39,7 +39,6 @@ namespace DSA_Group1_Final_Project
 
 
         string r;
-        string userId;
         FirestoreServices db = new FirestoreServices();
         StudentDocument student = new StudentDocument();
         StudentDocument studentLive = new StudentDocument();
@@ -47,7 +46,6 @@ namespace DSA_Group1_Final_Project
         {
             InitializeComponent();
             instance = this;
-            this.userId = userId;
             r = role;
             student = db.GetCurrentStudentAsync(userId).Result;
 
@@ -76,7 +74,7 @@ namespace DSA_Group1_Final_Project
                 btnSettings.Location = new Point(0, 531 + 62);
                 btnLogout.Location = new Point(0, 593 + 62);
 
-                homeAdmin homeAdmin = new homeAdmin(instance ,userId);
+                homeAdmin homeAdmin = new homeAdmin();
                 homeAdmin.Dock = DockStyle.Fill;
                 pnlMain.Controls.Clear();
                 pnlMain.Controls.Add(homeAdmin);
@@ -199,7 +197,7 @@ namespace DSA_Group1_Final_Project
         {
             if (r == "Admin")
             {
-                homeAdmin homeAdmin = new homeAdmin(instance, userId);
+                homeAdmin homeAdmin = new homeAdmin();
                 homeAdmin.Dock = DockStyle.Fill;
                 pnlMain.Controls.Clear();
                 pnlMain.Controls.Add(homeAdmin);    
