@@ -29,7 +29,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Student
             AdminNextAvailableCourses adminNextAvailableCourses = new AdminNextAvailableCourses(s, r);
             adminNextAvailableCourses.Dock = DockStyle.Fill;
             MainScreen mainScreen = (MainScreen)Parent.Parent.Parent.Parent;
-            mainScreen.LoadUserControl(adminNextAvailableCourses);
+                mainScreen.LoadUserControl(adminNextAvailableCourses);
         }
 
         private void btnCouseList_Click(object sender, EventArgs e)

@@ -53,7 +53,7 @@
                 BackColor = Color.Transparent
             };
             brandingLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            brandingLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 60F));
+            brandingLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
             string projectDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
             // Move up to the main project folder (adjust as needed)
@@ -78,7 +78,7 @@
             // Branding Label (MMCM CURRICULUM TRACKER)
             Label brandingLabel = new Label
             {
-                Text = "MMCM\nCURRICULUM TRACKER",
+                Text = "MMCM\nCOURSE TRACKER",
                 ForeColor = Color.Red,
                 Font = new Font("Arial", 36, FontStyle.Bold), // Large font
                 Dock = DockStyle.Fill,
