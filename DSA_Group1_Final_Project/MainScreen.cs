@@ -56,8 +56,9 @@ namespace DSA_Group1_Final_Project
                 studentLive = studentData;
 
                 // Refresh UI when approval status updates
-                this.Invoke((MethodInvoker)delegate {
-                    RefreshUI();
+                this.Invoke((MethodInvoker)delegate
+                {
+                    RefreshUI();//bugged
                 });
             });
 
@@ -67,13 +68,13 @@ namespace DSA_Group1_Final_Project
                 btnCourseList.Visible = false;
                 lblScreenView.Text = "Admin Dashboard";
 
-                btnStudentMasterList.Location = new Point(0, 205);
+                btnStudentMasterList.Location = new Point(0, 205 + 56);
 
-                btnDevelopers.Location = new Point(0, 251);
-                lblSettings.Location = new Point(3, 306);
-                btnProfile.Location = new Point(0, 338);
-                btnSettings.Location = new Point(0, 384);
-                btnLogout.Location = new Point(0, 430);
+                btnDevelopers.Location = new Point(0, 251 + 56);
+                lblSettings.Location = new Point(3, 306 + 56);
+                btnProfile.Location = new Point(0, 338 + 56);
+                btnSettings.Location = new Point(0, 384 + 56);
+                btnLogout.Location = new Point(0, 430 + 56);
 
                 homeAdmin homeAdmin = new homeAdmin(instance, userId);
                 homeAdmin.Dock = DockStyle.Fill;
@@ -87,13 +88,13 @@ namespace DSA_Group1_Final_Project
 
                 btnStudentMasterList.Visible = false;
 
-                btnAvailableCourses.Location = new Point(0, 204);
-                btnCourseList.Location = new Point(0, 250);
-                btnDevelopers.Location = new Point(0, 296);
-                lblSettings.Location = new Point(3, 351);
-                btnProfile.Location = new Point(0, 382);
-                btnSettings.Location = new Point(0, 428);
-                btnLogout.Location = new Point(0, 474);
+                btnAvailableCourses.Location = new Point(0, 204 + 56);
+                btnCourseList.Location = new Point(0, 250 + 56);
+                btnDevelopers.Location = new Point(0, 296 + 56);
+                lblSettings.Location = new Point(3, 351 + 56);
+                btnProfile.Location = new Point(0, 382 + 56);
+                btnSettings.Location = new Point(0, 428 + 56);
+                btnLogout.Location = new Point(0, 474 + 56);
 
                 homeStudent homeStudent = new homeStudent(student, r);
                 homeStudent.Dock = DockStyle.Fill;
@@ -201,7 +202,7 @@ namespace DSA_Group1_Final_Project
                 homeAdmin homeAdmin = new homeAdmin(instance, userId);
                 homeAdmin.Dock = DockStyle.Fill;
                 pnlMain.Controls.Clear();
-                pnlMain.Controls.Add(homeAdmin);    
+                pnlMain.Controls.Add(homeAdmin);
             }
             else
             {
@@ -210,6 +211,16 @@ namespace DSA_Group1_Final_Project
                 pnlMain.Controls.Clear();
                 pnlMain.Controls.Add(homeStudent);
             }
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This functionality is under construction.");
+        }
+
+        private void btnProfile_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This functionality is under construction.");
         }
     }
 }

@@ -45,6 +45,7 @@ namespace DSA_Group1_Final_Project.Windows.Pop_ups
             pnlTopBar.ShadowDecoration.CustomizableEdges = customizableEdges5;
             pnlTopBar.Size = new Size(800, 37);
             pnlTopBar.TabIndex = 41;
+            pnlTopBar.MouseDown += pnlTopBar_MouseDown;
             // 
             // guna2ImageButton1
             // 

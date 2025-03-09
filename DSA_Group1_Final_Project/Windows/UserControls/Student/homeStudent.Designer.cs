@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(homeStudent));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -58,10 +59,9 @@
             // 
             lblWelcome.BackColor = Color.Transparent;
             lblWelcome.Font = new Font("Segoe UI", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblWelcome.Location = new Point(353, 54);
-            lblWelcome.Margin = new Padding(3, 2, 3, 2);
+            lblWelcome.Location = new Point(403, 72);
             lblWelcome.Name = "lblWelcome";
-            lblWelcome.Size = new Size(284, 88);
+            lblWelcome.Size = new Size(352, 108);
             lblWelcome.TabIndex = 0;
             lblWelcome.Text = "Welcome";
             // 
@@ -69,10 +69,9 @@
             // 
             lblName.BackColor = Color.Transparent;
             lblName.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblName.Location = new Point(399, 155);
-            lblName.Margin = new Padding(3, 2, 3, 2);
+            lblName.Location = new Point(456, 207);
             lblName.Name = "lblName";
-            lblName.Size = new Size(188, 32);
+            lblName.Size = new Size(233, 39);
             lblName.TabIndex = 1;
             lblName.Text = "guna2HtmlLabel1";
             lblName.Click += lblName_Click;
@@ -81,10 +80,9 @@
             // 
             guna2HtmlLabel2.BackColor = Color.Transparent;
             guna2HtmlLabel2.Font = new Font("Segoe UI Black", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel2.Location = new Point(319, 254);
-            guna2HtmlLabel2.Margin = new Padding(3, 2, 3, 2);
+            guna2HtmlLabel2.Location = new Point(365, 339);
             guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            guna2HtmlLabel2.Size = new Size(354, 32);
+            guna2HtmlLabel2.Size = new Size(432, 39);
             guna2HtmlLabel2.TabIndex = 3;
             guna2HtmlLabel2.Text = "MMCM Student Courses Tracker";
             // 
@@ -92,41 +90,44 @@
             // 
             guna2HtmlLabel1.BackColor = Color.Transparent;
             guna2HtmlLabel1.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel1.Location = new Point(481, 210);
-            guna2HtmlLabel1.Margin = new Padding(3, 2, 3, 2);
+            guna2HtmlLabel1.Location = new Point(550, 280);
             guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            guna2HtmlLabel1.Size = new Size(24, 27);
+            guna2HtmlLabel1.Size = new Size(30, 33);
             guna2HtmlLabel1.TabIndex = 4;
             guna2HtmlLabel1.Text = "To";
             // 
             // pcbAvailableCourses
             // 
             pcbAvailableCourses.CustomizableEdges = customizableEdges1;
+            pcbAvailableCourses.ErrorImage = (Image)resources.GetObject("pcbAvailableCourses.ErrorImage");
+            pcbAvailableCourses.Image = (Image)resources.GetObject("pcbAvailableCourses.Image");
             pcbAvailableCourses.ImageRotate = 0F;
-            pcbAvailableCourses.Location = new Point(55, 317);
-            pcbAvailableCourses.Margin = new Padding(3, 2, 3, 2);
+            pcbAvailableCourses.Location = new Point(63, 423);
             pcbAvailableCourses.Name = "pcbAvailableCourses";
             pcbAvailableCourses.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            pcbAvailableCourses.Size = new Size(404, 235);
+            pcbAvailableCourses.Size = new Size(462, 313);
+            pcbAvailableCourses.SizeMode = PictureBoxSizeMode.Zoom;
             pcbAvailableCourses.TabIndex = 5;
             pcbAvailableCourses.TabStop = false;
             // 
             // pcbCourseList
             // 
             pcbCourseList.CustomizableEdges = customizableEdges3;
+            pcbCourseList.ErrorImage = (Image)resources.GetObject("pcbCourseList.ErrorImage");
+            pcbCourseList.Image = (Image)resources.GetObject("pcbCourseList.Image");
             pcbCourseList.ImageRotate = 0F;
-            pcbCourseList.Location = new Point(530, 317);
-            pcbCourseList.Margin = new Padding(3, 2, 3, 2);
+            pcbCourseList.Location = new Point(606, 423);
             pcbCourseList.Name = "pcbCourseList";
             pcbCourseList.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            pcbCourseList.Size = new Size(404, 235);
+            pcbCourseList.Size = new Size(462, 313);
+            pcbCourseList.SizeMode = PictureBoxSizeMode.Zoom;
             pcbCourseList.TabIndex = 6;
             pcbCourseList.TabStop = false;
             // 
             // btnAvailableCourses
             // 
             btnAvailableCourses.AutoRoundedCorners = true;
-            btnAvailableCourses.BorderRadius = 20;
+            btnAvailableCourses.BorderRadius = 27;
             btnAvailableCourses.CustomizableEdges = customizableEdges5;
             btnAvailableCourses.DisabledState.BorderColor = Color.DarkGray;
             btnAvailableCourses.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -134,11 +135,10 @@
             btnAvailableCourses.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnAvailableCourses.Font = new Font("Segoe UI", 9F);
             btnAvailableCourses.ForeColor = Color.White;
-            btnAvailableCourses.Location = new Point(55, 571);
-            btnAvailableCourses.Margin = new Padding(3, 2, 3, 2);
+            btnAvailableCourses.Location = new Point(63, 761);
             btnAvailableCourses.Name = "btnAvailableCourses";
             btnAvailableCourses.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            btnAvailableCourses.Size = new Size(404, 42);
+            btnAvailableCourses.Size = new Size(462, 56);
             btnAvailableCourses.TabIndex = 7;
             btnAvailableCourses.Text = "Go To Available Courses";
             btnAvailableCourses.Click += btnAvailableCourses_Click;
@@ -146,7 +146,7 @@
             // btnCouseList
             // 
             btnCouseList.AutoRoundedCorners = true;
-            btnCouseList.BorderRadius = 20;
+            btnCouseList.BorderRadius = 27;
             btnCouseList.CustomizableEdges = customizableEdges7;
             btnCouseList.DisabledState.BorderColor = Color.DarkGray;
             btnCouseList.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -154,11 +154,10 @@
             btnCouseList.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnCouseList.Font = new Font("Segoe UI", 9F);
             btnCouseList.ForeColor = Color.White;
-            btnCouseList.Location = new Point(530, 571);
-            btnCouseList.Margin = new Padding(3, 2, 3, 2);
+            btnCouseList.Location = new Point(606, 761);
             btnCouseList.Name = "btnCouseList";
             btnCouseList.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            btnCouseList.Size = new Size(404, 42);
+            btnCouseList.Size = new Size(462, 56);
             btnCouseList.TabIndex = 8;
             btnCouseList.Text = "Go To Course List";
             btnCouseList.Click += btnCouseList_Click;
@@ -168,24 +167,26 @@
             guna2Panel1.CustomizableEdges = customizableEdges9;
             guna2Panel1.FillColor = Color.FromArgb(94, 148, 255);
             guna2Panel1.Location = new Point(0, 0);
+            guna2Panel1.Margin = new Padding(3, 4, 3, 4);
             guna2Panel1.Name = "guna2Panel1";
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2Panel1.Size = new Size(994, 29);
+            guna2Panel1.Size = new Size(1136, 39);
             guna2Panel1.TabIndex = 9;
             // 
             // guna2Panel2
             // 
             guna2Panel2.CustomizableEdges = customizableEdges11;
             guna2Panel2.FillColor = Color.FromArgb(94, 148, 255);
-            guna2Panel2.Location = new Point(0, 643);
+            guna2Panel2.Location = new Point(0, 857);
+            guna2Panel2.Margin = new Padding(3, 4, 3, 4);
             guna2Panel2.Name = "guna2Panel2";
             guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            guna2Panel2.Size = new Size(994, 29);
+            guna2Panel2.Size = new Size(1136, 39);
             guna2Panel2.TabIndex = 10;
             // 
             // homeStudent
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(guna2Panel2);
             Controls.Add(guna2Panel1);
@@ -197,9 +198,8 @@
             Controls.Add(guna2HtmlLabel2);
             Controls.Add(lblName);
             Controls.Add(lblWelcome);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "homeStudent";
-            Size = new Size(994, 672);
+            Size = new Size(1136, 896);
             ((System.ComponentModel.ISupportInitialize)pcbAvailableCourses).EndInit();
             ((System.ComponentModel.ISupportInitialize)pcbCourseList).EndInit();
             ResumeLayout(false);
