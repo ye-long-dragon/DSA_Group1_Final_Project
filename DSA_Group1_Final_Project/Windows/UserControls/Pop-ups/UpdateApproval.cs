@@ -47,7 +47,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Pop_ups
 
         private void rbtnApproved_CheckedChanged(object sender, EventArgs e)
         {
-            s.ApprovalStatus = "Approved";
+            s.ApprovalStatus = "approved";
             
             //add code to update the status in the database
         }
@@ -55,7 +55,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Pop_ups
 
         private void rbtnPending_CheckedChanged(object sender, EventArgs e)
         {
-            s.ApprovalStatus = "Pending";
+            s.ApprovalStatus = "pending";
             
             //add code to update the status in the database
         }
