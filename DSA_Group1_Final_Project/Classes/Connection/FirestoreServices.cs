@@ -451,8 +451,7 @@ namespace DSA_Group1_Final_Project.Classes.Connection
             {
                 Debug.WriteLine($"Fetching student document for UserID: {userId}");
 
-                CollectionReference studentsCollection = db.Collection("students");
-                DocumentReference studentDocRef = studentsCollection.Document(userId);
+                DocumentReference studentDocRef = db.Collection("students").Document(userId);
                 DocumentSnapshot snapshot = await studentDocRef.GetSnapshotAsync().ConfigureAwait(false);
 
                 if (!snapshot.Exists)
@@ -466,21 +465,19 @@ namespace DSA_Group1_Final_Project.Classes.Connection
                 // ✅ Convert Firestore document to Dictionary
                 Dictionary<string, object> data = snapshot.ToDictionary();
 
-                // ✅ Map Firestore fields safely
+                // ✅ Use a helper function to simplify field extraction
                 StudentDocument student = new StudentDocument
                 {
-                    StudentID = snapshot.Id, // Firestore Document ID
-                    UserID = data.TryGetValue("userID", out var userIDObj) ? userIDObj?.ToString() ?? "" : "",
-                    Name = data.TryGetValue("name", out var nameObj) ? nameObj?.ToString() ?? "Unknown",
-                    Email = data.TryGetValue("email", out var emailObj) ? emailObj?.ToString() ?? "",
-                    StudentNumber = data.TryGetValue("studentNumber", out var studentNumberObj) ? studentNumberObj?.ToString() ?? "",
-                    Program = data.TryGetValue("program", out var programObj) ? programObj?.ToString() ?? "",
-                    TermEnrolling = data.TryGetValue("termEnrolling", out var termEnrollingObj) && int.TryParse(termEnrollingObj?.ToString(), out int term) ? term : 1,
-                    Curriculum = data.TryGetValue("curriculum", out var curriculumObj) ? curriculumObj?.ToString() ?? "",
-                    CompletedCourses = data.TryGetValue("completedCourses", out var completedObj) && completedObj is List<object> completedList
-                        ? completedList.Select(c => c.ToString()).ToList()
-                        : new List<string>(),
-                    ApprovalStatus = data.TryGetValue("approvalStatus", out var approvalStatusObj) ? approvalStatusObj?.ToString() ?? ""
+                    StudentID = snapshot.Id,
+                    UserID = data.TryGetValueOrDefault<string>("userID"),
+                    Name = data.TryGetValueOrDefault<string>("name", "Unknown"),
+                    Email = data.TryGetValueOrDefault<string>("email"),
+                    StudentNumber = data.TryGetValueOrDefault<string>("studentNumber"),
+                    Program = data.TryGetValueOrDefault<string>("program"),
+                    TermEnrolling = data.TryGetValueOrDefault<int>("termEnrolling", 1),
+                    Curriculum = data.TryGetValueOrDefault<string>("curriculum"),
+                    CompletedCourses = data.TryGetValueOrDefault<List<string>>("completedCourses", new List<string>()),
+                    ApprovalStatus = data.TryGetValueOrDefault<string>("approvalStatus")
                 };
 
                 Debug.WriteLine($"Fetched Student: {student.Name} ({student.Email}), Program: {student.Program}");
@@ -491,7 +488,11 @@ namespace DSA_Group1_Final_Project.Classes.Connection
                 Debug.WriteLine($"Error fetching student document: {ex.Message}");
                 return null;
             }
+
+
         }
 
+
     }
+
 }
