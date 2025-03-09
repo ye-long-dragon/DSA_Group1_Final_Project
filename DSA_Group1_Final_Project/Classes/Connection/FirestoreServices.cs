@@ -493,7 +493,7 @@ namespace DSA_Group1_Final_Project.Classes.Connection
 
         }
 
-        // Real-time Listener for Student Status
+        //  Real-time Listener for Student Status
         public void ListenForStudentStatusChanges(string userId, Action<StudentDocument> onStudentUpdated)
         {
             DocumentReference studentDocRef = db.Collection("students").Document(userId);
@@ -529,7 +529,7 @@ namespace DSA_Group1_Final_Project.Classes.Connection
             });
         }
 
-        // Stop Listening
+        // ✅ Stop Listening
         public void StopListening()
         {
             studentListener?.StopAsync();

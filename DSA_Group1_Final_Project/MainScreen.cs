@@ -124,7 +124,7 @@ namespace DSA_Group1_Final_Project
             else
             {
                 // actual Course List screen
-                ViewCurriculumDetails courseList = new ViewCurriculumDetails(student, "Student");
+                StudentCurriculum courseList = new StudentCurriculum(studentLive, "Student");
                 pnlMain.Controls.Clear();
                 pnlMain.Controls.Add(courseList);
             }
@@ -139,7 +139,7 @@ namespace DSA_Group1_Final_Project
             else
             {
                 //  actual Available Courses screen
-                AdminNextAvailableCourses adminNextAvailableCourses = new AdminNextAvailableCourses(student, "");
+                AdminNextAvailableCourses adminNextAvailableCourses = new AdminNextAvailableCourses(studentLive, "");
                 pnlMain.Controls.Clear();
                 pnlMain.Controls.Add(adminNextAvailableCourses);
             }
