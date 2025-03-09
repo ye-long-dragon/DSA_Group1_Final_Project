@@ -227,7 +227,6 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
                     Text = "Share",
                     BackColor = MMCMColors.White,
                     ForeColor = MMCMColors.Black,
-                    FlatStyle = FlatStyle.Flat,
                     AutoSize = true,
 
                 };

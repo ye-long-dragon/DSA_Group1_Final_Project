@@ -172,49 +172,53 @@ namespace DSA_Group1_Final_Project.Classes.Connection
 
             try
             {
-                // 🔹 Fetch regular courses (Loop through all years & terms)
+                // 🔹 Task list for parallel execution
+                List<Task> fetchTasks = new List<Task>();
+
+                // 🔹 Fetch regular courses in parallel
                 foreach (int year in years)
                 {
                     foreach (int term in terms)
                     {
-                        CollectionReference termRef = db.Collection("curriculums").Document(studentCurriculum).Collection(year.ToString()).Document($"term_{term}").Collection("courses");
-                        QuerySnapshot snapshot = await termRef.GetSnapshotAsync();
+                        fetchTasks.Add(FetchRegularCoursesAsync(year, term));
+                    }
+                }
 
-                        List<CourseNode> courses = new List<CourseNode>();
+                // 🔹 Fetch elective courses in parallel
+                if (electiveCategories.TryGetValue(curriculumId, out var categories) && categories.Count > 0)
+                {
+                    foreach (var category in categories.Distinct()) // Remove duplicates before iterating
+                    {
+                        fetchTasks.Add(FetchElectiveCoursesAsync(category));
+                    }
+                }
 
-                        foreach (var doc in snapshot.Documents)
-                        {
-                            Dictionary<string, object> data = doc.ToDictionary(); // Get raw document data
+                // ✅ Wait for all tasks to complete
+                await Task.WhenAll(fetchTasks);
 
-                            CourseNode course = new CourseNode
-                            {
-                                Code = data.ContainsKey("code") ? data["code"].ToString() : "",
-                                Name = data.ContainsKey("name") ? data["name"].ToString() : "",
-                                Units = data.ContainsKey("units") ? Convert.ToInt32(data["units"]) : 0,
-                                YearLevel = data.ContainsKey("yearLevel") ? Convert.ToInt32(data["yearLevel"]) : 0,
-                                Term = data.ContainsKey("term") ? Convert.ToInt32(data["term"]) : 0,
-
-                                // Handling lists safely
-                                Prerequisites = data.ContainsKey("prerequisites") && data["prerequisites"] is List<object> prereqList
-                                    ? prereqList.Select(p => p.ToString()).ToList()
-                                    : new List<string>(),
-
-                                CoRequisites = data.ContainsKey("coRequisites") && data["coRequisites"] is List<object> coreqList
-                                    ? coreqList.Select(c => c.ToString()).ToList()
-                                    : new List<string>(),
-
-                                RegularTerms = data.ContainsKey("regularTerms") && data["regularTerms"] is List<object> termList
-                                    ? termList.Select(t => Convert.ToInt32(t)).ToList()
-                                    : new List<int>(),
-
-                                Taken = data.ContainsKey("taken") ? Convert.ToBoolean(data["taken"]) : false
-                            };
-
-                            courses.Add(course);
-                        }
+                // 🔹 Return the structured course graph
+                return new CourseGraph(groupedCourses, electiveCourses);
 
 
-                        if (courses.Any())
+                /// =============================================
+                /// 🔹 Helper Method: Fetch Regular Courses
+                /// =============================================
+                async Task FetchRegularCoursesAsync(int year, int term)
+                {
+                    CollectionReference termRef = db.Collection("curriculums")
+                        .Document(studentCurriculum)
+                        .Collection(year.ToString())
+                        .Document($"term_{term}")
+                        .Collection("courses");
+
+                    QuerySnapshot snapshot = await termRef.GetSnapshotAsync();
+                    if (snapshot.Documents.Count == 0) return;
+
+                    List<CourseNode> courses = ParseCourses(snapshot.Documents);
+
+                    if (courses.Count > 0)
+                    {
+                        lock (groupedCourses) // Prevent race conditions
                         {
                             if (!groupedCourses.ContainsKey(year))
                                 groupedCourses[year] = new Dictionary<int, List<CourseNode>>();
@@ -227,50 +231,91 @@ namespace DSA_Group1_Final_Project.Classes.Connection
                     }
                 }
 
-                if (!electiveCategories.ContainsKey(curriculumId))
+                /// =============================================
+                /// 🔹 Helper Method: Fetch Elective Courses
+                /// =============================================
+                async Task FetchElectiveCoursesAsync(string category)
                 {
-                    Debug.WriteLine($"No electives found for curriculumId: {curriculumId}");
-                    return null;
-                }
+                    CollectionReference electiveRef = db.Collection("curriculums")
+                        .Document(studentCurriculum)
+                        .Collection("electives")
+                        .Document(category)
+                        .Collection("courses");
 
-                var electiveCategory = electiveCategories[curriculumId].Distinct().ToList(); // Remove duplicates
-                var fetchTasks = electiveCategory.Select(async category =>
-                {
-                    CollectionReference electiveRef = db.Collection("curriculums").Document(studentCurriculum).Collection("electives").Document(category).Collection("courses");
                     QuerySnapshot snapshot = await electiveRef.GetSnapshotAsync();
-
                     if (snapshot.Documents.Count == 0)
                     {
                         Debug.WriteLine($"No elective courses found for category: {category}");
                         return;
                     }
 
-                    var courses = snapshot.Documents.Select(doc =>
+                    List<CourseNode> courses = ParseCourses(snapshot.Documents);
+
+                    if (courses.Count > 0)
                     {
-                        var data = doc.ToDictionary();
-                        return new CourseNode
+                        lock (electiveCourses) // Prevent race conditions
                         {
-                            Code = data.ContainsKey("code") ? data["code"].ToString() : "",
-                            Name = data.ContainsKey("name") ? data["name"].ToString() : "",
-                            Units = data.ContainsKey("units") ? Convert.ToInt32(data["units"]) : 0,
-                            YearLevel = data.ContainsKey("yearLevel") ? Convert.ToInt32(data["yearLevel"]) : 0,
-                            Term = data.ContainsKey("term") ? Convert.ToInt32(data["term"]) : 0,
-                            Prerequisites = data.TryGetValue("prerequisites", out object prereqObj) && prereqObj is List<object> prereqList ? prereqList.Select(p => p.ToString()).ToList() : new List<string>(),
-                            CoRequisites = data.TryGetValue("coRequisites", out object coreqObj) && coreqObj is List<object> coreqList ? coreqList.Select(c => c.ToString()).ToList() : new List<string>(),
-                            RegularTerms = data.TryGetValue("regularTerms", out object termObj) && termObj is List<object> termList ? termList.Select(t => Convert.ToInt32(t)).ToList() : new List<int>(),
-                            Taken = false
-                        };
-                    }).ToList();
+                            electiveCourses.AddRange(courses);
+                        }
+                    }
+                }
 
-                    electiveCourses.AddRange(courses);
-                });
+                /// =============================================
+                /// 🔹 Helper Method: Parse Course Data
+                /// =============================================
+                List<CourseNode> ParseCourses(IEnumerable<DocumentSnapshot> documents)
+                {
+                    List<CourseNode> courses = new List<CourseNode>();
 
-                await Task.WhenAll(fetchTasks); // Fetch all electives in parallel
+                    foreach (var doc in documents)
+                    {
+                        Dictionary<string, object> data = doc.ToDictionary();
 
+                        // ✅ Retrieve values once (avoids multiple dictionary lookups)
+                        data.TryGetValue("code", out var codeObj);
+                        data.TryGetValue("name", out var nameObj);
+                        data.TryGetValue("units", out var unitsObj);
+                        data.TryGetValue("yearLevel", out var yearObj);
+                        data.TryGetValue("term", out var termObj);
+                        data.TryGetValue("prerequisites", out var prereqObj);
+                        data.TryGetValue("coRequisites", out var coreqObj);
+                        data.TryGetValue("regularTerms", out var termObjList);
 
-                // 🔹 Return the structured course graph
-                return new CourseGraph(groupedCourses, electiveCourses);
-                
+                        // ✅ Direct casting instead of `.ToString()`
+                        string code = codeObj as string ?? "";
+                        string name = nameObj as string ?? "";
+
+                        // ✅ Faster integer conversion (Firestore stores numbers as `long`)
+                        int units = unitsObj is long u ? (int)u : 0;
+                        int yearLevel = yearObj is long y ? (int)y : 0;
+                        int term = termObj is long t ? (int)t : 0;
+
+                        // ✅ Faster list conversion (avoids `.Select()`)
+                        List<string> prerequisites = prereqObj is List<object> prereqList ? prereqList.Cast<string>().ToList() : new List<string>();
+                        List<string> coRequisites = coreqObj is List<object> coreqList ? coreqList.Cast<string>().ToList() : new List<string>();
+                        List<int> regularTerms = termObjList is List<object> termList ? termList.Cast<long>().Select(i => (int)i).ToList() : new List<int>();
+
+                        // ✅ Direct boolean assignment (avoids unnecessary conversion)
+                        bool taken = false;
+
+                        // ✅ Create and add CourseNode object
+                        courses.Add(new CourseNode
+                        {
+                            Code = code,
+                            Name = name,
+                            Units = units,
+                            YearLevel = yearLevel,
+                            Term = term,
+                            Prerequisites = prerequisites,
+                            CoRequisites = coRequisites,
+                            RegularTerms = regularTerms,
+                            Taken = taken
+                        });
+                    }
+
+                    return courses;
+                }
+
             }
             catch (Exception ex)
             {
@@ -278,6 +323,8 @@ namespace DSA_Group1_Final_Project.Classes.Connection
                 return null;
             }
         }
+
+
 
         public async Task UpdateCompletedCourses(string studentId, string courseCode, bool isChecked)
         {
