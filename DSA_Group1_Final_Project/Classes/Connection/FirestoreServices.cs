@@ -444,7 +444,54 @@ namespace DSA_Group1_Final_Project.Classes.Connection
 
             return availableCourses;
         }
-        
+
+        public async Task<StudentDocument> GetCurrentStudentAsync(string userId)
+        {
+            try
+            {
+                Debug.WriteLine($"Fetching student document for UserID: {userId}");
+
+                CollectionReference studentsCollection = db.Collection("students");
+                DocumentReference studentDocRef = studentsCollection.Document(userId);
+                DocumentSnapshot snapshot = await studentDocRef.GetSnapshotAsync().ConfigureAwait(false);
+
+                if (!snapshot.Exists)
+                {
+                    Debug.WriteLine($"No student document found for UserID: {userId}");
+                    return null;
+                }
+
+                Debug.WriteLine($"Student document found for UserID: {userId}");
+
+                // ✅ Convert Firestore document to Dictionary
+                Dictionary<string, object> data = snapshot.ToDictionary();
+
+                // ✅ Map Firestore fields safely
+                StudentDocument student = new StudentDocument
+                {
+                    StudentID = snapshot.Id, // Firestore Document ID
+                    UserID = data.TryGetValue("userID", out var userIDObj) ? userIDObj?.ToString() ?? "" : "",
+                    Name = data.TryGetValue("name", out var nameObj) ? nameObj?.ToString() ?? "Unknown",
+                    Email = data.TryGetValue("email", out var emailObj) ? emailObj?.ToString() ?? "",
+                    StudentNumber = data.TryGetValue("studentNumber", out var studentNumberObj) ? studentNumberObj?.ToString() ?? "",
+                    Program = data.TryGetValue("program", out var programObj) ? programObj?.ToString() ?? "",
+                    TermEnrolling = data.TryGetValue("termEnrolling", out var termEnrollingObj) && int.TryParse(termEnrollingObj?.ToString(), out int term) ? term : 1,
+                    Curriculum = data.TryGetValue("curriculum", out var curriculumObj) ? curriculumObj?.ToString() ?? "",
+                    CompletedCourses = data.TryGetValue("completedCourses", out var completedObj) && completedObj is List<object> completedList
+                        ? completedList.Select(c => c.ToString()).ToList()
+                        : new List<string>(),
+                    ApprovalStatus = data.TryGetValue("approvalStatus", out var approvalStatusObj) ? approvalStatusObj?.ToString() ?? ""
+                };
+
+                Debug.WriteLine($"Fetched Student: {student.Name} ({student.Email}), Program: {student.Program}");
+                return student;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error fetching student document: {ex.Message}");
+                return null;
+            }
+        }
 
     }
 }

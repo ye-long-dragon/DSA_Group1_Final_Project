@@ -64,7 +64,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
             {
                 Dock = DockStyle.Fill,
                 Padding = new Padding(10, 60, 10, 10), // ✅ Prevents overlap with top bar
-                AutoScroll = false // ✅ Disable to avoid double scrollbars
+                AutoScroll = true 
             };
 
             // 🔹 FlowLayoutPanel for Layout Management
@@ -74,7 +74,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
                 FlowDirection = FlowDirection.TopDown,
                 WrapContents = false,
                 Margin = new Padding(30),
-                AutoScroll = true // ✅ Only this panel should have scrolling
+                AutoScroll = true // 
             };
 
             // 🔹 Student Email Label
@@ -132,7 +132,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Admin
                 Padding = new Padding(10),
                 Dock = DockStyle.Fill,
                 AutoSize = true,
-                MaximumSize = new Size(1200, 0), 
+                //MaximumSize = new Size(1500, 0), 
             };
 
             // 🔹 Add Components to Main Layout
