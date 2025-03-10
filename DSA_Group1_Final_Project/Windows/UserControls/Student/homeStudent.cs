@@ -16,10 +16,12 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Student
     {
         string r;
         StudentDocument s;
-        public homeStudent(StudentDocument student, string role)
+        MainScreen mainScreen;
+        public homeStudent(MainScreen mainScreen, StudentDocument student, string role)
         {
             InitializeComponent();
             lblName.Text = student.Name;
+            this.mainScreen = mainScreen;
             r = role;
             s = student;
         }
@@ -28,7 +30,6 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Student
         {
             AdminNextAvailableCourses adminNextAvailableCourses = new AdminNextAvailableCourses(s, r);
             adminNextAvailableCourses.Dock = DockStyle.Fill;
-            MainScreen mainScreen = (MainScreen)Parent.Parent.Parent.Parent;
             mainScreen.LoadUserControl(adminNextAvailableCourses);//bugged
 
 
@@ -36,10 +37,9 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Student
 
         private void btnCouseList_Click(object sender, EventArgs e)
         {
-            ViewCurriculumDetails viewCurriculumDetails = new ViewCurriculumDetails(s, r);
-            viewCurriculumDetails.Dock = DockStyle.Fill;
-            MainScreen mainScreen = (MainScreen)Parent.Parent.Parent.Parent;
-            mainScreen.LoadUserControl(viewCurriculumDetails);//bugged
+            StudentCurriculum studentCurriculum = new StudentCurriculum(s,r);
+            studentCurriculum.Dock = DockStyle.Fill;
+            mainScreen.LoadUserControl(studentCurriculum);//bugged
         }
 
         private void lblName_Click(object sender, EventArgs e)

@@ -47,6 +47,7 @@ namespace DSA_Group1_Final_Project
         {
             InitializeComponent();
             instance = this;
+            this.userId = userId;
             r = role;
             student = db.GetCurrentStudentAsync(userId).Result;
 
@@ -96,7 +97,7 @@ namespace DSA_Group1_Final_Project
                 btnSettings.Location = new Point(0, 428 + 56);
                 btnLogout.Location = new Point(0, 474 + 56);
 
-                homeStudent homeStudent = new homeStudent(student, r);
+                homeStudent homeStudent = new homeStudent(instance, student, r);
                 homeStudent.Dock = DockStyle.Fill;
                 pnlMain.Controls.Clear();
                 pnlMain.Controls.Add(homeStudent);
@@ -154,7 +155,7 @@ namespace DSA_Group1_Final_Project
             }
             else
             {
-                LoadUserControl(new homeStudent(student, r));
+                LoadUserControl(new homeStudent(instance, student, r));
             }
         }
 
@@ -201,12 +202,11 @@ namespace DSA_Group1_Final_Project
             {
                 homeAdmin homeAdmin = new homeAdmin(instance, userId);
                 homeAdmin.Dock = DockStyle.Fill;
-                pnlMain.Controls.Clear();
-                pnlMain.Controls.Add(homeAdmin);
+                instance.LoadUserControl(homeAdmin);
             }
             else
             {
-                homeStudent homeStudent = new homeStudent(student, r);
+                homeStudent homeStudent = new homeStudent(instance, student, r);
                 homeStudent.Dock = DockStyle.Fill;
                 pnlMain.Controls.Clear();
                 pnlMain.Controls.Add(homeStudent);

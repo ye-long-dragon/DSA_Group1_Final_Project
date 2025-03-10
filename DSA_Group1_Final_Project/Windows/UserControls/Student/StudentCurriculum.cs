@@ -312,7 +312,7 @@ namespace DSA_Group1_Final_Project.Windows.UserControls.Student
                 }
                 else
                 {
-                    mainScreen.LoadUserControl(new homeStudent(student, r));
+                    mainScreen.LoadUserControl(new homeStudent(mainScreen, student, r));
                 }
             }
             else
